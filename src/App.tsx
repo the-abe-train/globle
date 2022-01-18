@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Guesser guesses={guesses} setGuesses={setGuesses} />
       <Globe />
-      <List guesses={guesses} />
+      <List />
     </div>
   );
 }
