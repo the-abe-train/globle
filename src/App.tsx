@@ -9,7 +9,7 @@ function App() {
   const [guesses, setGuesses] = useState<Array<string>>([]);
 
   return (
-    <div className="max-w-xl my-0 mx-auto">
+    <div className="max-w-xl my-4 mx-auto">
       <Header />
       <Guesser guesses={guesses} setGuesses={setGuesses} />
       <Globe />

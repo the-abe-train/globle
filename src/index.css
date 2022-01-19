@@ -3,3 +3,16 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+html {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(ellipse at top, rgba(135, 207, 235, 0.7), transparent),
+    radial-gradient(ellipse at bottom, rgba(255, 166, 0, 0.7), transparent);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  height: 100%;
+}

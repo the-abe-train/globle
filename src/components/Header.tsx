@@ -1,8 +1,8 @@
 export function Header() {
   return (
-    <header className="my-4">
-      <div className="flex justify-between items-end">
-        <div>
+    <header className="mt-8 h-10 relative">
+      <div className="relative h-full">
+        <div className="absolute left-0 bottom-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -15,8 +15,13 @@ export function Header() {
             ></path>
           </svg>
         </div>
-        <h1 className="text-3xl font-bold" style={{fontFamily: "'Montserrat'"}}>GLOBLE</h1>
-        <div className="space-x-1 flex">
+        <h1
+          className="text-4xl font-extrabold absolute bottom-0 left-1/2 transform -translate-x-1/2 "
+          style={{ fontFamily: "'Montserrat'" }}
+        >
+          GLOBLE
+        </h1>
+        <div className="space-x-1 flex absolute right-0 bottom-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -29,6 +34,7 @@ export function Header() {
             ></path>
           </svg>
           <svg
+          
             xmlns="http://www.w3.org/2000/svg"
             height="24"
             viewBox="0 0 24 24"
@@ -41,7 +47,7 @@ export function Header() {
           </svg>
         </div>
       </div>
-      <hr />
+      <hr className="border-blue-800  bottom-0"/>
     </header>
   );
 }

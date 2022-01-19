@@ -28,8 +28,8 @@ const guesses = countries.slice(6, 17);
 
 export function List() {
   return (
-    <div>
-      <ul className="grid grid-cols-4">
+    <div className="ml-10 my-8">
+      <ul className="grid grid-cols-4 gap-2">
         {guesses.map((guess, idx) => {
           return (
             <li key={idx}>
@@ -40,7 +40,7 @@ export function List() {
                 alt={guess.name}
                 className="inline"
               />
-              <span className="mx-1 text-sm">{guess.name}</span>
+              <span className="mx-1 text-base">{guess.name}</span>
             </li>
           );
         })}

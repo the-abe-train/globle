@@ -18,9 +18,9 @@ export function Guesser({ guesses, setGuesses }: Props) {
   return (
     <form
       onSubmit={addGuess}
-      className="space-y-3 space-x-2 my-5 mx-auto block text-center"
+      className="space-y-3 space-x-2 my-8 mx-auto block text-center"
     >
-      <label className="block" htmlFor="guesser">
+      <label className="block text-lg" htmlFor="guesser">
         Guess the Mystery Country
       </label>
       <input
@@ -31,7 +31,7 @@ export function Guesser({ guesses, setGuesses }: Props) {
         onChange={(e) => setGuess(e.currentTarget.value)}
       />
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="submit"
       >
         Enter
