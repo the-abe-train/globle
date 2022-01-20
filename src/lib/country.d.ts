@@ -84,8 +84,6 @@ export type Country = {
   };
   bbox: number[];
   geometry:
-  // | Polygon
-  // | MultiPolygon
     | {
         type: "Polygon";
         coordinates: number[][][];
@@ -94,32 +92,4 @@ export type Country = {
         type: "MultiPolygon";
         coordinates: number[][][][];
       }
-    // | {
-    //     type: string;
-    //     coordinates: number[][][];
-    //   }
-    // | {
-    //     type: string;
-    //     coordinates: number[][][][];
-    //   }
-    // | {
-    //     type: "Fake";
-    //     coordinates: any;
-    //   }
-    // | {
-    //     type: string;
-    //     coordinates: number[];
-    //   }
-    // | {
-    //     type: string;
-    //     coordinates: number[][];
-    //   }
-    // | {
-    //     type: string;
-    //     coordinates: number[][][];
-    //   }
-    // | {
-    //     type: string;
-    //     coordinates: number[][][][];
-    //   }
 };
