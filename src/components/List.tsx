@@ -1,24 +1,10 @@
-import Data from "../sample_data.json";
-
-// TODO display list as grid
-// TODO add flags to country grid
-
-// Sample data
-// const guesses = [...Sample];
-
-type Country = {
-  properties: {
-    NAME: string;
-    ISO_A2: string;
-    TYPE: string;
-  };
-};
+import Data from "../country_data.json";
 
 const countries = Data.features
-  .filter((country: Country) => {
+  .filter((country) => {
     return country.properties.TYPE === "Sovereign country";
   })
-  .map((country: Country) => {
+  .map((country) => {
     return {
       name: country.properties.NAME,
       code: country.properties.ISO_A2.toLowerCase(),

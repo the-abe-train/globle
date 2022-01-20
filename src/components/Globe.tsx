@@ -1,53 +1,48 @@
-// @ts-nocheck
 import { useEffect, useRef } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
-import Data from "../sample_data.json";
 
 import { scaleSequentialSqrt } from "d3-scale";
 import { interpolateRdGy } from "d3-scale-chromatic";
+import { polygonDistance } from "../util/distance";
+import Data from "../country_data.json";
 
-type Country = {
-  properties: {
-    NAME: string;
-    ISO_A2: string;
-    TYPE: string;
-  };
-};
-
-const guesses = Data.features
-  .filter((country: Country) => {
-    return country.properties.TYPE === "Sovereign country";
-  })
-  .slice(6, 37);
-
-const answer = Data.features.find((country: Country) => {
-  return country.properties.NAME === "Bulgaria";
+const guesses = Data.features.filter((country) => {
+  return (
+    country.properties.TYPE === "Sovereign country" ||
+    country.properties.TYPE === "Country"
+  );
 });
+// .slice(6, 37);
 
 export function Globe() {
   // Globe size settings
-  const size = 400; // px on one side
+  const size = 500; // px on one side
   const extraStyle = {
     width: `${size}px`,
   };
 
-  const globeRef = useRef<GlobeMethods>(null!);
+  const answer = Data.features.find((country) => {
+    return country.properties.NAME === "Mexico";
+  });
 
   // Color scale
-  const colorScale = scaleSequentialSqrt(interpolateRdGy);
-  const getDistance = (guess: Country, answer: Country) => {
-    // guess.properties.
-    
-    return 1
-  }
-  const getVal = (feat) => {
-    return feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
+  const getColour = (guess: any, answer: any) => {
+    // Typescript wasn't playing nice here so removed typing
+    if (!answer) throw "e";
+    if (guess.properties.NAME === answer.properties.NAME) return "green";
+    const colorScale = scaleSequentialSqrt(interpolateRdGy);
+    const distance = polygonDistance(guess, answer);
+    const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
+    const fraction = distance / maxDistance;
+    const colour = colorScale(fraction);
+    return colour;
   };
 
+  const globeRef = useRef<GlobeMethods>(null!);
   useEffect(() => {
     // @ts-ignore
     // globeRef.current.controls().autoRotate = true;
-    console.log(globeRef.current);
+    // console.log(globeRef.current);
     globeRef.current.camera().zoom = 1.4;
   }, []);
 
@@ -60,10 +55,8 @@ export function Globe() {
         height={size}
         backgroundColor="#00000000"
         polygonsData={guesses}
-        polygonCapColor={(d: Country) =>
-          d.properties.NAME === "Bulgaria" ? "green" : colorScale(getVal(d))
-        }
-        onPolygonHover={(d) => console.log(d)}
+        polygonCapColor={(d) => getColour(d, answer)}
+        // onPolygonHover={(d) => console.log(d)}
       />
     </div>
   );

@@ -16,6 +16,7 @@
     "react-dom": "^17.0.2",
     "react-globe.gl": "^2.20.1",
     "react-scripts": "5.0.0",
+    "spherical-geometry-js": "^3.0.0",
     "typescript": "^4.5.4",
     "web-vitals": "^2.1.3"
   },
@@ -23,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "ts": "tsc -w"
   },
   "eslintConfig": {
     "extends": [

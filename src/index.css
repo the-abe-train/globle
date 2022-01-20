@@ -9,8 +9,8 @@ html {
 }
 
 body {
-  background: radial-gradient(ellipse at top, rgba(135, 207, 235, 0.7), transparent),
-    radial-gradient(ellipse at bottom, rgba(255, 166, 0, 0.7), transparent);
+  background: radial-gradient(ellipse at top, rgba(63, 201, 255, 0.7), transparent),
+    radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), transparent);
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
