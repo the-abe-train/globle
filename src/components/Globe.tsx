@@ -48,9 +48,10 @@ export function Globe({ guesses }: Props) {
     }
   }, [guesses]);
 
-  function changeView(coords: { lat: number; lng: number }) {
+  function fixView(coords: { lat: number; lng: number; altitude?: number }) {
     // @ts-ignore
     globeRef.current.controls().autoRotate = false;
+    coords['altitude'] = 2.5;
     globeRef.current.pointOfView(coords);
     // console.log("Click POV", globeRef.current.pointOfView());
   }
@@ -76,9 +77,10 @@ export function Globe({ guesses }: Props) {
         polygonCapColor={getColour}
         // @ts-ignore
         polygonLabel={({ properties: d }) => `
-        <b class="text-red-500">${d.ADMIN}</b> 
-      `}
-        onGlobeClick={changeView}
+        <b class="text-black">${d.ADMIN}</b> 
+        `}
+        onGlobeClick={fixView}
+        onPolygonClick={(p, e, c) => fixView(c)}
 
         // onPolygonHover={(d) => console.log(d)}
       />

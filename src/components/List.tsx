@@ -1,5 +1,8 @@
 import { Country } from "../lib/country";
 
+// TODO final country should say "answer" beside it, not "closest"
+// TODO click on country should rotate globe to centre country.
+
 type Props = {
   guesses: Country[];
 };
@@ -9,11 +12,9 @@ export function List({ guesses }: Props) {
     return a.proximity - b.proximity;
   });
 
+
   return (
     <div className="ml-10 my-8">
-      {orderedGuesses && (
-        <h3 className="font-bold text-xl mb-2">Your guesses (closest first)</h3>
-      )}
       <ul className="grid grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, WB_A2, ISO_A2 } = guess.properties;
@@ -29,7 +30,9 @@ export function List({ guesses }: Props) {
                 alt={name}
                 className=""
               />
-              <span className="mx-1 text-md">{name}</span>
+              <span className="mx-1 text-md">
+                {name} {idx === 0 ? "(Closest)" : ""}
+              </span>
             </li>
           );
         })}
