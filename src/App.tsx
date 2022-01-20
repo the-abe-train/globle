@@ -8,12 +8,13 @@ import { Country } from "./lib/country";
 function App() {
 
   const [guesses, setGuesses] = useState<Country[]>([]);
+  const [win, setWin] = useState(false);
   
 
   return (
     <div className="max-w-xl my-4 mx-auto">
       <Header />
-      <Guesser guesses={guesses} setGuesses={setGuesses} />
+      <Guesser guesses={guesses} setGuesses={setGuesses} win={win} setWin={setWin} />
       <Globe guesses={guesses}  />
       <List guesses={guesses}  />
     </div>

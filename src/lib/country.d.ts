@@ -1,5 +1,6 @@
 export type Country = {
   type: string;
+  proximity: number;
   properties: {
     scalerank: number;
     featurecla: string;

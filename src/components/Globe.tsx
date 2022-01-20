@@ -6,15 +6,9 @@ import { interpolateRdGy } from "d3-scale-chromatic";
 import { polygonDistance } from "../util/distance";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
+import answer from "../answer.json";
+import { answerName } from "../util/answer";
 const countryData: Country[] = require("../country_data.json").features;
-
-// const guesses = Data.features.filter((country) => {
-//   return (
-//     country.properties.TYPE === "Sovereign country" ||
-//     country.properties.TYPE === "Country"
-//   );
-// });
-// .slice(6, 37);
 
 type Props = {
   guesses: Country[];
@@ -28,20 +22,16 @@ export function Globe({ guesses }: Props) {
   };
 
   // Answer
-  const answer = countryData.find((country) => {
-    return country.properties.NAME === "Mexico";
-  });
+  // const answerCountry = countryData.find((country) => {
+  //   return country.properties.NAME === answer.name;
+  // });
 
   // Color scale
   const getColour = (guess: Country) => {
-    // Typescript wasn't playing nice here so removed typing
-    if (!answer) throw "e";
-    if (guess.properties.NAME === answer.properties.NAME) return "green";
+    if (guess.properties.NAME === answerName()) return "green";
+    if (guess.proximity == null) throw "e";
     const colorScale = scaleSequentialSqrt(interpolateRdGy);
-    const distance = polygonDistance(guess, answer);
-    const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
-    const fraction = distance / maxDistance;
-    const colour = colorScale(fraction);
+    const colour = colorScale(guess.proximity);
     return colour;
   };
 
@@ -57,19 +47,19 @@ export function Globe({ guesses }: Props) {
       globeRef.current.pointOfView(newSpot, 0);
     }
   }, [guesses]);
-  
+
   function changeView(coords: { lat: number; lng: number }) {
     // @ts-ignore
     globeRef.current.controls().autoRotate = false;
     globeRef.current.pointOfView(coords);
-    console.log("Click POV", globeRef.current.pointOfView());
+    // console.log("Click POV", globeRef.current.pointOfView());
   }
-  
+
   // On first render
   useEffect(() => {
     // @ts-ignore
     globeRef.current.controls().autoRotate = true;
-    console.log(globeRef.current);
+    // console.log(globeRef.current);
     globeRef.current.camera().zoom = 1.4;
   }, []);
 
@@ -84,6 +74,10 @@ export function Globe({ guesses }: Props) {
         polygonsData={guesses}
         // @ts-ignore
         polygonCapColor={getColour}
+        // @ts-ignore
+        polygonLabel={({ properties: d }) => `
+        <b class="text-red-500">${d.ADMIN}</b> 
+      `}
         onGlobeClick={changeView}
 
         // onPolygonHover={(d) => console.log(d)}
