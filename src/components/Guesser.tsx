@@ -13,12 +13,29 @@ type Props = {
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type Stats = {
+  gamesWon: number;
+  lastWin: string;
+  currentStreak: number;
+  maxStreak: number;
+  usedGuesses: number[];
+};
+
 export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
 
-  const oldGuesses = localStorage.getItem("guesses") || "";
-  const [, setStoredGuesses] = useLocalStorage("guesses", oldGuesses);
+  const [storedGuesses, storeGuesses] = useLocalStorage("guesses", []);
+  const firstStats: Stats = {
+    gamesWon: 0,
+    lastWin: new Date(0).toLocaleDateString(),
+    currentStreak: 0,
+    maxStreak: 0,
+    usedGuesses: [],
+  };
+  const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
+
+  // const
 
   function findCountry(countryName: string) {
     let country = countryData.find((country) => {
@@ -65,11 +82,42 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     }
   }
 
+  // On startup
+  useEffect(() => {});
+
+  // When the player makes a new guess
   useEffect(() => {
     const guessNames = guesses.map((country) => country.properties.NAME);
-    console.log(guessNames);
-    setStoredGuesses(guessNames);
+    storeGuesses(guessNames);
+    // console.log(g);
+    console.log(storedGuesses);
   }, [guesses]);
+
+  // When the player wins!
+  useEffect(() => {
+    if (win) {
+      const today = Date.now();
+      const todayString = new Date().toLocaleString().slice(0, 10);
+      const gamesWon =
+        todayString === storedStats.lastWin ? storedStats.gamesWon + 1 : 1;
+      const previousWin = Date.parse(storedStats.lastWin);
+      const elapsed = today - previousWin;
+      const streakBroken = elapsed / 3600 / 1000 >= 24 ? true : false;
+      const currentStreak = streakBroken ? 1 : storedStats.currentStreak + 1;
+      const maxStreak =
+        currentStreak > storedStats.maxStreak
+          ? currentStreak
+          : storedStats.maxStreak;
+      const newStats: Stats = {
+        gamesWon,
+        lastWin: todayString,
+        currentStreak,
+        maxStreak,
+        usedGuesses: [...storedStats.usedGuesses, storedGuesses.length],
+      };
+      storeStats(newStats);
+    }
+  }, [win]);
 
   return (
     <form
@@ -80,15 +128,16 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         Guess the Mystery Country
       </label> */}
       <input
-        className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-400 disabled:border-slate-400"
         type="text"
         name="guesser"
         id="guesser"
         value={guessName}
         onChange={(e) => setGuessName(e.currentTarget.value)}
+        disabled={win}
       />
       <button
-        className="bg-blue-700 hover:bg-blue-900  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-green-800 disabled:text-gray-300 "
+        className="bg-blue-700 hover:bg-blue-900 disabled:bg-blue-900  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
         type="submit"
         disabled={win}
       >
