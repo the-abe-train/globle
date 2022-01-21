@@ -11,11 +11,11 @@ export default function Help({ setScreen }: Props) {
 
   const globeRef = useRef<GlobeMethods>(null!);
 
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   globeRef.current.controls().autoRotate = true;
-  //   globeRef.current.camera().zoom = 1.4;
-  // }, []);
+  useEffect(() => {
+    // @ts-ignore
+    globeRef.current.controls().autoRotate = true;
+    //   globeRef.current.camera().zoom = 1.4;
+  }, []);
 
   function goToGame() {
     setScreen("Game");
@@ -31,10 +31,10 @@ export default function Help({ setScreen }: Props) {
         Mystery Country.
       </p>
       <p>
-        For example, if the Mystery Country is Japan, each of the following
+        For example, if the Mystery Country is Japan, then the following
         countries would appear with these colours if guessed:
       </p>
-      <div className="flex">
+      <div className="flex justify-between">
         <figure>
           <img src="images/fr-01.svg" width={countrySize} alt="France" />
           <figcaption className="text-center">France</figcaption>
