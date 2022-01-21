@@ -1,5 +1,6 @@
 import * as geometry from "spherical-geometry-js";
 import { Country } from "../lib/country";
+import { answerCountry } from "./answer";
 
 function pointToCoordinates(point: Array<number>) {
   // In the data, coordinates are [E/W (lng), N/S (lat)]
@@ -42,8 +43,19 @@ function calcProximity(points1: number[][], points2: number[][]) {
   return proximity;
 }
 
-export function polygonDistance(country1: Country, country2: Country) {
+function polygonDistance(country1: Country, country2: Country) {
   const points1 = polygonPoints(country1);
   const points2 = polygonPoints(country2);
   return calcProximity(points1, points2);
+}
+
+export function addProximity(guessCountry: Country) {
+  // TODO it may not be wise to have proximity in the state in case the
+  // user can see it.
+  if (!answerCountry) throw "Answer country not found";
+  const distance = polygonDistance(guessCountry, answerCountry);
+  const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
+  const proximity = distance / maxDistance;
+  guessCountry["proximity"] = proximity;
+  return guessCountry;
 }

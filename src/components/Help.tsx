@@ -11,11 +11,11 @@ export default function Help({ setScreen }: Props) {
 
   const globeRef = useRef<GlobeMethods>(null!);
 
-  useEffect(() => {
-    // @ts-ignore
-    globeRef.current.controls().autoRotate = true;
-    globeRef.current.camera().zoom = 1.4;
-  }, []);
+  // useEffect(() => {
+  //   // @ts-ignore
+  //   globeRef.current.controls().autoRotate = true;
+  //   globeRef.current.camera().zoom = 1.4;
+  // }, []);
 
   function goToGame() {
     setScreen("Game");
@@ -27,12 +27,12 @@ export default function Help({ setScreen }: Props) {
       <p>
         Every day, there is a new Mystery Country. Your goal is to guess the
         mystery country using the fewest number of guesses. Each incorrect guess
-        will appear on the globe with a colour indicating how close to the
+        will appear on the globe with a colour indicating how close it is to the
         Mystery Country.
       </p>
       <p>
-        For example, if the Mystery Country was Japan, each of the following
-        countries would appear with the colour codes seen here:
+        For example, if the Mystery Country is Japan, each of the following
+        countries would appear with these colours if guessed:
       </p>
       <div className="flex">
         <figure>
@@ -53,21 +53,22 @@ export default function Help({ setScreen }: Props) {
         </figure>
       </div>
       <p>A new Mystery Country will be available every day!</p>
-      <div
-        className="mx-auto cursor-pointer"
-        style={{ width: `${globeSize}px` }}
-      >
-        <ReactGlobe
-          ref={globeRef}
-          globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
-          width={globeSize}
-          height={globeSize}
-          backgroundColor="#00000000"
-          onGlobeClick={goToGame}
-        />
+      <div className="w-1/2 flex flex-col justify-center align-middle mx-auto">
+        <div
+          className="mx-auto cursor-pointer"
+          style={{ width: `${globeSize}px` }}
+        >
+          <ReactGlobe
+            ref={globeRef}
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
+            width={globeSize}
+            height={globeSize}
+            backgroundColor="#00000000"
+            onGlobeClick={goToGame}
+          />
+        </div>
         <p className="text-center">
-
-        <b >Click to play!</b>
+          <b>Click the globe to play!</b>
         </p>
       </div>
     </div>

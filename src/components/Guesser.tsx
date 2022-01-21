@@ -1,8 +1,9 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Country } from "../lib/country";
-import { polygonDistance } from "../util/distance";
 import { answerName } from "../util/answer";
 import { Message } from "./Message";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { addProximity } from "../util/distance";
 const countryData: Country[] = require("../country_data.json").features;
 
 type Props = {
@@ -15,6 +16,9 @@ type Props = {
 export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
+
+  const oldGuesses = localStorage.getItem("guesses") || "";
+  const [, setStoredGuesses] = useLocalStorage("guesses", oldGuesses);
 
   function findCountry(countryName: string) {
     let country = countryData.find((country) => {
@@ -44,21 +48,9 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       setError("Invalid country name");
       return;
     }
-    if (guessCountry.properties.NAME === answerName()) {
+    if (guessCountry.properties.NAME === answerName) {
       setWin(true);
     }
-    return guessCountry;
-  }
-
-  function addProximity(guessCountry: Country) {
-    // TODO it may not be wise to have proximity in the state in case the
-    // user can see it.
-    const answerCountry = findCountry(answerName());
-    if (!answerCountry) throw "Answer not found;";
-    const distance = polygonDistance(guessCountry, answerCountry);
-    const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
-    const proximity = distance / maxDistance;
-    guessCountry["proximity"] = proximity;
     return guessCountry;
   }
 
@@ -68,10 +60,16 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     let guessCountry = runChecks();
     if (guessCountry) {
       guessCountry = addProximity(guessCountry);
-      setGuessName("");
       setGuesses([...guesses, guessCountry]);
+      setGuessName("");
     }
   }
+
+  useEffect(() => {
+    const guessNames = guesses.map((country) => country.properties.NAME);
+    console.log(guessNames);
+    setStoredGuesses(guessNames);
+  }, [guesses]);
 
   return (
     <form

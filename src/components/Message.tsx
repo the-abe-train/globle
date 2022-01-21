@@ -11,7 +11,7 @@ export function Message({ win, error }: Props) {
   } else if (win) {
     return (
       <p className="text-green-800 h-1">
-        The mystery country was {answerName()}!
+        The Mystery Country is {answerName}!
       </p>
     );
   } else {

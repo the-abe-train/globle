@@ -1,22 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 
 import { scaleSequentialSqrt } from "d3-scale";
 import { interpolateRdGy } from "d3-scale-chromatic";
-import { polygonDistance } from "../util/distance";
+import { addProximity } from "../util/distance";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
-import answer from "../answer.json";
 import { answerName } from "../util/answer";
 const countryData: Country[] = require("../country_data.json").features;
+
+// TODO add lines between finished countries
+// TODO map is blurry, play with zoom settings
+// TODO clip zoomed in globe as circle (maybe nicer?)
 
 type Props = {
   guesses: Country[];
 };
 
 export function Globe({ guesses }: Props) {
+
+// Hooks
+  const globeRef = useRef<GlobeMethods>(null!);
+
   // Globe size settings
-  const size = 500; // px on one side
+  const size = 600; // px on one side
   const extraStyle = {
     width: `${size}px`,
   };
@@ -28,14 +35,23 @@ export function Globe({ guesses }: Props) {
 
   // Color scale
   const getColour = (guess: Country) => {
-    if (guess.properties.NAME === answerName()) return "green";
-    if (guess.proximity == null) throw "e";
+    if (guess.properties.NAME === answerName) return "green";
+    if (guess.proximity == null) {
+      guess = addProximity(guess);
+    };
     const colorScale = scaleSequentialSqrt(interpolateRdGy);
     const colour = colorScale(guess.proximity);
     return colour;
   };
 
-  const globeRef = useRef<GlobeMethods>(null!);
+  function fixView(coords: { lat: number; lng: number; altitude?: number }) {
+    // @ts-ignore
+    globeRef.current.controls().autoRotate = false;
+    const currentAlt = globeRef.current.pointOfView().altitude;
+    coords['altitude'] = Math.max(coords['altitude'] || currentAlt, 1.4)
+    globeRef.current.pointOfView(coords);
+    // console.log("Click POV", globeRef.current.pointOfView());
+  }
 
   // After each guess
   useEffect(() => {
@@ -44,24 +60,18 @@ export function Globe({ guesses }: Props) {
     const newGuess = [...guesses].pop();
     if (newGuess) {
       const newSpot = findCentre(newGuess);
-      globeRef.current.pointOfView(newSpot, 0);
+      // globeRef.current.pointOfView(newSpot, 0);
+      fixView(newSpot)
     }
   }, [guesses]);
 
-  function fixView(coords: { lat: number; lng: number; altitude?: number }) {
-    // @ts-ignore
-    globeRef.current.controls().autoRotate = false;
-    coords['altitude'] = 2.5;
-    globeRef.current.pointOfView(coords);
-    // console.log("Click POV", globeRef.current.pointOfView());
-  }
+
 
   // On first render
   useEffect(() => {
     // @ts-ignore
     globeRef.current.controls().autoRotate = true;
-    // console.log(globeRef.current);
-    globeRef.current.camera().zoom = 1.4;
+    globeRef.current.pointOfView({lat: 0, lng: 0, altitude: 1.4});
   }, []);
 
   return (
@@ -81,8 +91,8 @@ export function Globe({ guesses }: Props) {
         `}
         onGlobeClick={fixView}
         onPolygonClick={(p, e, c) => fixView(c)}
-
-        // onPolygonHover={(d) => console.log(d)}
+        polygonSideColor="#00000000"
+        polygonStrokeColor="#00000000"
       />
     </div>
   );

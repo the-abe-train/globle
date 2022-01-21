@@ -1,17 +1,22 @@
+import { useEffect, useState } from "react";
 import { Country } from "../lib/country";
 
 // TODO final country should say "answer" beside it, not "closest"
-// TODO click on country should rotate globe to centre country.
+// TODO Fix order of countries in list when pulled from local storage
 
 type Props = {
   guesses: Country[];
 };
 
 export function List({ guesses }: Props) {
-  const orderedGuesses = [...guesses].sort((a, b) => {
-    return a.proximity - b.proximity;
-  });
+  const [orderedGuesses, setOrderedGuesses] = useState<Country[]>([]);
 
+  useEffect(() => {
+    const newOrder = [...guesses].sort((a, b) => {
+      return a.proximity - b.proximity;
+    });
+    setOrderedGuesses(newOrder);
+  }, [guesses]);
 
   return (
     <div className="ml-10 my-8">
@@ -24,7 +29,7 @@ export function List({ guesses }: Props) {
           return (
             <li key={idx} className="flex items-center">
               <img
-                src={`https://flagcdn.com/h20/${flag}.png`}
+                src={`https://flagcdn.com/w20/${flag}.png`}
                 // width="16"
                 // height="12"
                 alt={name}
