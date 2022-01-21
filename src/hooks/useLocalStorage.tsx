@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function getStorageValue(key: string, defaultValue: string) {
+function getStorageValue(key: string, defaultValue: object) {
   // getting stored value
   const saved = localStorage.getItem(key);
   if (saved) {
@@ -10,7 +10,7 @@ function getStorageValue(key: string, defaultValue: string) {
   }
 }
 
-export const useLocalStorage = (key: string, defaultValue: string) => {
+export const useLocalStorage = (key: string, defaultValue: object) => {
   const [value, setValue] = useState(() => {
     return getStorageValue(key, defaultValue);
   });
