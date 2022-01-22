@@ -1,27 +1,24 @@
-import { useEffect } from "react";
-
 type Props = {
   screen: string;
   setScreen: React.Dispatch<React.SetStateAction<string>>;
   reSpin: boolean;
   setReSpin: React.Dispatch<React.SetStateAction<boolean>>;
+  showStats: boolean;
+  setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function Header({ setScreen, reSpin, setReSpin, screen }: Props) {
-  // function goToHelp() {
-  //   setScreen("Help");
-  // }
-
+export function Header({
+  setScreen,
+  reSpin,
+  setReSpin,
+  screen,
+  showStats,
+  setShowStats,
+}: Props) {
   function reRenderGlobe() {
     setReSpin(true);
     setScreen("Game");
   }
-
-  // useEffect(() => {
-  //   if (screen === "Game") {
-  //     setReSpin(reSpin + 1);
-  //   }
-  // }, [screen])
 
   return (
     <header className="mt-8 h-10 relative">
@@ -51,7 +48,7 @@ export function Header({ setScreen, reSpin, setReSpin, screen }: Props) {
           </h1>
         </button>
         <div className="space-x-1 flex absolute right-0 bottom-1">
-          <button onClick={() => setScreen("Statistics")}>
+          <button onClick={() => setShowStats(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"

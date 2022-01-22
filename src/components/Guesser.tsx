@@ -4,6 +4,7 @@ import { answerName } from "../util/answer";
 import { Message } from "./Message";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addProximity } from "../util/distance";
+import { Stats } from "../lib/localStorage";
 const countryData: Country[] = require("../country_data.json").features;
 
 type Props = {
@@ -13,27 +14,25 @@ type Props = {
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type Stats = {
-  gamesWon: number;
-  lastWin: string;
-  currentStreak: number;
-  maxStreak: number;
-  usedGuesses: number[];
-};
-
 export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
 
-  const [storedGuesses, storeGuesses] = useLocalStorage("guesses", []);
-  const firstStats: Stats = {
+  const [storedGuesses, storeGuesses] = useLocalStorage<string[]>(
+    "guesses",
+    []
+  );
+  const firstStats = {
     gamesWon: 0,
     lastWin: new Date(0).toLocaleDateString(),
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
   };
-  const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
+  const [storedStats, storeStats] = useLocalStorage<Stats>(
+    "statistics",
+    firstStats
+  );
 
   // const
 
@@ -103,7 +102,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         currentStreak > storedStats.maxStreak
           ? currentStreak
           : storedStats.maxStreak;
-      const newStats: Stats = {
+      const newStats = {
         gamesWon,
         lastWin: todayString,
         currentStreak,

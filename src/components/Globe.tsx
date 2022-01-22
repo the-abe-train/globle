@@ -58,7 +58,6 @@ export function Globe({ guesses, globeRef }: Props) {
     // @ts-ignore
     globeRef.current.controls().autoRotate = true;
     globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.75 });
-    console.log("globe started")
   }, []);
 
   return (

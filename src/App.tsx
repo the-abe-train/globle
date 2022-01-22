@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import Game from "./components/Game";
 import { Header } from "./components/Header";
 import Help from "./components/Help";
+import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 
 function App() {
   // State
   const [screen, setScreen] = useState("Help");
   const [reSpin, setReSpin] = useState(false);
+  const [showStats, setShowStats] = useState(false);
 
   // Context
   const theme = useContext(ThemeContext);
@@ -24,14 +26,7 @@ function App() {
     if (screen === "Help") {
       return <Help setScreen={setScreen} />;
     } else {
-      return (
-        <Game
-          screen={screen}
-          setScreen={setScreen}
-          reSpin={reSpin}
-          setReSpin={setReSpin}
-        />
-      );
+      return <Game reSpin={reSpin} />;
     }
   };
 
@@ -42,7 +37,10 @@ function App() {
         setScreen={setScreen}
         reSpin={reSpin}
         setReSpin={setReSpin}
+        showStats={showStats}
+        setShowStats={setShowStats}
       />
+      {showStats && <Statistics setShowStats={setShowStats} />}
       {pickScreen()}
     </div>
   );

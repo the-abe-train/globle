@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function getStorageValue(key: string, defaultValue: object) {
+function getStorageValue<T>(key: string, defaultValue: T): T {
   // getting stored value
   const saved = localStorage.getItem(key);
   if (saved) {
@@ -10,7 +10,10 @@ function getStorageValue(key: string, defaultValue: object) {
   }
 }
 
-export const useLocalStorage = (key: string, defaultValue: object) => {
+export function useLocalStorage<T>(
+  key: string,
+  defaultValue: T
+): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState(() => {
     return getStorageValue(key, defaultValue);
   });
@@ -21,4 +24,4 @@ export const useLocalStorage = (key: string, defaultValue: object) => {
   }, [key, value]);
 
   return [value, setValue];
-};
+}
