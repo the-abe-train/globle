@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 
 import { scaleSequentialSqrt } from "d3-scale";
@@ -8,6 +8,7 @@ import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
 import { answerName } from "../util/answer";
 import { turnGlobe } from "../util/turnGlobe";
+import { ThemeContext } from "../context/ThemeContext";
 const countryData: Country[] = require("../country_data.json").features;
 
 // TODO add lines between finished countries
@@ -19,13 +20,15 @@ type Props = {
 };
 
 export function Globe({ guesses, globeRef }: Props) {
-  // Hooks
+  // Theme
+  const theme = useContext(ThemeContext);
+  const timeOfDay = theme.darkMode ? "night" : "day";
 
   // Globe size settings
   const size = 600; // px on one side
   const extraStyle = {
     width: `${size}px`,
-    clipPath: `circle(${size/2}px at ${size/2}px ${size/2}px)`,
+    clipPath: `circle(${size / 2}px at ${size / 2}px ${size / 2}px)`,
   };
 
   // Color scale
@@ -55,13 +58,14 @@ export function Globe({ guesses, globeRef }: Props) {
     // @ts-ignore
     globeRef.current.controls().autoRotate = true;
     globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.75 });
+    console.log("globe started")
   }, []);
 
   return (
     <div className="mx-auto" style={extraStyle}>
       <ReactGlobe
         ref={globeRef}
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
+        globeImageUrl={`//unpkg.com/three-globe/example/img/earth-${timeOfDay}.jpg`}
         width={size}
         height={size}
         backgroundColor="#00000000"

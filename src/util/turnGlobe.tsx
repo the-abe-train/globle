@@ -13,7 +13,7 @@ export function turnGlobe(
   // @ts-ignore
   globeRef.current.controls().autoRotate = false;
   const currentAlt = globeRef.current.pointOfView().altitude;
-  coords["altitude"] = Math.max(coords["altitude"] || currentAlt, 1.4);
+  coords["altitude"] = Math.max(currentAlt, 1.4);
   globeRef.current.pointOfView(coords);
   
 }

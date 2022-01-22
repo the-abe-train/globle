@@ -82,15 +82,10 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     }
   }
 
-  // On startup
-  useEffect(() => {});
-
   // When the player makes a new guess
   useEffect(() => {
     const guessNames = guesses.map((country) => country.properties.NAME);
     storeGuesses(guessNames);
-    // console.log(g);
-    console.log(storedGuesses);
   }, [guesses]);
 
   // When the player wins!
