@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { GlobeMethods } from "react-globe.gl";
 
 export function turnGlobe(
@@ -9,11 +8,9 @@ export function turnGlobe(
   },
   globeRef: React.MutableRefObject<GlobeMethods>
 ) {
-  // const globeRef = useRef<GlobeMethods>(null!);
   // @ts-ignore
   globeRef.current.controls().autoRotate = false;
   const currentAlt = globeRef.current.pointOfView().altitude;
-  coords["altitude"] = Math.max(currentAlt, 1.4);
+  coords["altitude"] = Math.max(currentAlt, 0.8);
   globeRef.current.pointOfView(coords);
-  
 }

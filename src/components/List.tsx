@@ -31,7 +31,6 @@ export function List({ guesses, win, globeRef }: Props) {
   const qualifier = win ? "Answer" : "Closest";
 
   function turnToCountry(e: SyntheticEvent, idx: number) {
-    console.log(idx);
     const clickedCountry = orderedGuesses[idx];
     const coords = findCentre(clickedCountry);
     turnGlobe(coords, globeRef);
@@ -39,6 +38,11 @@ export function List({ guesses, win, globeRef }: Props) {
 
   return (
     <div className="ml-10 my-8 dark:text-white">
+      {orderedGuesses.length > 0 && (
+        <p className="my-1">
+          <b>{qualifier}</b>
+        </p>
+      )}
       <ul className="grid grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, WB_A2, ISO_A2 } = guess.properties;
@@ -58,9 +62,7 @@ export function List({ guesses, win, globeRef }: Props) {
                   alt={name}
                   className=""
                 />
-                <span className="mx-1 text-md">
-                  {name} {idx === 0 ? `(${qualifier})` : ""}
-                </span>
+                <span className="mx-1 text-md">{name}</span>
               </button>
             </li>
           );

@@ -5,7 +5,10 @@ import Header from "./components/Header";
 import Help from "./components/Help";
 import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
+import TestAllCountries from "./components/TestAllCountries";
 import { ThemeContext } from "./context/ThemeContext";
+
+// TODO make app responsive
 
 function App() {
   // State
@@ -19,7 +22,8 @@ function App() {
   // Re-render globe
   useEffect(() => {
     if (screen === "Game") setReSpin(true);
-  }, [screen]); useEffect(() => {
+  }, [screen]);
+  useEffect(() => {
     if (reSpin) setTimeout(() => setReSpin(false), 1);
   }, [reSpin]);
 
@@ -44,12 +48,15 @@ function App() {
   const dark = themeContext.theme.nightMode ? "dark" : "";
 
   return (
-    <div className={`max-w-2xl my-4 mx-auto ${dark}`}>
+    <div
+      className={`max-w-2xl mx-auto z-20 absolute top-0 bottom-0 left-0 right-0 block ${dark}`}
+    >
       <Header
         setScreen={setScreen}
         setReSpin={setReSpin}
         setShowStats={setShowStats}
       />
+      <TestAllCountries />
       {showStats && <Statistics setShowStats={setShowStats} />}
       {pickScreen()}
     </div>

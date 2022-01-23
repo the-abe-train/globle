@@ -1,3 +1,5 @@
+// TODO fix country colours for day and night in this section
+
 export default function Help() {
   const countrySize = 150;
 
@@ -11,25 +13,25 @@ export default function Help() {
         Mystery Country.
       </p>
       <p>
-        For example, if the Mystery Country is Japan, then the following
+        For example, if the Mystery Country is <b>Japan</b>, then the following
         countries would appear with these colours if guessed:
       </p>
       <div className="flex justify-between">
         <figure>
           <img src="images/fr-01.svg" width={countrySize} alt="France" />
-          <figcaption className="text-center">France</figcaption>
+          <figcaption className="text-center font-bold">France</figcaption>
         </figure>
         <figure>
           <img src="images/ir-01.svg" width={countrySize} alt="Iran" />
-          <figcaption className="text-center">Iran</figcaption>
+          <figcaption className="text-center font-bold">Iran</figcaption>
         </figure>
         <figure>
           <img src="images/cn-01.svg" width={countrySize} alt="China" />
-          <figcaption className="text-center">China</figcaption>
+          <figcaption className="text-center font-bold">China</figcaption>
         </figure>
         <figure>
           <img src="images/kr-01.svg" width={countrySize} alt="South Korea" />
-          <figcaption className="text-center">South Korea</figcaption>
+          <figcaption className="text-center font-bold">South Korea</figcaption>
         </figure>
       </div>
       <p>A new Mystery Country will be available every day!</p>

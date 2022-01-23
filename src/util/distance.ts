@@ -11,36 +11,40 @@ function pointToCoordinates(point: Array<number>) {
   return coord;
 }
 
-function polygonPoints(country: Country): number[][] {
+function polygonPoints(country: Country) {
   const { geometry } = country;
-  const { type } = geometry;
-  let points: number[][] = [];
-  switch (type) {
+  switch (geometry.type) {
     case "Polygon":
-      points = geometry.coordinates[0];
-      return points;
+      return geometry.coordinates[0];
     case "MultiPolygon":
-      for (const polygon of geometry.coordinates[0]) {
-        points = [...points, ...polygon];
+      let points: number[][] = [];
+      for (const polygon of geometry.coordinates) {
+        points = [...points, ...polygon[0]];
       }
       return points;
+    default:
+      throw "Country data error";
   }
 }
 
 function calcProximity(points1: number[][], points2: number[][]) {
   // Find min distance between 2 sets of points
-  let proximity = 40_075_000 / 2;
+  let distance = 40_075_000 / 2;
   for (let i = 0; i < points1.length; i++) {
     const point1 = points1[i];
     const coord1 = pointToCoordinates(point1);
     for (let j = 0; j < points2.length; j++) {
       const point2 = points2[j];
       const coord2 = pointToCoordinates(point2);
-      const distance = geometry.computeDistanceBetween(coord1, coord2);
-      proximity = Math.min(proximity, distance);
+      const pointDistance = geometry.computeDistanceBetween(coord1, coord2);
+      distance = Math.min(distance, pointDistance);
     }
   }
-  return proximity;
+  console.log("Country 1 points:", points1.length);
+  console.log("Country 2 points:", points2.length);
+  console.log("Total paths measured:", points1.length * points2.length);
+  console.log("Proximity is:", distance);
+  return distance;
 }
 
 function polygonDistance(country1: Country, country2: Country) {
@@ -50,13 +54,13 @@ function polygonDistance(country1: Country, country2: Country) {
 }
 
 export function addProximity(guessCountry: Country) {
-  // TODO it may not be wise to have proximity in the state in case the
-  // user can see it.
   if (!answerCountry) throw "Answer country not found";
   const distance = polygonDistance(guessCountry, answerCountry);
   // const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
-  const maxDistance = 40_000_000;  // 
-  const proximity = 1 - Math.min(distance / maxDistance, 1);
-  guessCountry["proximity"] = proximity;
+  // const maxDistance = 15_000_000;  // 
+  // const proximity = 1 - Math.min(distance / maxDistance, 1);
+  console.log(guessCountry.properties.NAME, distance);
+  // guessCountry["proximity"] = proximity;
+  guessCountry["proximity"] = distance;
   return guessCountry;
 }

@@ -25,4 +25,5 @@ yarn-error.log*
 
 .prettierrc
 country_data.json
+countries_orig.json
 country.d copy.ts

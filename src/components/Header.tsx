@@ -15,10 +15,10 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
     setScreen("Game");
   }
 
-  const svgColour = theme.nightMode ? "white" : "black";
+  const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
 
   return (
-    <header className="mt-8 h-10 relative dark:text-white">
+    <header className="mt-8 h-10 relative dark:text-gray-300">
       <div className="relative h-full">
         <button
           onClick={() => setScreen("Help")}
@@ -73,7 +73,7 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
           </button>
         </div>
       </div>
-      <hr className="border-blue-800  bottom-0" />
+      <hr className="bottom-0" style={{ borderColor: svgColour }} />
     </header>
   );
 }

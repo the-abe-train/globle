@@ -1,7 +1,9 @@
-import { ReactChild, useEffect, useRef } from "react";
+import { ReactChild, useContext, useEffect, useRef } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
+import { ThemeContext } from "../context/ThemeContext";
 
 // TODO Add my personal info to the footer
+// TODO add "not all countries included" discalaimer to the footer
 
 type Props = {
   children: ReactChild;
@@ -11,6 +13,9 @@ type Props = {
 export default function Auxilliary({ children, setScreen }: Props) {
   const globeSize = 150;
   const globeRef = useRef<GlobeMethods>(null!);
+
+  const { theme } = useContext(ThemeContext);
+  const timeOfDay = theme.nightMode ? "night" : "day";
 
   useEffect(() => {
     // @ts-ignore
@@ -23,7 +28,7 @@ export default function Auxilliary({ children, setScreen }: Props) {
   }
 
   return (
-    <div className="dark:text-white">
+    <div className="dark:text-gray-300">
       {children}
       <div className="w-1/2 flex flex-col justify-center align-middle mx-auto">
         <div
@@ -32,7 +37,7 @@ export default function Auxilliary({ children, setScreen }: Props) {
         >
           <ReactGlobe
             ref={globeRef}
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
+            globeImageUrl={`images/earth-${timeOfDay}.jpg`}
             width={globeSize}
             height={globeSize}
             backgroundColor="#00000000"

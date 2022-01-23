@@ -8,34 +8,7 @@ html {
   height: 100%;
 }
 
-.nothing {
-  background-color: rgb(24, 24, 65);
-}
-
-/* body {
-  background: radial-gradient(ellipse at top, rgba(63, 201, 255, 0.7), transparent),
-    radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), transparent);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+body {
   margin: 0;
-} */
-
-/* @media (prefers-color-scheme: light) {
-  body {
-    background: radial-gradient(ellipse at top, rgba(63, 201, 255, 0.7), transparent),
-      radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), transparent);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-  }
-} */
-
-/* @media (prefers-color-scheme: dark) {
-  body {
-    background: radial-gradient(ellipse at top, rgba(58, 114, 136, 0.7), black),
-      radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), black);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-  }
-} */
+  height: 100%;
+}

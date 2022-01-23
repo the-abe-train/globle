@@ -124,7 +124,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         Guess the Mystery Country
       </label> */}
       <input
-        className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-400 disabled:border-slate-400"
+        className="shadow appearance-none border rounded py-2 px-3 text-gray-700 dark:bg-slate-300 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-400 disabled:border-slate-400"
         type="text"
         name="guesser"
         id="guesser"

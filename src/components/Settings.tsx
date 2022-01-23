@@ -5,14 +5,14 @@ function Toggle({ checked }: { checked: boolean }) {
   if (checked) {
     return (
       <div>
-        <div className="block bg-gray-100 w-14 h-8 rounded-full border-solid border-2 border-black"></div>
+        <div className="block bg-gray-100 w-14 h-8 rounded-full border-solid border-2 border-gray-500"></div>
         <div className="dot absolute left-1 top-1 bg-blue-800 w-6 h-6 rounded-full transition"></div>
       </div>
     );
   } else {
     return (
       <div>
-        <div className="block bg-gray-600 w-14 h-8 rounded-full border-1 border-black"></div>
+        <div className="block bg-gray-600 w-14 h-8 rounded-full border-1 border-gray-500"></div>
         <div className="dot absolute left-1 top-1 bg-blue-100 w-6 h-6 rounded-full transition translate-x-full"></div>
       </div>
     );
@@ -20,8 +20,8 @@ function Toggle({ checked }: { checked: boolean }) {
 }
 
 export default function Settings() {
-  const [checked, setChecked] = useState(true);
   const themeContext = useContext(ThemeContext);
+  const [checked, setChecked] = useState(!themeContext.theme.nightMode);
 
   function changeTheme(e: React.ChangeEvent<HTMLInputElement>) {
     setChecked(e.currentTarget.checked);
@@ -47,9 +47,7 @@ export default function Settings() {
           />
           <Toggle checked={checked} />
         </label>
-        <span className=" text-lg w-36">
-          {checked ? "Day" : "Night"} Theme
-        </span>
+        <span className=" text-lg w-36">{checked ? "Day" : "Night"} Theme</span>
       </div>
     </div>
   );
