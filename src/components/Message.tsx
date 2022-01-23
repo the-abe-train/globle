@@ -10,7 +10,7 @@ export function Message({ win, error }: Props) {
     return <p className="text-red-700 h-1">{error}</p>;
   } else if (win) {
     return (
-      <p className="text-green-800 h-1">
+      <p className="text-green-800 dark:text-green-300 h-1">
         The Mystery Country is {answerName}!
       </p>
     );

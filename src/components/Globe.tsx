@@ -2,13 +2,18 @@ import { useContext, useEffect } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 
 import { scaleSequentialSqrt } from "d3-scale";
-import { interpolateRdGy } from "d3-scale-chromatic";
+import {
+  interpolateBlues,
+  interpolateRdGy,
+  interpolateReds,
+} from "d3-scale-chromatic";
 import { addProximity } from "../util/distance";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
 import { answerName } from "../util/answer";
 import { turnGlobe } from "../util/turnGlobe";
 import { ThemeContext } from "../context/ThemeContext";
+// import { ThemeContext } from "../context/ThemeContext";
 const countryData: Country[] = require("../country_data.json").features;
 
 // TODO add lines between finished countries
@@ -21,8 +26,8 @@ type Props = {
 
 export function Globe({ guesses, globeRef }: Props) {
   // Theme
-  const theme = useContext(ThemeContext);
-  const timeOfDay = theme.darkMode ? "night" : "day";
+  const { theme } = useContext(ThemeContext);
+  const timeOfDay = theme.nightMode ? "night" : "day";
 
   // Globe size settings
   const size = 600; // px on one side
@@ -37,7 +42,9 @@ export function Globe({ guesses, globeRef }: Props) {
     if (guess.proximity == null) {
       guess = addProximity(guess);
     }
-    const colorScale = scaleSequentialSqrt(interpolateRdGy);
+    const gradient = theme.nightMode ? interpolateBlues : interpolateReds;
+    const colorScale = scaleSequentialSqrt(gradient);
+    console.log(guess.proximity);
     const colour = colorScale(guess.proximity);
     return colour;
   };

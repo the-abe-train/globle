@@ -1,25 +1,5 @@
-import { useEffect, useRef } from "react";
-import ReactGlobe, { GlobeMethods } from "react-globe.gl";
-
-type Props = {
-  setScreen: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export default function Help({ setScreen }: Props) {
+export default function Help() {
   const countrySize = 150;
-  const globeSize = 150;
-
-  const globeRef = useRef<GlobeMethods>(null!);
-
-  useEffect(() => {
-    // @ts-ignore
-    globeRef.current.controls().autoRotate = true;
-    //   globeRef.current.camera().zoom = 1.4;
-  }, []);
-
-  function goToGame() {
-    setScreen("Game");
-  }
 
   return (
     <div className="my-4 space-y-6">
@@ -53,24 +33,6 @@ export default function Help({ setScreen }: Props) {
         </figure>
       </div>
       <p>A new Mystery Country will be available every day!</p>
-      <div className="w-1/2 flex flex-col justify-center align-middle mx-auto">
-        <div
-          className="mx-auto cursor-pointer"
-          style={{ width: `${globeSize}px` }}
-        >
-          <ReactGlobe
-            ref={globeRef}
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
-            width={globeSize}
-            height={globeSize}
-            backgroundColor="#00000000"
-            onGlobeClick={goToGame}
-          />
-        </div>
-        <p className="text-center">
-          <b>Click the globe to play!</b>
-        </p>
-      </div>
     </div>
   );
 }

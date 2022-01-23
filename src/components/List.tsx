@@ -38,7 +38,7 @@ export function List({ guesses, win, globeRef }: Props) {
   }
 
   return (
-    <div className="ml-10 my-8">
+    <div className="ml-10 my-8 dark:text-white">
       <ul className="grid grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, WB_A2, ISO_A2 } = guess.properties;

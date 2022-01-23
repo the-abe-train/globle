@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
+import Auxilliary from "./components/Auxilliary";
 import Game from "./components/Game";
-import { Header } from "./components/Header";
+import Header from "./components/Header";
 import Help from "./components/Help";
+import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 
@@ -12,32 +14,40 @@ function App() {
   const [showStats, setShowStats] = useState(false);
 
   // Context
-  const theme = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
 
   // Re-render globe
   useEffect(() => {
     if (screen === "Game") setReSpin(true);
-  }, [screen]);
-  useEffect(() => {
+  }, [screen]); useEffect(() => {
     if (reSpin) setTimeout(() => setReSpin(false), 1);
   }, [reSpin]);
 
   const pickScreen = () => {
     if (screen === "Help") {
-      return <Help setScreen={setScreen} />;
+      return (
+        <Auxilliary setScreen={setScreen}>
+          <Help />
+        </Auxilliary>
+      );
+    } else if (screen === "Settings") {
+      return (
+        <Auxilliary setScreen={setScreen}>
+          <Settings />
+        </Auxilliary>
+      );
     } else {
       return <Game reSpin={reSpin} />;
     }
   };
 
+  const dark = themeContext.theme.nightMode ? "dark" : "";
+
   return (
-    <div className="max-w-2xl my-4 mx-auto">
+    <div className={`max-w-2xl my-4 mx-auto ${dark}`}>
       <Header
-        screen={screen}
         setScreen={setScreen}
-        reSpin={reSpin}
         setReSpin={setReSpin}
-        showStats={showStats}
         setShowStats={setShowStats}
       />
       {showStats && <Statistics setShowStats={setShowStats} />}

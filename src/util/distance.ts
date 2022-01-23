@@ -54,8 +54,9 @@ export function addProximity(guessCountry: Country) {
   // user can see it.
   if (!answerCountry) throw "Answer country not found";
   const distance = polygonDistance(guessCountry, answerCountry);
-  const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
-  const proximity = distance / maxDistance;
+  // const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
+  const maxDistance = 40_000_000;  // 
+  const proximity = 1 - Math.min(distance / maxDistance, 1);
   guessCountry["proximity"] = proximity;
   return guessCountry;
 }

@@ -1,41 +1,34 @@
-import { createContext, useReducer } from "react";
+import { createContext, ReactNode, useState } from "react";
 
-type State = {
-  darkMode: boolean;
-  toggleDark?: () => void;
+// Use context as follows:
+// ThemeProvider > ThemeContext > themeContext > theme & setTheme
+
+type ProviderProps = {
+  children: ReactNode;
 };
 
-type Action = {
-  type: "LIGHTMODE" | "DARKMODE";
+type Theme = {
+  nightMode: boolean;
 };
 
-type Props = {
-  children: any;
+type ThemeContext = {
+  theme: Theme;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>> | null;
 };
 
-export const ThemeContext = createContext<State>({ darkMode: false });
-
-const initialState = { darkMode: false };
-
-const themeReducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case "LIGHTMODE":
-      return { darkMode: false };
-    case "DARKMODE":
-      return { darkMode: true };
-    default:
-      return state;
-  }
+const initialTheme: Theme = { nightMode: false };
+const initialThemeContext: ThemeContext = {
+  theme: initialTheme,
+  setTheme: null,
 };
 
-export function ThemeProvider({ children }: Props) {
-  const [state, dispatch] = useReducer(themeReducer, initialState);
+export const ThemeContext = createContext<ThemeContext>(initialThemeContext);
 
+export const ThemeProvider = ({ children }: ProviderProps) => {
+  const [theme, setTheme] = useState(initialTheme);
   return (
-    <ThemeContext.Provider
-      value={{ darkMode: false, toggleDark: () => console.log("toggle") }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
-}
+};

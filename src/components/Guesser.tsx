@@ -7,6 +7,8 @@ import { addProximity } from "../util/distance";
 import { Stats } from "../lib/localStorage";
 const countryData: Country[] = require("../country_data.json").features;
 
+// TODO Remove old guesses on new day.
+
 type Props = {
   guesses: Country[];
   setGuesses: React.Dispatch<React.SetStateAction<Country[]>>;
