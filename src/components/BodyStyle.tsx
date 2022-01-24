@@ -28,8 +28,8 @@ export default function BodyStyle() {
     backgroundImage:
       "url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/131045/clouds.png), url(https://assets.codepen.io/557388/clouds.png)",
     backgroundRepeat: "repeat repeat",
-    margin: "8rem 0",
-    opacity: 0.2,
+    marginTop: "8rem",
+    opacity: 0.2
   };
 
   return (

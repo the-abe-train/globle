@@ -1,8 +1,7 @@
-// TODO fix country colours for day and night in this section
+import Outline from "./Outline";
 
 export default function Help() {
   const countrySize = 150;
-
   return (
     <div className="my-4 space-y-6">
       <h2 className="text-center text-2xl my-5">How to play</h2>
@@ -17,22 +16,11 @@ export default function Help() {
         countries would appear with these colours if guessed:
       </p>
       <div className="flex justify-between">
-        <figure>
-          <img src="images/fr-01.svg" width={countrySize} alt="France" />
-          <figcaption className="text-center font-bold">France</figcaption>
-        </figure>
-        <figure>
-          <img src="images/ir-01.svg" width={countrySize} alt="Iran" />
-          <figcaption className="text-center font-bold">Iran</figcaption>
-        </figure>
-        <figure>
-          <img src="images/cn-01.svg" width={countrySize} alt="China" />
-          <figcaption className="text-center font-bold">China</figcaption>
-        </figure>
-        <figure>
-          <img src="images/kr-01.svg" width={countrySize} alt="South Korea" />
-          <figcaption className="text-center font-bold">South Korea</figcaption>
-        </figure>
+        {["France", "Nepal", "Mongolia", "South Korea"].map((country, idx) => {
+          return (
+            <Outline key={idx} countryName={country} width={countrySize} />
+          );
+        })}
       </div>
       <p>A new Mystery Country will be available every day!</p>
     </div>

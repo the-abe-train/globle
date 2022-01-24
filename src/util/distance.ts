@@ -1,6 +1,5 @@
 import * as geometry from "spherical-geometry-js";
 import { Country } from "../lib/country";
-import { answerCountry } from "./answer";
 
 function pointToCoordinates(point: Array<number>) {
   // In the data, coordinates are [E/W (lng), N/S (lat)]
@@ -40,27 +39,26 @@ function calcProximity(points1: number[][], points2: number[][]) {
       distance = Math.min(distance, pointDistance);
     }
   }
-  console.log("Country 1 points:", points1.length);
-  console.log("Country 2 points:", points2.length);
-  console.log("Total paths measured:", points1.length * points2.length);
-  console.log("Proximity is:", distance);
+  // console.log("Country 1 points:", points1.length);
+  // console.log("Country 2 points:", points2.length);
+  // console.log("Total paths measured:", points1.length * points2.length);
+  // console.log("Proximity is:", distance);
   return distance;
 }
 
-function polygonDistance(country1: Country, country2: Country) {
+export function polygonDistance(country1: Country, country2: Country) {
   const points1 = polygonPoints(country1);
   const points2 = polygonPoints(country2);
   return calcProximity(points1, points2);
 }
 
-export function addProximity(guessCountry: Country) {
-  if (!answerCountry) throw "Answer country not found";
-  const distance = polygonDistance(guessCountry, answerCountry);
-  // const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
-  // const maxDistance = 15_000_000;  // 
-  // const proximity = 1 - Math.min(distance / maxDistance, 1);
-  console.log(guessCountry.properties.NAME, distance);
-  // guessCountry["proximity"] = proximity;
-  guessCountry["proximity"] = distance;
-  return guessCountry;
-}
+// export function addProximity(guessCountry: Country, answerCountry: Country) {
+//   const distance = polygonDistance(guessCountry, answerCountry);
+//   // const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
+//   // const maxDistance = 15_000_000;  // 
+//   // const proximity = 1 - Math.min(distance / maxDistance, 1);
+//   // console.log(guessCountry.properties.NAME, distance);
+//   // guessCountry["proximity"] = proximity;
+//   // guessCountry["proximity"] = distance;
+//   return distance;
+// }

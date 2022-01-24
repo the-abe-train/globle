@@ -1,9 +1,9 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Country } from "../lib/country";
-import { answerName } from "../util/answer";
+import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { addProximity } from "../util/distance";
+import { polygonDistance } from "../util/distance";
 import { Stats } from "../lib/localStorage";
 const countryData: Country[] = require("../country_data.json").features;
 
@@ -76,8 +76,8 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     e.preventDefault();
     setError("");
     let guessCountry = runChecks();
-    if (guessCountry) {
-      guessCountry = addProximity(guessCountry);
+    if (guessCountry &&  answerCountry) {
+      guessCountry['proximity'] = polygonDistance(guessCountry, answerCountry);
       setGuesses([...guesses, guessCountry]);
       setGuessName("");
     }

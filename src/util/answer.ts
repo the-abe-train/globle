@@ -19,10 +19,10 @@ const validCountries = countryData.filter(
 
 const key = generateKey(validCountries);
 
-export const answerCountry = validCountries[key];
-export const answerName = answerCountry.properties.NAME;
+// export const answerCountry = validCountries[key];
+// export const answerName = answerCountry.properties.NAME;
 
-// export const answerName = "Japan";
-// export const answerCountry = countryData.find((c) => {
-//   return c.properties.NAME === "Japan"
-// })
+export const answerName = "Japan";
+export const answerCountry = countryData.find((c) => {
+  return c.properties.NAME === "Japan"
+})
