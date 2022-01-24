@@ -3,6 +3,8 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
 
 // TODO Make stats page look nice
+// TODO Add a sharing feature
+// TODO Check that the scoring day by day actually works
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
+// TODO add cities version of the game
+
 function Toggle({ checked }: { checked: boolean }) {
   if (checked) {
     return (
