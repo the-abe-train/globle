@@ -1,26 +1,35 @@
 import { useState, useEffect } from "react";
 
-function getStorageValue<T>(key: string, defaultValue: T): T {
-  // getting stored value
+export function getStorageValue<T>(key: string, defaultValue?: T): T {
   const saved = localStorage.getItem(key);
   if (saved) {
     return JSON.parse(saved);
-  } else {
+  } else if (defaultValue) {
     return defaultValue;
+  } else {
+    throw "Local storage error"
   }
 }
 
 export function useLocalStorage<T>(
   key: string,
-  defaultValue: T
+  defaultValue: T,
+  expiration: string
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const [value, setValue] = useState(() => {
+  let [value, setValue] = useState(() => {
     return getStorageValue(key, defaultValue);
   });
 
   useEffect(() => {
     // storing input name
-    localStorage.setItem(key, JSON.stringify(value));
+    const today = new Date().toLocaleDateString();
+    console.log("today", today)
+    console.log("expiration", expiration)
+    if (today <= expiration) {
+      localStorage.setItem(key, JSON.stringify(value));
+    } else {
+      localStorage.setItem(key, JSON.stringify(defaultValue));
+    }
   }, [key, value]);
 
   return [value, setValue];

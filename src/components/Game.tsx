@@ -5,6 +5,8 @@ import { Globe } from "./Globe";
 import { Guesser } from "./Guesser";
 import { List } from "./List";
 import { answerName } from "../util/answer";
+import { getStorageValue } from "../hooks/useLocalStorage";
+import { Guesses } from "../lib/localStorage";
 const countryData: Country[] = require("../country_data.json").features;
 
 type Props = {
@@ -20,9 +22,7 @@ export default function Game({ reSpin }: Props) {
 
   // Get old guesses and convert to Countries
   useEffect(() => {
-    const storage = localStorage.getItem("guesses") || "[]";
-    const storedGuesses: string[] = JSON.parse(storage);
-    // console.log(storedGuesses, typeof storedGuesses);
+    const storedGuesses = getStorageValue<Guesses>("guesses").countries;
     let storedCountries = storedGuesses.map((guess) => {
       const foundCountry = countryData.find((country) => {
         return country.properties.NAME === guess;

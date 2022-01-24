@@ -4,10 +4,10 @@ import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { polygonDistance } from "../util/distance";
-import { Stats } from "../lib/localStorage";
+import { Stats, Guesses } from "../lib/localStorage";
 const countryData: Country[] = require("../country_data.json").features;
 
-// TODO Remove old guesses on new day.
+// TODO Test: remove old guesses on new day.
 
 type Props = {
   guesses: Country[];
@@ -20,9 +20,14 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
 
-  const [storedGuesses, storeGuesses] = useLocalStorage<string[]>(
+  const today = new Date().toLocaleDateString();
+  const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>(
     "guesses",
-    []
+    {
+      day: today,
+      countries: [],
+    },
+    today
   );
   const firstStats = {
     gamesWon: 0,
@@ -33,7 +38,8 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   };
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
-    firstStats
+    firstStats,
+    '9999-99-99'
   );
 
   // const
@@ -76,8 +82,8 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     e.preventDefault();
     setError("");
     let guessCountry = runChecks();
-    if (guessCountry &&  answerCountry) {
-      guessCountry['proximity'] = polygonDistance(guessCountry, answerCountry);
+    if (guessCountry && answerCountry) {
+      guessCountry["proximity"] = polygonDistance(guessCountry, answerCountry);
       setGuesses([...guesses, guessCountry]);
       setGuessName("");
     }
@@ -86,7 +92,11 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   // When the player makes a new guess
   useEffect(() => {
     const guessNames = guesses.map((country) => country.properties.NAME);
-    storeGuesses(guessNames);
+    const today = new Date().toLocaleDateString();
+    storeGuesses({
+      day: today,
+      countries: guessNames,
+    });
   }, [guesses]);
 
   // When the player wins!
@@ -109,7 +119,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         lastWin: todayString,
         currentStreak,
         maxStreak,
-        usedGuesses: [...storedStats.usedGuesses, storedGuesses.length],
+        usedGuesses: [...storedStats.usedGuesses, storedGuesses.countries.length],
       };
       storeStats(newStats);
     }

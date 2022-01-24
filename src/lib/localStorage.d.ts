@@ -5,3 +5,8 @@ export type Stats = {
   maxStreak: number;
   usedGuesses: number[];
 };
+
+export type Guesses = {
+  day: string;
+  countries: string[];
+}

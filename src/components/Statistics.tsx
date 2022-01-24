@@ -37,7 +37,8 @@ export default function Statistics({ setShowStats }: Props) {
 
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
-    firstStats
+    firstStats,
+    new Date().toLocaleDateString()
   );
 
   const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses } =

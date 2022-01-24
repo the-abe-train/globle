@@ -1,17 +1,14 @@
 import { useContext, useEffect, useRef } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
-import { scaleSequentialSqrt } from "d3-scale";
-import { interpolateOrRd, interpolateBuPu } from "d3-scale-chromatic";
-import { polygonDistance } from "../util/distance";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
-import { answerCountry, answerName } from "../util/answer";
+import { answerCountry } from "../util/answer";
 import { turnGlobe } from "../util/turnGlobe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
-const countryData: Country[] = require("../country_data.json").features;
 
 // TODO make it more clear to users that the globe is interactive
+// TODO globe image is too big, get's a warning. Look into compressing it.
 
 type Props = {
   guesses: Country[];
@@ -28,20 +25,6 @@ export function Globe({ guesses, globeRef }: Props) {
     width: `${size}px`,
     clipPath: `circle(${size / 2}px at ${size / 2}px ${size / 2}px)`,
   };
-
-  // const colour = getColour(guess)
-
-  // Color scale
-  // const getColour = (guess: Country) => {
-  //   if (guess.properties.NAME === answerName) return "green";
-  //   if (guess.proximity == null) {
-  //     guess['proximity'] = polygonDistance(guess, answerCountry);
-  //   }
-  //   const gradient = nightMode ? interpolateBuPu : interpolateOrRd;
-  //   const colorScale = scaleSequentialSqrt(gradient).domain([15_000_000, 0]);
-  //   const colour = colorScale(guess.proximity);
-  //   return colour;
-  // };
 
   // After each guess
   useEffect(() => {
