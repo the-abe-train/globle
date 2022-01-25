@@ -16,12 +16,12 @@ type Props = {
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
+export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
   const [firstGuess, setFirstGuess] = useState(false);
 
-  const today = new Date().toLocaleDateString();
+  const today = new Date().toLocaleDateString("en-CA");
   const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>(
     "guesses",
     {
@@ -32,7 +32,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   );
   const firstStats = {
     gamesWon: 0,
-    lastWin: new Date(0).toLocaleDateString(),
+    lastWin: new Date(0).toLocaleDateString("en-CA"),
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
@@ -91,7 +91,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   // When the player makes a new guess
   useEffect(() => {
     const guessNames = guesses.map((country) => country.properties.NAME);
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toLocaleDateString("en-CA");
     storeGuesses({
       day: today,
       countries: guessNames,
@@ -101,7 +101,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     } else {
       setFirstGuess(false);
     }
-  }, [guesses]);
+  }, [guesses, storeGuesses]);
 
   // When the player wins!
   useEffect(() => {
@@ -130,7 +130,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       };
       storeStats(newStats);
     }
-  }, [win]);
+  });
 
   return (
     <div className="mt-10 mb-6 block mx-auto w-fit text-center">

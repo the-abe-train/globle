@@ -16,7 +16,7 @@ export default function Statistics({ setShowStats }: Props) {
   // Stats data
   const firstStats = {
     gamesWon: 0,
-    lastWin: new Date(0).toLocaleDateString(),
+    lastWin: new Date(0).toLocaleDateString("en-CA"),
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
@@ -25,7 +25,7 @@ export default function Statistics({ setShowStats }: Props) {
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
     firstStats,
-    new Date().toLocaleDateString()
+    new Date().toLocaleDateString("en-CA")
   );
 
   const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses } =
@@ -49,18 +49,19 @@ export default function Statistics({ setShowStats }: Props) {
 
   // Closing the modal
   const modalRef = useRef<HTMLDivElement>(null!);
-  function closeModal(e: MouseEvent) {
-    const target = e.target as HTMLElement;
-    if (!modalRef.current?.contains(target)) {
-      setShowStats(false);
-    }
-  }
+
   useEffect(() => {
+    function closeModal(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      if (!modalRef.current?.contains(target)) {
+        setShowStats(false);
+      }
+    }
     document.addEventListener("click", closeModal);
     return () => {
       document.removeEventListener("click", closeModal);
     };
-  }, []);
+  }, [setShowStats]);
 
   // Reset stats
   const [msg, setMsg] = useState("");

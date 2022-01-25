@@ -7,7 +7,7 @@ export function getStorageValue<T>(key: string, defaultValue?: T): T {
   } else if (defaultValue) {
     return defaultValue;
   } else {
-    throw "Local storage error"
+    throw new Error("Local storage error");
   }
 }
 
@@ -22,7 +22,7 @@ export function useLocalStorage<T>(
 
   useEffect(() => {
     // storing input name
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toLocaleDateString("en-CA");
     // console.log("today", today)
     // console.log("expiration", expiration)
     if (today <= expiration) {
@@ -30,7 +30,7 @@ export function useLocalStorage<T>(
     } else {
       localStorage.setItem(key, JSON.stringify(defaultValue));
     }
-  }, [key, value]);
+  }, [key, value, defaultValue, expiration]);
 
   return [value, setValue];
 }

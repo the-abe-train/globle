@@ -4,11 +4,11 @@ const countryData: Country[] = require("../country_data.json").features;
 
 function generateKey(list: any[]) {
   const now = new Date();
-  const [year, month, date] = now.toLocaleDateString().split("-");
+  const [year, month, date] = now.toLocaleDateString("en-CA").split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
   const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
-  const key = (dayCode * parseInt(SHUFFLE_KEY)) % list.length
-  return key
+  const key = (dayCode * parseInt(SHUFFLE_KEY)) % list.length;
+  return key;
 }
 
 const validCountries = countryData.filter(

@@ -22,7 +22,7 @@ function polygonPoints(country: Country) {
       }
       return points;
     default:
-      throw "Country data error";
+      throw new Error("Country data error");
   }
 }
 

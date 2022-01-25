@@ -11,7 +11,7 @@ type Props = {
   globeRef: React.MutableRefObject<GlobeMethods>;
 };
 
-export function List({ guesses, win, globeRef }: Props) {
+export default function List({ guesses, win, globeRef }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState<Country[]>([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export function List({ guesses, win, globeRef }: Props) {
   }
 
   return (
-    <div className="mx-2 md:ml-10 md:mr-0 my-8 dark:text-white">
+    <div className="mx-2 md:ml-10 md:mr-0 py-8 dark:text-white">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
           <b>{qualifier}</b>

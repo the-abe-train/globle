@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div
-      className={`max-w-xs sm:max-w-sm md:max-w-2xl mx-auto 
+      className={`max-w-xs sm:max-w-md md:max-w-2xl mx-auto 
       z-20 absolute top-0 bottom-0 left-0 right-0 block ${dark}`}
     >
       <Header

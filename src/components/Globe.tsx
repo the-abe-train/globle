@@ -13,7 +13,7 @@ type Props = {
   globeRef: React.MutableRefObject<GlobeMethods>;
 };
 
-export function Globe({ guesses, globeRef }: Props) {
+export default function Globe({ guesses, globeRef }: Props) {
   // Theme
   const { nightMode } = useContext(ThemeContext).theme;
 
@@ -36,14 +36,14 @@ export function Globe({ guesses, globeRef }: Props) {
       const newSpot = findCentre(newGuess);
       turnGlobe(newSpot, globeRef);
     }
-  }, [guesses]);
+  }, [guesses, globeRef]);
 
   // On first render
   useEffect(() => {
     // @ts-ignore
     globeRef.current.controls().autoRotate = true;
     globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.75 });
-  }, []);
+  }, [globeRef]);
 
   // Stop rotate on drag
   const containerRef = useRef<HTMLDivElement>(null!);
@@ -56,13 +56,13 @@ export function Globe({ guesses, globeRef }: Props) {
       // @ts-ignore
       globeRef.current.controls().autoRotate = false;
     });
-  }, []);
+  }, [globeRef]);
 
   return (
     <div ref={containerRef} className="mx-auto" style={extraStyle}>
       <ReactGlobe
         ref={globeRef}
-        globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.jpg`}
+        globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
         width={size}
         height={size}
         backgroundColor="#00000000"

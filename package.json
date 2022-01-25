@@ -12,11 +12,13 @@
     "@types/react-dom": "^17.0.11",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.0.0",
+    "eslint-config-react-app": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-globe.gl": "^2.20.1",
     "react-scripts": "5.0.0",
     "react-transition-group": "^4.4.2",
+    
     "spherical-geometry-js": "^3.0.0",
     "typescript": "^4.5.4",
     "web-vitals": "^2.1.3"
@@ -26,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ts": "tsc -w"
+    "ts": "tsc -w",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +55,7 @@
     "@types/react-transition-group": "^4.4.4",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.15"
+    "tailwindcss": "^3.0.15",
+    "source-map-explorer": "^2.5.2"
   }
 }
