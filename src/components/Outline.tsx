@@ -13,7 +13,7 @@ type Props = {
 
 export default function Outline({ countryName, width }: Props) {
   const { nightMode } = useContext(ThemeContext).theme;
-  
+
   const country = countryData.find((p) => p.properties.NAME === countryName);
   if (!country) throw "Country in Help screen not found in Country Data";
 
@@ -31,7 +31,7 @@ export default function Outline({ countryName, width }: Props) {
   const colour = getColour(country, sampleAnswer, nightMode);
 
   return (
-    <figure>
+    <figure className="flex md:flex-col justify-left space-x-8 mx-auto">
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,9 @@ export default function Outline({ countryName, width }: Props) {
           <path fill={colour} d={outline.path} />
         </g>
       </svg>
-      <figcaption className="text-center font-bold">{countryName}</figcaption>
+      <figcaption className="text-left md:text-center font-bold my-auto">
+        {countryName}
+      </figcaption>
     </figure>
   );
 }

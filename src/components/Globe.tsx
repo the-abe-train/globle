@@ -6,6 +6,7 @@ import { answerCountry } from "../util/answer";
 import { turnGlobe } from "../util/turnGlobe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
+import useCheckMobile from "../hooks/useCheckMobile";
 
 type Props = {
   guesses: Country[];
@@ -16,8 +17,11 @@ export function Globe({ guesses, globeRef }: Props) {
   // Theme
   const { nightMode } = useContext(ThemeContext).theme;
 
+  // Check device
+  const isMobile = useCheckMobile();
+
   // Globe size settings
-  const size = 600; // px on one side
+  const size = isMobile ? 320 : 600; // px on one side
   const extraStyle = {
     width: `${size}px`,
     clipPath: `circle(${size / 2}px at ${size / 2}px ${size / 2}px)`,
@@ -48,10 +52,14 @@ export function Globe({ guesses, globeRef }: Props) {
       // @ts-ignore
       globeRef.current.controls().autoRotate = false;
     });
-  });
+    containerRef.current.addEventListener("touchend", () => {
+      // @ts-ignore
+      globeRef.current.controls().autoRotate = false;
+    });
+  }, []);
 
   return (
-    <div ref={containerRef} className="mx-auto z-1" style={extraStyle}>
+    <div ref={containerRef} className="mx-auto" style={extraStyle}>
       <ReactGlobe
         ref={globeRef}
         globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.jpg`}

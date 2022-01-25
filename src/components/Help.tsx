@@ -15,7 +15,7 @@ export default function Help() {
         For example, if the Mystery Country is <b>Japan</b>, then the following
         countries would appear with these colours if guessed:
       </p>
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between">
         {["France", "Nepal", "Mongolia", "South Korea"].map((country, idx) => {
           return (
             <Outline key={idx} countryName={country} width={countrySize} />

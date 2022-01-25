@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
 import { Transition } from "react-transition-group";
+import useCheckMobile from "../hooks/useCheckMobile";
 
 // TODO Test: Check that the scoring day by day actually works
 
@@ -36,12 +37,14 @@ export default function Statistics({ setShowStats }: Props) {
 
   const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
 
+  const avgShorthand = useCheckMobile()  ? "Avg. guesses" : "Average guesses needed";
+
   const statsTable = [
     { label: "Last win", value: showLastWin },
     { label: "Games won", value: gamesWon },
     { label: "Current streak", value: currentStreak },
     { label: "Max streak", value: maxStreak },
-    { label: "Average guesses used", value: showAvgGuesses },
+    { label: avgShorthand, value: showAvgGuesses },
   ];
 
   // Closing the modal
@@ -109,7 +112,7 @@ Average guesses used	${showAvgGuesses}`;
   return (
     <div
       className="text-gray-900 dark:text-gray-300  border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl bg-sky-100 dark:bg-slate-900 
-      absolute z-10 top-24 w-96 inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
+      absolute z-10 top-24 md:w-96 inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
       ref={modalRef}
     >
       <button

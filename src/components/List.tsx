@@ -13,7 +13,6 @@ type Props = {
 
 export function List({ guesses, win, globeRef }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState<Country[]>([]);
-  const [clicked, setClicked] = useState<Country>();
 
   useEffect(() => {
     const newOrder = [...guesses].sort((a, b) => {
@@ -37,13 +36,13 @@ export function List({ guesses, win, globeRef }: Props) {
   }
 
   return (
-    <div className="ml-10 my-8 dark:text-white">
+    <div className="mx-2 md:ml-10 md:mr-0 my-8 dark:text-white">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
           <b>{qualifier}</b>
         </p>
       )}
-      <ul className="grid grid-cols-4 gap-3">
+      <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, WB_A2, ISO_A2 } = guess.properties;
           const name = NAME_LEN > 10 ? ABBREV : NAME;
@@ -57,8 +56,6 @@ export function List({ guesses, win, globeRef }: Props) {
               >
                 <img
                   src={`https://flagcdn.com/w20/${flag}.png`}
-                  // width="16"
-                  // height="12"
                   alt={name}
                   className=""
                 />

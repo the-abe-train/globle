@@ -133,28 +133,33 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   }, [win]);
 
   return (
-    <form
-      onSubmit={addGuess}
-      className="space-y-3 space-x-2 my-6 mx-auto block text-center"
-    >
-      <input
-        className="shadow appearance-none border rounded py-2 px-3 text-gray-700 dark:bg-slate-300 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-400 disabled:border-slate-400"
-        type="text"
-        name="guesser"
-        id="guesser"
-        value={guessName}
-        onChange={(e) => setGuessName(e.currentTarget.value)}
-        disabled={win}
-        placeholder={guesses.length === 0 ? "Enter country name here" : ""}
-      />
-      <button
-        className="bg-blue-700 hover:bg-blue-900 disabled:bg-blue-900  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
-        type="submit"
-        disabled={win}
+    <div className="mx-auto mt-10 mb-6 block w-fit text-center">
+      <form
+        onSubmit={addGuess}
+        className="space-x-4 mx-auto my-2 flex text-center"
       >
-        Enter
-      </button>
+        <input
+          className="shadow px-2 py-1 md:py-0
+          text-gray-700 dark:bg-slate-300 focus:outline-none focus:shadow-outline disabled:bg-slate-400
+          border rounded disabled:border-slate-400"
+          type="text"
+          name="guesser"
+          id="guesser"
+          value={guessName}
+          onChange={(e) => setGuessName(e.currentTarget.value)}
+          disabled={win}
+          placeholder={guesses.length === 0 ? "Enter country name here" : ""}
+        />
+        <button
+          className="bg-blue-700 hover:bg-blue-900 disabled:bg-blue-900  text-white 
+          font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hidden md:inline-block "
+          type="submit"
+          disabled={win}
+        >
+          Enter
+        </button>
+      </form>
       <Message win={win} error={error} firstGuess={firstGuess} />
-    </form>
+    </div>
   );
 }
