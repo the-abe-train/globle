@@ -19,6 +19,7 @@ type Props = {
 export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
+  const [firstGuess, setFirstGuess] = useState(false);
 
   const today = new Date().toLocaleDateString();
   const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>(
@@ -39,10 +40,8 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
     firstStats,
-    '9999-99-99'
+    "9999-99-99"
   );
-
-  // const
 
   function findCountry(countryName: string) {
     let country = countryData.find((country) => {
@@ -97,6 +96,11 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       day: today,
       countries: guessNames,
     });
+    if (guesses.length === 1) {
+      setFirstGuess(true);
+    } else {
+      setFirstGuess(false);
+    }
   }, [guesses]);
 
   // When the player wins!
@@ -119,7 +123,10 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         lastWin: todayString,
         currentStreak,
         maxStreak,
-        usedGuesses: [...storedStats.usedGuesses, storedGuesses.countries.length],
+        usedGuesses: [
+          ...storedStats.usedGuesses,
+          storedGuesses.countries.length,
+        ],
       };
       storeStats(newStats);
     }
@@ -130,9 +137,6 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       onSubmit={addGuess}
       className="space-y-3 space-x-2 my-6 mx-auto block text-center"
     >
-      {/* <label className="block text-lg" htmlFor="guesser">
-        Guess the Mystery Country
-      </label> */}
       <input
         className="shadow appearance-none border rounded py-2 px-3 text-gray-700 dark:bg-slate-300 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-400 disabled:border-slate-400"
         type="text"
@@ -141,6 +145,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         value={guessName}
         onChange={(e) => setGuessName(e.currentTarget.value)}
         disabled={win}
+        placeholder={guesses.length === 0 ? "Enter country name here" : ""}
       />
       <button
         className="bg-blue-700 hover:bg-blue-900 disabled:bg-blue-900  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
@@ -149,7 +154,7 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       >
         Enter
       </button>
-      <Message win={win} error={error} />
+      <Message win={win} error={error} firstGuess={firstGuess} />
     </form>
   );
 }
