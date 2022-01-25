@@ -2,7 +2,7 @@ import { Country } from "../lib/country";
 
 const countryData: Country[] = require("../country_data.json").features;
 
-// TODO and environment variable encryption key so people don't know the answer by looking at the code!
+// TODO add environment variable encryption key so people don't know the answer by looking at the code!
 
 function generateKey(list: any[]) {
   const now = new Date();

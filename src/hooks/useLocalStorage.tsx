@@ -23,8 +23,8 @@ export function useLocalStorage<T>(
   useEffect(() => {
     // storing input name
     const today = new Date().toLocaleDateString();
-    console.log("today", today)
-    console.log("expiration", expiration)
+    // console.log("today", today)
+    // console.log("expiration", expiration)
     if (today <= expiration) {
       localStorage.setItem(key, JSON.stringify(value));
     } else {

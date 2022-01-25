@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-// TODO finalize background colours
-
 export default function BodyStyle() {
   const { nightMode } = useContext(ThemeContext).theme;
 

@@ -108,15 +108,15 @@ Average guesses used	${showAvgGuesses}`;
 
   return (
     <div
-      className="text-gray-900 dark:text-gray-300  border-4 border-sky-300 dark:border-slate-700 drop-shadow-xl bg-sky-100 dark:bg-slate-900 
-      absolute z-10 top-28 w-96 inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
+      className="text-gray-900 dark:text-gray-300  border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl bg-sky-100 dark:bg-slate-900 
+      absolute z-10 top-24 w-96 inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
       ref={modalRef}
     >
       <button
         className="absolute top-3 right-4"
         onClick={() => setShowStats(false)}
       >
-        <svg x="0px" y="0px" viewBox="0 0 460.775 460.775" width="0.75rem" className=" dark:fill-gray-300">
+        <svg x="0px" y="0px" viewBox="0 0 460.775 460.775" width="12px" className=" dark:fill-gray-300">
           <path
             d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
 	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
