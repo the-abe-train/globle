@@ -4,6 +4,7 @@
 ## Attributions
 - This game was inspired by Wordle and the "Hot or Cold" geography games from Sporcle.com
 - Country outlines in the Help screen provided by Vemaps.com
+- Favicons are from favicon.io
 
 # Tech stack
 - React (Create React App)
