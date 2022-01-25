@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function Auxilliary({ children, setScreen }: Props) {
-
   // Window size
   const isMobile = useCheckMobile();
 
@@ -17,7 +16,9 @@ export default function Auxilliary({ children, setScreen }: Props) {
   const globeSize = 150;
   const extraStyle = {
     width: `${globeSize}px`,
-    clipPath: `circle(${globeSize / 2}px at ${globeSize / 2}px ${globeSize / 2}px)`,
+    clipPath: `circle(${globeSize / 2}px at ${globeSize / 2}px ${
+      globeSize / 2
+    }px)`,
   };
   const globeRef = useRef<GlobeMethods>(null!);
 
@@ -38,10 +39,7 @@ export default function Auxilliary({ children, setScreen }: Props) {
     <div className="dark:text-gray-300 relative min-h-96 ">
       {children}
       <div className="w-1/2 flex flex-col justify-center align-middle mx-auto">
-        <div
-          className="mx-auto cursor-pointer"
-          style={extraStyle}
-        >
+        <div className="mx-auto cursor-pointer" style={extraStyle}>
           <ReactGlobe
             ref={globeRef}
             globeImageUrl={`images/earth-${timeOfDay}.jpg`}
@@ -55,7 +53,7 @@ export default function Auxilliary({ children, setScreen }: Props) {
           <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
         </p>
       </div>
-      <footer className="absolute -bottom-24 md:-bottom-16 left-0 py-4 text-sm">
+      <footer className="absolute -bottom-24 md:-bottom-36 left-0 py-4 text-sm">
         <span className="flex space-x-3">
           <a href="https://the-abe-train.com">by The Abe Train</a>
           <a href="https://twitter.com/theAbeTrain">

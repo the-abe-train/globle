@@ -133,10 +133,10 @@ export function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   }, [win]);
 
   return (
-    <div className="mx-auto mt-10 mb-6 block w-fit text-center">
+    <div className="mt-10 mb-6 block mx-auto w-fit text-center">
       <form
         onSubmit={addGuess}
-        className="space-x-4 mx-auto my-2 flex text-center"
+        className="space-x-4 mx-auto my-2 flex justify-center"
       >
         <input
           className="shadow px-2 py-1 md:py-0

@@ -77,6 +77,7 @@ export function Globe({ guesses, globeRef }: Props) {
         onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
         polygonSideColor="#00000000"
         polygonStrokeColor="#00000000"
+        atmosphereColor={nightMode ? "rgba(63, 201, 255)" : "lightskyblue"}
       />
     </div>
   );

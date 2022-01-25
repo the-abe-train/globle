@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 // Use context as follows:
 // ThemeProvider > ThemeContext > themeContext > theme & setTheme
@@ -17,6 +18,7 @@ type ThemeContext = {
 };
 
 const initialTheme: Theme = { nightMode: false };
+
 const initialThemeContext: ThemeContext = {
   theme: initialTheme,
   setTheme: null,
@@ -25,7 +27,18 @@ const initialThemeContext: ThemeContext = {
 export const ThemeContext = createContext<ThemeContext>(initialThemeContext);
 
 export const ThemeProvider = ({ children }: ProviderProps) => {
-  const [theme, setTheme] = useState(initialTheme);
+  const [storedTheme, storeTheme] = useLocalStorage<Theme>(
+    "theme",
+    initialTheme,
+    "2050-01-01"
+  );
+
+  const [theme, setTheme] = useState(storedTheme);
+
+  useEffect(() => {
+    storeTheme(theme);
+  }, [theme])
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}

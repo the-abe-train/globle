@@ -16,7 +16,11 @@ export function Message({ win, error, firstGuess }: Props) {
       </p>
     );
   } else if (firstGuess) {
-    return <p className="text-gray-700 ">Drag, click, and zoom-in on the globe to help you find your next guess</p>
+    return (
+      <p className="text-gray-700 dark:text-gray-400 ">
+        Drag, click, and zoom-in on the globe to help you find your next guess
+      </p>
+    );
   } else {
     return <p className="text-red-700 "></p>;
   }
