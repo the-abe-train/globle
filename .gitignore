@@ -27,3 +27,4 @@ yarn-error.log*
 country_data.json
 countries_orig.json
 country.d copy.ts
+TestAllCountries.tsx
