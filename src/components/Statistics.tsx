@@ -1,11 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
 import { Transition } from "react-transition-group";
 import useCheckMobile from "../hooks/useCheckMobile";
 import { getPath } from "../util/svg";
+import { ThemeContext } from "../context/ThemeContext";
 
 // TODO Test: Check that the scoring day by day actually works
+// TODO Make sharing stats more appealing
+// TODO Replace react transition group with Framer Motion
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
@@ -85,12 +88,11 @@ export default function Statistics({ setShowStats }: Props) {
   // Clipboard
   const [showCopyMsg, setShowCopyMsg] = useState(false);
   async function copyToClipboard() {
-    const shareString = `My GLOBLE Stats
-Last win	${showLastWin}
-Games won	${gamesWon}
-Current streak	${currentStreak}
-Max streak	${maxStreak}
-Average guesses used	${showAvgGuesses}`;
+    const shareString = `My GLOBLE Stats 🌎
+Current streak: ${currentStreak}
+Average guesses: ${showAvgGuesses}
+
+https://globle-game.com`;
     setMsg("Copied to clipboard!");
     setShowCopyMsg(true);
     setTimeout(() => setShowCopyMsg(false), 2000);
@@ -112,12 +114,23 @@ Average guesses used	${showAvgGuesses}`;
     exited: { opacity: 0 },
   };
 
+  // Backgorund style
+  const { nightMode } = useContext(ThemeContext).theme;
+  const background = nightMode
+    ? `radial-gradient(ellipse at top, rgba(22, 1, 82, 0.4), transparent), 
+radial-gradient(ellipse at bottom, rgba(125, 48, 116, 0.2), transparent) 
+no-repeat fixed black`
+    : `radial-gradient(ellipse at top, rgba(63, 201, 255, 0.2), transparent), 
+  radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.2), transparent) 
+  no-repeat fixed white`;
+
   return (
     <div
-      className="text-gray-900 dark:text-gray-300 bg-sky-100 dark:bg-slate-900 
+      className="text-gray-900 dark:text-gray-300 dark:bg-slate-900 
       border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl 
       absolute z-10 top-24 sm:max-w-sm inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
       ref={modalRef}
+      style={{ background }}
     >
       <button
         className="absolute top-3 right-4"
@@ -133,7 +146,12 @@ Average guesses used	${showAvgGuesses}`;
           <path d={getPath("x")} />
         </svg>
       </button>
-      <h2 className="text-3xl text-center">Statistics</h2>
+      <h2
+        className="text-3xl text-center font-extrabold"
+        style={{ fontFamily: "'Montserrat'" }}
+      >
+        Statistics
+      </h2>
       <table cellPadding="4rem" className="mx-auto" width="100%">
         <tbody>
           {statsTable.map((row, idx) => {
@@ -158,7 +176,9 @@ Average guesses used	${showAvgGuesses}`;
           Reset
         </button>
         <button
-          className="bg-blue-700 text-white rounded-md px-8 py-2 block text-base font-medium hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow mx-10"
+          className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
+          text-white rounded-md px-8 py-2 block text-base font-medium 
+          focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow mx-10"
           onClick={copyToClipboard}
         >
           Share
