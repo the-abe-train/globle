@@ -9,15 +9,16 @@ import {
 import { GlobeMethods } from "react-globe.gl";
 import { ThemeContext } from "../context/ThemeContext";
 import useCheckMobile from "../hooks/useCheckMobile";
-import { getPath } from "../util/svg";
+import Footer from "./Footer";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
 
 type Props = {
   children: ReactChild;
   setScreen: React.Dispatch<React.SetStateAction<string>>;
+  screen: string;
 };
 
-export default function Auxilliary({ children, setScreen }: Props) {
+export default function Auxilliary({ children, setScreen, screen }: Props) {
   // Window size
   const isMobile = useCheckMobile();
 
@@ -48,8 +49,6 @@ export default function Auxilliary({ children, setScreen }: Props) {
   }
 
   const renderLoader = () => <p>Loading</p>;
-
-  const iconWidth = 14;
 
   function keyPressToggle(e: React.KeyboardEvent<HTMLDivElement>) {
     const keys = ["Enter", " ", "Return"];
@@ -82,31 +81,7 @@ export default function Auxilliary({ children, setScreen }: Props) {
           <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
         </p>
       </div>
-      <footer className="absolute -bottom-24 md:-bottom-36 left-0 py-4 text-xs">
-        <span className="flex space-x-3">
-          <a href="https://the-abe-train.com">by The Abe Train</a>
-          <a href="https://twitter.com/theAbeTrain" aria-label="Twitter">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={iconWidth}
-              viewBox="0 0 24 24"
-              fill={nightMode ? "rgb(209 213 219)" : "rgb(17 24 39)"}
-            >
-              <path d={getPath("twitter")} />
-            </svg>
-          </a>
-          <a href="https://github.com/the-abe-train" aria-label="Github">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={iconWidth}
-              viewBox="0 0 24 24"
-              fill={nightMode ? "rgb(209 213 219)" : "rgb(17 24 39)"}
-            >
-              <path d={getPath("github")} />
-            </svg>
-          </a>
-        </span>
-      </footer>
+      {screen === "Help" && <Footer />}
     </div>
   );
 }

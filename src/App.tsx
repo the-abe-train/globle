@@ -27,13 +27,13 @@ function App() {
   const pickScreen = () => {
     if (screen === "Help") {
       return (
-        <Auxilliary setScreen={setScreen}>
+        <Auxilliary screen={screen} setScreen={setScreen}>
           <Help />
         </Auxilliary>
       );
     } else if (screen === "Settings") {
       return (
-        <Auxilliary setScreen={setScreen}>
+        <Auxilliary screen={screen} setScreen={setScreen}>
           <Settings />
         </Auxilliary>
       );
