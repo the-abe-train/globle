@@ -26,15 +26,13 @@ export default function Settings() {
   const [toggleTheme, setToggleTheme] = useState(!themeContext.theme.nightMode);
   const [toggleScope, setToggleScope] = useState(true);
 
+  const { setTheme } = themeContext;
+
   useEffect(() => {
-    if (themeContext.setTheme) {
-      if (toggleTheme) {
-        themeContext.setTheme({ nightMode: false });
-      } else {
-        themeContext.setTheme({ nightMode: true });
-      }
+    if (setTheme) {
+      setTheme({ nightMode: !toggleTheme });
     }
-  }, [toggleTheme, themeContext]);
+  }, [toggleTheme, setTheme]);
 
   function keyPressToggle(
     e: React.KeyboardEvent<HTMLLabelElement>,
