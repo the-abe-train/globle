@@ -51,9 +51,6 @@ export default function Game({ reSpin, setShowStats }: Props) {
     return foundCountry;
   });
 
-  // Stored stats to state
-  const previousStats: Stats = { ...storedStats };
-
   // Check if win condition already met
   const alreadyWon = storedCountryNames.includes(answerName);
 
@@ -74,23 +71,23 @@ export default function Game({ reSpin, setShowStats }: Props) {
 
   // When the player wins!
   useEffect(() => {
-    if (win && previousStats.lastWin < today) {
+    if (win && storedStats.lastWin !== today) {
       // Store new stats in local storage
       const gamesWon =
-        today === previousStats.lastWin ? previousStats.gamesWon + 1 : 1;
-      const elapsed = Date.parse(today) - Date.parse(previousStats.lastWin);
+        today === storedStats.lastWin ? storedStats.gamesWon + 1 : 1;
+      const elapsed = Date.parse(today) - Date.parse(storedStats.lastWin);
       const streakBroken = elapsed / 3600 / 1000 >= 24 ? true : false;
-      const currentStreak = streakBroken ? 1 : previousStats.currentStreak + 1;
+      const currentStreak = streakBroken ? 1 : storedStats.currentStreak + 1;
       const maxStreak =
-        currentStreak > previousStats.maxStreak
+        currentStreak > storedStats.maxStreak
           ? currentStreak
-          : previousStats.maxStreak;
+          : storedStats.maxStreak;
       const newStats = {
         gamesWon,
         lastWin: today,
         currentStreak,
         maxStreak,
-        usedGuesses: [...previousStats.usedGuesses, guesses.length],
+        usedGuesses: [...storedStats.usedGuesses, guesses.length],
       };
       storeStats(newStats);
 
@@ -100,7 +97,7 @@ export default function Game({ reSpin, setShowStats }: Props) {
 
     // Previous stats must NOT be in the dependency array or there will be an
     // infinite loop
-  }, [win, guesses, setShowStats, storeStats]);
+  }, [win, guesses, today, setShowStats, storeStats, storedStats]);
 
   // Fallback while loading
   const renderLoader = () => <p>Loading</p>;
