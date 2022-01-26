@@ -7,7 +7,7 @@ function generateKey(list: any[]) {
   const [year, month, date] = now.toLocaleDateString("en-CA").split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
   const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
-  const key = (dayCode * parseInt(SHUFFLE_KEY)) % list.length;
+  const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY)) % list.length;
   return key;
 }
 
