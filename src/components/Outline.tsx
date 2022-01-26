@@ -15,13 +15,15 @@ export default function Outline({ countryName, width }: Props) {
   const { nightMode } = useContext(ThemeContext).theme;
 
   const country = countryData.find((p) => p.properties.NAME === countryName);
-  if (!country) throw new Error("Country in Help screen not found in Country Data");
+  if (!country)
+    throw new Error("Country in Help screen not found in Country Data");
 
   const sampleAnswerName = "Japan";
   const sampleAnswer = countryData.find(
     (p) => p.properties.NAME === sampleAnswerName
   );
-  if (!sampleAnswer) throw new Error("Country in Help screen not found in Country Data");
+  if (!sampleAnswer)
+    throw new Error("Country in Help screen not found in Country Data");
 
   country["proximity"] = polygonDistance(country, sampleAnswer);
 
@@ -40,7 +42,7 @@ export default function Outline({ countryName, width }: Props) {
         width={width}
       >
         <g id={countryName}>
-          <path fill={colour} d={outline} />
+          <path fill={colour} d={outline} stroke="black" />
         </g>
       </svg>
       <figcaption className="text-left md:text-center font-bold my-auto">

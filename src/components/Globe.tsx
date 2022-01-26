@@ -29,8 +29,8 @@ export default function Globe({ guesses, globeRef }: Props) {
 
   // After each guess
   useEffect(() => {
-    // @ts-ignore
-    globeRef.current.controls().autoRotate = false;
+    const controls: any = globeRef.current.controls();
+    controls.autoRotate = false;
     const newGuess = [...guesses].pop();
     if (newGuess) {
       const newSpot = findCentre(newGuess);
@@ -40,21 +40,23 @@ export default function Globe({ guesses, globeRef }: Props) {
 
   // On first render
   useEffect(() => {
-    // @ts-ignore
-    globeRef.current.controls().autoRotate = true;
-    globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.75 });
+    const controls: any = globeRef.current.controls();
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1;
+    setTimeout(() => {
+      globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
+    }, 400);
   }, [globeRef]);
 
   // Stop rotate on drag
   const containerRef = useRef<HTMLDivElement>(null!);
   useEffect(() => {
+    const controls: any = globeRef.current.controls();
     containerRef.current.addEventListener("mouseup", () => {
-      // @ts-ignore
-      globeRef.current.controls().autoRotate = false;
+      controls.autoRotate = false;
     });
     containerRef.current.addEventListener("touchend", () => {
-      // @ts-ignore
-      globeRef.current.controls().autoRotate = false;
+      controls.autoRotate = false;
     });
   }, [globeRef]);
 

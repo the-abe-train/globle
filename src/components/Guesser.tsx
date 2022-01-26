@@ -2,9 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { polygonDistance } from "../util/distance";
-import { Stats, Guesses } from "../lib/localStorage";
 const countryData: Country[] = require("../country_data.json").features;
 
 // TODO Test: remove old guesses on new day.
@@ -20,28 +18,6 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
   const [firstGuess, setFirstGuess] = useState(false);
-
-  const today = new Date().toLocaleDateString("en-CA");
-  const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>(
-    "guesses",
-    {
-      day: today,
-      countries: [],
-    },
-    today
-  );
-  const firstStats = {
-    gamesWon: 0,
-    lastWin: new Date(0).toLocaleDateString("en-CA"),
-    currentStreak: 0,
-    maxStreak: 0,
-    usedGuesses: [],
-  };
-  const [storedStats, storeStats] = useLocalStorage<Stats>(
-    "statistics",
-    firstStats,
-    "9999-99-99"
-  );
 
   function findCountry(countryName: string) {
     let country = countryData.find((country) => {
@@ -90,47 +66,12 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
 
   // When the player makes a new guess
   useEffect(() => {
-    const guessNames = guesses.map((country) => country.properties.NAME);
-    const today = new Date().toLocaleDateString("en-CA");
-    storeGuesses({
-      day: today,
-      countries: guessNames,
-    });
     if (guesses.length === 1) {
       setFirstGuess(true);
     } else {
       setFirstGuess(false);
     }
-  }, [guesses, storeGuesses]);
-
-  // When the player wins!
-  useEffect(() => {
-    if (win) {
-      const today = Date.now();
-      const todayString = new Date().toLocaleString().slice(0, 10);
-      const gamesWon =
-        todayString === storedStats.lastWin ? storedStats.gamesWon + 1 : 1;
-      const previousWin = Date.parse(storedStats.lastWin);
-      const elapsed = today - previousWin;
-      const streakBroken = elapsed / 3600 / 1000 >= 24 ? true : false;
-      const currentStreak = streakBroken ? 1 : storedStats.currentStreak + 1;
-      const maxStreak =
-        currentStreak > storedStats.maxStreak
-          ? currentStreak
-          : storedStats.maxStreak;
-      const newStats = {
-        gamesWon,
-        lastWin: todayString,
-        currentStreak,
-        maxStreak,
-        usedGuesses: [
-          ...storedStats.usedGuesses,
-          storedGuesses.countries.length,
-        ],
-      };
-      storeStats(newStats);
-    }
-  });
+  }, [guesses, setFirstGuess]);
 
   return (
     <div className="mt-10 mb-6 block mx-auto w-fit text-center">
@@ -152,7 +93,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         />
         <button
           className="bg-blue-700 hover:bg-blue-900 disabled:bg-blue-900  text-white 
-          font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hidden md:inline-block "
+          font-bold py-2 px-4 rounded focus:shadow-outline hidden md:inline-block "
           type="submit"
           disabled={win}
         >

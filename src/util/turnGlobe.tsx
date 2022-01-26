@@ -8,9 +8,9 @@ export function turnGlobe(
   },
   globeRef: React.MutableRefObject<GlobeMethods>
 ) {
-  // @ts-ignore
-  globeRef.current.controls().autoRotate = false;
+  const controls: any = globeRef.current.controls();
+  controls.autoRotate = false;
   const currentAlt = globeRef.current.pointOfView().altitude;
-  coords["altitude"] = Math.max(currentAlt, 0.8);
+  coords["altitude"] = Math.max(currentAlt, 1);
   globeRef.current.pointOfView(coords, 250);
 }

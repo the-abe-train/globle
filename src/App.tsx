@@ -38,7 +38,7 @@ function App() {
         </Auxilliary>
       );
     } else {
-      return <Game reSpin={reSpin} />;
+      return <Game reSpin={reSpin} setShowStats={setShowStats} />;
     }
   };
 

@@ -24,6 +24,7 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
         <button
           onClick={() => setScreen("Help")}
           className="absolute left-0 bottom-1"
+          aria-label="Help"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -31,45 +32,39 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
             viewBox="0 0 24 24"
             width="24"
           >
-            <path
-              fill={svgColour}
-              d={getPath("help")}
-            ></path>
+            <path fill={svgColour} d={getPath("help")}></path>
           </svg>
         </button>
-        <button onClick={reRenderGlobe}>
+        <button
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 "
+          onClick={reRenderGlobe}
+        >
           <h1
-            className="text-4xl font-extrabold absolute bottom-0 left-1/2 transform -translate-x-1/2 "
+            className="text-4xl font-extrabold"
             style={{ fontFamily: "'Montserrat'" }}
           >
             GLOBLE
           </h1>
         </button>
         <div className="space-x-1 flex absolute right-0 bottom-1">
-          <button onClick={() => setShowStats(true)}>
+          <button onClick={() => setShowStats(true)} aria-label="Statistics">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
               viewBox="0 0 24 24"
               width="24"
             >
-              <path
-                fill={svgColour}
-                d={getPath("stats")}
-              ></path>
+              <path fill={svgColour} d={getPath("stats")}></path>
             </svg>
           </button>
-          <button onClick={() => setScreen("Settings")}>
+          <button onClick={() => setScreen("Settings")} aria-label="Settings">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
               viewBox="0 0 24 24"
               width="24"
             >
-              <path
-                fill={svgColour}
-                d={getPath("settings")}
-              ></path>
+              <path fill={svgColour} d={getPath("settings")}></path>
             </svg>
           </button>
         </div>

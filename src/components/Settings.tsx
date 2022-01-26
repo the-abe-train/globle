@@ -1,5 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+
+// TODO make input focus better for a11y
 
 function Toggle({ checked }: { checked: boolean }) {
   if (checked) {
@@ -21,64 +23,75 @@ function Toggle({ checked }: { checked: boolean }) {
 
 export default function Settings() {
   const themeContext = useContext(ThemeContext);
-  const [themeToggle, setThemeToggle] = useState(!themeContext.theme.nightMode);
-  const [scopeToggle, setScopeToggle] = useState(true);
+  const [toggleTheme, setToggleTheme] = useState(!themeContext.theme.nightMode);
+  const [toggleScope, setToggleScope] = useState(true);
 
-  function changeTheme(e: React.ChangeEvent<HTMLInputElement>) {
-    setThemeToggle(e.currentTarget.checked);
+  useEffect(() => {
     if (themeContext.setTheme) {
-      if (themeToggle) {
-        themeContext.setTheme({ nightMode: true });
-      } else {
+      if (toggleTheme) {
         themeContext.setTheme({ nightMode: false });
+      } else {
+        themeContext.setTheme({ nightMode: true });
       }
+    }
+  }, [toggleTheme, themeContext]);
+
+  function keyPressToggle(
+    e: React.KeyboardEvent<HTMLLabelElement>,
+    toggle: boolean,
+    setToggle: React.Dispatch<React.SetStateAction<boolean>>
+  ) {
+    const keys = ["Enter", " ", "Return"];
+    if (keys.includes(e.key)) {
+      setToggle(!toggle);
     }
   }
 
-  function changeScope(e: React.ChangeEvent<HTMLInputElement>) {
-    setScopeToggle(e.currentTarget.checked);
-    // if (scopeToggle) {
-    //   if (themeToggle) {
-    //     scopeToggle({ nightMode: true });
-    //   } else {
-    //     scopeToggle({ nightMode: false });
-    //   }
-    // }
-  }
+  const options = [
+    {
+      name: "theme",
+      setToggle: setToggleTheme,
+      toggle: toggleTheme,
+      on: "Day Theme",
+      off: "Night Theme",
+    },
+    {
+      name: "scope",
+      setToggle: setToggleScope,
+      toggle: toggleScope,
+      on: "Countries",
+      off: "Cities",
+    },
+  ];
 
   return (
     <div className="flex-col space-y-8 mx-auto my-10 w-72 h-36">
-      <div className="flex items-center justify-between">
-        <label htmlFor="theme" className="relative cursor-pointer">
-          <input
-            id="theme"
-            type="checkbox"
-            className="sr-only"
-            checked={themeToggle}
-            onChange={changeTheme}
-          />
-          <Toggle checked={themeToggle} />
-        </label>
-        <span className=" text-lg w-36">
-          {themeToggle ? "Day" : "Night"} Theme
-        </span>
-      </div>
-      <div className="flex items-center justify-between">
-        <label htmlFor="scope" className="relative cursor-pointer">
-          <input
-            id="scope"
-            type="checkbox"
-            className="sr-only"
-            checked={scopeToggle}
-            onChange={changeScope}
-          />
-          <Toggle checked={scopeToggle} />
-        </label>
-        <span className=" text-lg w-36">
-          {scopeToggle ? "Countries" : "Cities"}
-        </span>
-      </div>
-      {!scopeToggle && (
+      {options.map((option, idx) => {
+        const { name, toggle, setToggle, on, off } = option;
+        return (
+          <div key={idx} className="flex items-center justify-between">
+            <label
+              htmlFor={name}
+              className="relative cursor-pointer focus-visible:ring"
+              onKeyPress={(e) => keyPressToggle(e, toggle, setToggle)}
+              tabIndex={0}
+            >
+              <input
+                id={name}
+                type="checkbox"
+                className="sr-only"
+                checked={toggle}
+                onChange={() => setToggle(!toggle)}
+                tabIndex={-1}
+                aria-hidden="true"
+              />
+              <Toggle checked={toggle} />
+            </label>
+            <span className="text-lg w-36">{toggle ? on : off}</span>
+          </div>
+        );
+      })}
+      {!toggleScope && (
         <p className="text-red-700">Globle: Cities Edition coming soon!</p>
       )}
     </div>

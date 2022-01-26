@@ -3,6 +3,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
 import { Transition } from "react-transition-group";
 import useCheckMobile from "../hooks/useCheckMobile";
+import { getPath } from "../util/svg";
 
 // TODO Test: Check that the scoring day by day actually works
 
@@ -27,7 +28,6 @@ export default function Statistics({ setShowStats }: Props) {
     firstStats,
     new Date().toLocaleDateString("en-CA")
   );
-
   const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses } =
     storedStats;
 
@@ -37,7 +37,9 @@ export default function Statistics({ setShowStats }: Props) {
 
   const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
 
-  const avgShorthand = useCheckMobile()  ? "Avg. guesses" : "Average guesses needed";
+  const avgShorthand = useCheckMobile()
+    ? "Avg. guesses"
+    : "Average guesses needed";
 
   const statsTable = [
     { label: "Last win", value: showLastWin },
@@ -77,7 +79,7 @@ export default function Statistics({ setShowStats }: Props) {
     setMsg("Stats erased.");
     setResetComplete(true);
     setTimeout(() => setShowResetMsg(false), 2000);
-    console.log(showResetMsg)
+    console.log(showResetMsg);
   }
 
   // Clipboard
@@ -112,23 +114,23 @@ Average guesses used	${showAvgGuesses}`;
 
   return (
     <div
-      className="text-gray-900 dark:text-gray-300  border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl bg-sky-100 dark:bg-slate-900 
-      absolute z-10 top-24 md:w-96 inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
+      className="text-gray-900 dark:text-gray-300 bg-sky-100 dark:bg-slate-900 
+      border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl 
+      absolute z-10 top-24 sm:max-w-sm inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
       ref={modalRef}
     >
       <button
         className="absolute top-3 right-4"
         onClick={() => setShowStats(false)}
       >
-        <svg x="0px" y="0px" viewBox="0 0 460.775 460.775" width="12px" className=" dark:fill-gray-300">
-          <path
-            d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
-	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
-	c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
-	c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
-	l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
-	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
-          />
+        <svg
+          x="0px"
+          y="0px"
+          viewBox="0 0 460.775 460.775"
+          width="12px"
+          className=" dark:fill-gray-300"
+        >
+          <path d={getPath("x")} />
         </svg>
       </button>
       <h2 className="text-3xl text-center">Statistics</h2>
@@ -148,7 +150,6 @@ Average guesses used	${showAvgGuesses}`;
           })}
         </tbody>
       </table>
-
       <div className="py-6 flex">
         <button
           className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
@@ -165,31 +166,31 @@ Average guesses used	${showAvgGuesses}`;
       </div>
       <Transition nodeRef={msgRef} in={showResetMsg} timeout={duration}>
         {(state: TransitionState) => (
-          <div ref={msgRef} 
+          <div
+            ref={msgRef}
             className={`transition-opacity ease-in-out delay-${duration} border-4 border-sky-300 dark:border-slate-700 bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
             absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
             style={{ ...transitionStyles[state] }}
           >
             <div>
               <p className="text-gray-900 dark:text-gray-300  ">{msg}</p>
-              
-                <div className="py-6 flex justify-center space-x-8">
-                  <button
-                    className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
-                    onClick={resetStats}
-                    disabled={resetComplete}
-                    >
-                    Yes
-                  </button>
-                  <button
-                    className="bg-blue-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                    onClick={() => setShowResetMsg(false)}
-                    disabled={resetComplete}
-                  >
-                    No
-                  </button>
-                </div>
-              
+
+              <div className="py-6 flex justify-center space-x-8">
+                <button
+                  className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
+                  onClick={resetStats}
+                  disabled={resetComplete}
+                >
+                  Yes
+                </button>
+                <button
+                  className="bg-blue-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  onClick={() => setShowResetMsg(false)}
+                  disabled={resetComplete}
+                >
+                  No
+                </button>
+              </div>
             </div>
           </div>
         )}

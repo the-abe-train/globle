@@ -45,7 +45,7 @@ export default function List({ guesses, win, globeRef }: Props) {
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, WB_A2, ISO_A2 } = guess.properties;
-          const name = NAME_LEN > 10 ? ABBREV : NAME;
+          const name = NAME_LEN >= 10 ? ABBREV : NAME;
           const flag =
             ISO_A2.length === 2 ? ISO_A2.toLowerCase() : WB_A2.toLowerCase();
           return (
