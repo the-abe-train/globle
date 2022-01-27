@@ -4,6 +4,7 @@ import { Country } from "../lib/country";
 import { answerName } from "../util/answer";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Guesses, Stats } from "../lib/localStorage";
+import { dateDiffInDays, today } from "../util/dates";
 
 const Globe = lazy(() => import("./Globe"));
 const Guesser = lazy(() => import("./Guesser"));
@@ -17,15 +18,10 @@ type Props = {
 
 export default function Game({ reSpin, setShowStats }: Props) {
   // Get data from local storage
-  const today = new Date().toLocaleDateString("en-CA");
-  const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>(
-    "guesses",
-    {
-      day: today,
-      countries: [],
-    },
-    today
-  );
+  const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
+    day: today,
+    countries: [],
+  });
 
   const firstStats = {
     gamesWon: 0,
@@ -36,21 +32,23 @@ export default function Game({ reSpin, setShowStats }: Props) {
   };
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
-    firstStats,
-    "9999-99-99"
+    firstStats
   );
 
   // Stored guesses to state, as countries
   // If it's a new day though, start with a blank slate
-  const storedCountryNames = storedGuesses.countries;
-  const storedCountries = storedCountryNames.map((guess) => {
-    const foundCountry = countryData.find((country) => {
-      return country.properties.NAME === guess;
+  let storedCountryNames: string[] = [];
+  let storedCountries: Country[] = [];
+  if (today <= storedGuesses.day) {
+    storedCountryNames = storedGuesses.countries;
+    storedCountries = storedCountryNames.map((guess) => {
+      const foundCountry = countryData.find((country) => {
+        return country.properties.NAME === guess;
+      });
+      if (!foundCountry) throw new Error("Country mapping broken");
+      return foundCountry;
     });
-    if (!foundCountry) throw new Error("Country mapping broken");
-    return foundCountry;
-  });
-
+  }
   // Check if win condition already met
   const alreadyWon = storedCountryNames.includes(answerName);
 
@@ -62,7 +60,6 @@ export default function Game({ reSpin, setShowStats }: Props) {
 
   useEffect(() => {
     const guessNames = guesses.map((country) => country.properties.NAME);
-    const today = new Date().toLocaleDateString("en-CA");
     storeGuesses({
       day: today,
       countries: guessNames,
@@ -73,31 +70,28 @@ export default function Game({ reSpin, setShowStats }: Props) {
   useEffect(() => {
     if (win && storedStats.lastWin !== today) {
       // Store new stats in local storage
-      const gamesWon =
-        today === storedStats.lastWin ? storedStats.gamesWon + 1 : 1;
-      const elapsed = Date.parse(today) - Date.parse(storedStats.lastWin);
-      const streakBroken = elapsed / 3600 / 1000 >= 24 ? true : false;
+      const lastWin = today;
+      const gamesWon = storedStats.gamesWon + 1;
+      const streakBroken = dateDiffInDays(storedStats.lastWin, lastWin) > 1;
       const currentStreak = streakBroken ? 1 : storedStats.currentStreak + 1;
       const maxStreak =
         currentStreak > storedStats.maxStreak
           ? currentStreak
           : storedStats.maxStreak;
+      const usedGuesses = [...storedStats.usedGuesses, guesses.length];
       const newStats = {
+        lastWin,
         gamesWon,
-        lastWin: today,
         currentStreak,
         maxStreak,
-        usedGuesses: [...storedStats.usedGuesses, guesses.length],
+        usedGuesses,
       };
       storeStats(newStats);
 
       // Show stats
       setTimeout(() => setShowStats(true), 3000);
     }
-
-    // Previous stats must NOT be in the dependency array or there will be an
-    // infinite loop
-  }, [win, guesses, today, setShowStats, storeStats, storedStats]);
+  }, [win, guesses, setShowStats, storeStats, storedStats]);
 
   // Fallback while loading
   const renderLoader = () => <p>Loading</p>;
