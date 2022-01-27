@@ -28,7 +28,8 @@ function polygonPoints(country: Country) {
 
 function calcProximity(points1: number[][], points2: number[][]) {
   // Find min distance between 2 sets of points
-  let distance = 40_075_000 / 2;
+  const EARTH_CIRCUMFERENCE = 40_075_000;
+  let distance = EARTH_CIRCUMFERENCE / 2;
   for (let i = 0; i < points1.length; i++) {
     const point1 = points1[i];
     const coord1 = pointToCoordinates(point1);
@@ -51,14 +52,3 @@ export function polygonDistance(country1: Country, country2: Country) {
   const points2 = polygonPoints(country2);
   return calcProximity(points1, points2);
 }
-
-// export function addProximity(guessCountry: Country, answerCountry: Country) {
-//   const distance = polygonDistance(guessCountry, answerCountry);
-//   // const maxDistance = 40_075_000 / 2; // Half of circumference of Earth
-//   // const maxDistance = 15_000_000;  // 
-//   // const proximity = 1 - Math.min(distance / maxDistance, 1);
-//   // console.log(guessCountry.properties.NAME, distance);
-//   // guessCountry["proximity"] = proximity;
-//   // guessCountry["proximity"] = distance;
-//   return distance;
-// }
