@@ -61,7 +61,7 @@ export default function Globe({ guesses, globeRef }: Props) {
   }, [globeRef]);
 
   return (
-    <div ref={containerRef} className="mx-auto" style={extraStyle}>
+    <div ref={containerRef} className="mx-auto cursor-grab" style={extraStyle}>
       <ReactGlobe
         ref={globeRef}
         globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
