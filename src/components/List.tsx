@@ -36,7 +36,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   }
 
   return (
-    <div className="mx-2 md:ml-10 md:mr-0 py-8 dark:text-white">
+    <div className="mx-2 md:ml-10 md:mr-0 py-8 dark:text-white z-30">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
           <b>{qualifier}</b>
@@ -52,7 +52,7 @@ export default function List({ guesses, win, globeRef }: Props) {
             <li key={idx}>
               <button
                 onClick={(e) => turnToCountry(e, idx)}
-                className="flex items-center"
+                className="flex items-center cursor-pointer"
               >
                 <img
                   src={`https://flagcdn.com/w20/${flag}.png`}

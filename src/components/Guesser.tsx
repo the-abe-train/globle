@@ -92,7 +92,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
           placeholder={guesses.length === 0 ? "Enter country name here" : ""}
         />
         <button
-          className="bg-blue-700 hover:bg-blue-900 disabled:bg-blue-900  text-white 
+          className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
           font-bold py-2 px-4 rounded focus:shadow-outline hidden md:inline-block "
           type="submit"
           disabled={win}

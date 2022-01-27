@@ -19,7 +19,7 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
   const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
 
   return (
-    <header className="mt-8 h-10 relative dark:text-gray-300">
+    <header className="mt-8 h-10 relative dark:text-gray-300 z-10">
       <div className="relative h-full">
         <button
           onClick={() => setScreen("Help")}

@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-// TODO make input focus better for a11y
-
 function Toggle({ checked }: { checked: boolean }) {
   if (checked) {
     return (

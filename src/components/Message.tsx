@@ -1,3 +1,4 @@
+import useCheckMobile from "../hooks/useCheckMobile";
 import { answerName } from "../util/answer";
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export function Message({ win, error, firstGuess }: Props) {
+  const isMobile = useCheckMobile();
   if (error) {
     return <p className="text-red-700 ">{error}</p>;
   } else if (win) {
@@ -18,7 +20,8 @@ export function Message({ win, error, firstGuess }: Props) {
   } else if (firstGuess) {
     return (
       <p className="text-gray-700 dark:text-gray-400 ">
-        Drag, click, and zoom-in on the globe to help you find your next guess
+        Drag, {isMobile ? "tap" : "click"}, and zoom-in on the globe to help you
+        find your next guess
       </p>
     );
   } else {

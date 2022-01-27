@@ -4,7 +4,12 @@ export default function Help() {
   const countrySize = 150;
   return (
     <div className="my-4 space-y-7">
-      <h2 className="text-center text-2xl my-5">How to play</h2>
+      <h2
+        className="text-center text-2xl my-5 font-extrabold"
+        style={{ fontFamily: "'Montserrat'" }}
+      >
+        How to play
+      </h2>
       <p>
         Every day, there is a new Mystery Country. Your goal is to guess the
         mystery country using the fewest number of guesses. Each incorrect guess
