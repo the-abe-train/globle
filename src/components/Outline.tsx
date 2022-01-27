@@ -32,7 +32,7 @@ export default function Outline({ countryName, width }: Props) {
   const colour = getColour(country, sampleAnswer, nightMode);
 
   return (
-    <figure className="flex md:flex-col justify-left space-x-8 md:space-x-0">
+    <figure className="flex w-4/5 space-x-6 md:flex-col md:justify-left md:space-x-0">
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +40,7 @@ export default function Outline({ countryName, width }: Props) {
         y="0px"
         viewBox="0 0 800 600"
         width={width}
+        height={width * 0.75}
       >
         <g id={countryName}>
           <path fill={colour} d={outline} stroke="black" />

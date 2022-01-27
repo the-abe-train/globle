@@ -1,7 +1,9 @@
+import useCheckMobile from "../hooks/useCheckMobile";
 import Outline from "./Outline";
 
 export default function Help() {
-  const countrySize = 150;
+  const isMobile = useCheckMobile();
+  const countrySize = isMobile ? 125 : 150;
   return (
     <div className="my-4 space-y-7">
       <h2
@@ -20,7 +22,7 @@ export default function Help() {
         For example, if the Mystery Country is <b>Japan</b>, then the following
         countries would appear with these colours if guessed:
       </p>
-      <div className="flex flex-col md:flex-row justify-between">
+      <div className="flex flex-col md:flex-row justify-between items-center">
         {["France", "Nepal", "Mongolia", "South Korea"].map((country, idx) => {
           return (
             <Outline key={idx} countryName={country} width={countrySize} />
