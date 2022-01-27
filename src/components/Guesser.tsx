@@ -1,11 +1,9 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
 const countryData: Country[] = require("../country_data.json").features;
-
-// TODO Test: remove old guesses on new day.
 
 type Props = {
   guesses: Country[];
@@ -17,7 +15,6 @@ type Props = {
 export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
-  const [firstGuess, setFirstGuess] = useState(false);
 
   function findCountry(countryName: string) {
     let country = countryData.find((country) => {
@@ -64,25 +61,17 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     }
   }
 
-  // When the player makes a new guess
-  useEffect(() => {
-    if (guesses.length === 1) {
-      setFirstGuess(true);
-    } else {
-      setFirstGuess(false);
-    }
-  }, [guesses, setFirstGuess]);
-
   return (
-    <div className="mt-10 mb-6 block mx-auto w-fit text-center">
+    <div className="mt-10 mb-6 block mx-auto text-center">
       <form
         onSubmit={addGuess}
-        className="space-x-4 mx-auto my-2 flex justify-center"
+        className="w-80 flex space-x-4 mx-auto my-2 justify-center"
       >
         <input
           className="shadow px-2 py-1 md:py-0
           text-gray-700 dark:bg-slate-300 focus:outline-none focus:shadow-outline disabled:bg-slate-400
-          border rounded disabled:border-slate-400"
+          border rounded disabled:border-slate-400
+          w-full"
           type="text"
           name="guesser"
           id="guesser"
@@ -93,14 +82,14 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         />
         <button
           className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
-          font-bold py-2 px-4 rounded focus:shadow-outline hidden md:inline-block "
+          font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline "
           type="submit"
           disabled={win}
         >
           Enter
         </button>
       </form>
-      <Message win={win} error={error} firstGuess={firstGuess} />
+      <Message win={win} error={error} guesses={guesses.length} />
     </div>
   );
 }
