@@ -6,8 +6,6 @@ import useCheckMobile from "../hooks/useCheckMobile";
 import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
 
-// TODO Test: Check that the scoring day by day actually works
-
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -26,8 +24,7 @@ export default function Statistics({ setShowStats }: Props) {
 
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
-    firstStats,
-    new Date().toLocaleDateString("en-CA")
+    firstStats
   );
   const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses } =
     storedStats;
@@ -80,7 +77,6 @@ export default function Statistics({ setShowStats }: Props) {
     setMsg("Stats erased.");
     setResetComplete(true);
     setTimeout(() => setShowResetMsg(false), 2000);
-    console.log(showResetMsg);
   }
 
   // Clipboard

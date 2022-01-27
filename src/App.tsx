@@ -7,8 +7,6 @@ import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 
-// TODO add preview image when sharing
-
 function App() {
   // State
   const [screen, setScreen] = useState("Help");

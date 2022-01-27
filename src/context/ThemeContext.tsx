@@ -30,8 +30,7 @@ export const ThemeContext =
 export const ThemeProvider = ({ children }: ProviderProps) => {
   const [storedTheme, storeTheme] = useLocalStorage<Theme>(
     "theme",
-    initialTheme,
-    "2050-01-01"
+    initialTheme
   );
 
   const [theme, setTheme] = useState(storedTheme);
