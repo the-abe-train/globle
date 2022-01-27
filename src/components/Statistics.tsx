@@ -7,8 +7,6 @@ import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
 
 // TODO Test: Check that the scoring day by day actually works
-// TODO Make sharing stats more appealing
-// TODO Replace react transition group with Framer Motion
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
@@ -190,7 +188,10 @@ no-repeat fixed black`
             ref={msgRef}
             className={`transition-opacity ease-in-out delay-${duration} border-4 border-sky-300 dark:border-slate-700 bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
             absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
-            style={{ ...transitionStyles[state] }}
+            style={{
+              ...transitionStyles[state],
+              background,
+            }}
           >
             <div>
               <p className="text-gray-900 dark:text-gray-300  ">{msg}</p>
@@ -219,10 +220,11 @@ no-repeat fixed black`
         {(state: TransitionState) => (
           <div
             className={`transition-opacity ease-in-out delay-${duration} 
-            border-4 border-sky-300 dark:border-slate-700 bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
+            border-4 border-sky-300 dark:border-slate-700 drop-shadow-xl 
             absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
             style={{
               ...transitionStyles[state],
+              background,
             }}
           >
             <p className="text-gray-900 dark:text-gray-300">{msg}</p>
