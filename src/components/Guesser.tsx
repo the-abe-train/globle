@@ -31,7 +31,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   }
 
   function runChecks() {
-    const guessCountry = findCountry(guessName);
+    const guessCountry = findCountry(guessName.trim());
     if (
       guesses.find((c) => {
         return c.properties.NAME.toLowerCase() === guessName.toLowerCase();
