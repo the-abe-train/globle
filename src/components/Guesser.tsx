@@ -3,6 +3,8 @@ import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
+import smallCountries from "../small_countries.json";
+import alternateNames from "../alternate_names.json";
 const countryData: Country[] = require("../country_data.json").features;
 
 type Props = {
@@ -12,12 +14,14 @@ type Props = {
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+const smallNames = smallCountries.map((name) => name.toLowerCase());
+
 export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
 
   function findCountry(countryName: string) {
-    let country = countryData.find((country) => {
+    let foundCountry = countryData.find((country) => {
       const { NAME, NAME_LONG, ABBREV, ADMIN } = country.properties;
       return (
         NAME.toLowerCase() === countryName.toLowerCase() ||
@@ -27,11 +31,21 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         ABBREV.replaceAll(".", "").toLowerCase() === countryName.toLowerCase()
       );
     });
-    return country;
+    return foundCountry;
   }
 
   function runChecks() {
-    const guessCountry = findCountry(guessName);
+    if (smallNames.includes(guessName.toLowerCase())) {
+      const idx = smallNames.indexOf(guessName.toLowerCase());
+      const smallName = smallCountries[idx];
+      setError(`${smallName} is too small to appear on this map`);
+      return;
+    }
+    const oldNamePair = alternateNames.find((pair) => {
+      return pair.old === guessName;
+    });
+    const userGuess = oldNamePair ? oldNamePair.real : guessName;
+    const guessCountry = findCountry(userGuess);
     if (
       guesses.find((c) => {
         return c.properties.NAME.toLowerCase() === guessName.toLowerCase();
