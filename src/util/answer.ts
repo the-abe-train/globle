@@ -11,11 +11,7 @@ function generateKey(list: any[]) {
   return key;
 }
 
-const validCountries = countryData.filter(
-  (c) => c.properties.TYPE === "Sovereign country"
-);
+const key = generateKey(countryData);
 
-const key = generateKey(validCountries);
-
-export const answerCountry = validCountries[key];
+export const answerCountry = countryData[key];
 export const answerName = answerCountry.properties.NAME;
