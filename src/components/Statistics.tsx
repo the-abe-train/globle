@@ -5,6 +5,7 @@ import { Transition } from "react-transition-group";
 import useCheckMobile from "../hooks/useCheckMobile";
 import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
+import { today } from "../util/dates";
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
@@ -83,6 +84,8 @@ export default function Statistics({ setShowStats }: Props) {
   const [showCopyMsg, setShowCopyMsg] = useState(false);
   async function copyToClipboard() {
     const shareString = `My GLOBLE Stats 🌎
+Date: ${today}
+Today's score: ${lastWin === today ? usedGuesses : "--"}
 Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
