@@ -11,6 +11,6 @@ export function turnGlobe(
   const controls: any = globeRef.current.controls();
   controls.autoRotate = false;
   const currentAlt = globeRef.current.pointOfView().altitude;
-  coords["altitude"] = Math.max(currentAlt, 1);
+  coords["altitude"] = Math.max(currentAlt, 0.5);
   globeRef.current.pointOfView(coords, 250);
 }
