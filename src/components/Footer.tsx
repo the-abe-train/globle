@@ -31,8 +31,11 @@ export default function Footer() {
         </a>
       </span>
       <span>
-        For more information on the list of valid countries,{" "}
-        <a className="underline" href="https://github.com/the-abe-train/globle">
+        To see the what counts as a valid country,
+        <a
+          className="underline"
+          href="https://www.sporcle.com/blog/2013/01/what-is-a-country/"
+        >
           click here.
         </a>
       </span>
