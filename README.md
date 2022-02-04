@@ -3,7 +3,7 @@
 ## Listed countries
 - The list of countries for this game is based on the [Worldometer](https://www.worldometers.info/geography/alphabetical-list-of-countries/). 
 - England, Scotland, Wales, and Northern Ireland are a part of the United Kingdom, as per Worldometer.
-- Some small countires were omitted because they do not render nicely on the globe. When guessed, the player is prompted with a notice that although the country exists, it is not a valid guess.
+- Some island countires were omitted because they do not render properly on the globe. When guessed, the player is prompted with a notice that although the country exists, it is not a valid guess. I am working on a solution to this issue.
 - Some alternate spellings and previous names are accepted, e.g. Burma for Myanmar.
 - Geogrpahy can be a sensitive topic, and some countries' borders are disputed. If you believe a correction should be made, please politely raise an issue or DM me on Twitter.
 
