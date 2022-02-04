@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
 
@@ -28,6 +28,12 @@ export default function Footer() {
           >
             <path d={getPath("github")} />
           </svg>
+        </a>
+      </span>
+      <span>
+        For more information on the list of valid countries,{" "}
+        <a className="underline" href="https://github.com/the-abe-train/globle">
+          click here.
         </a>
       </span>
     </footer>
