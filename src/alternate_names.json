@@ -10,5 +10,13 @@
   {
     "real": "North Macedonia",
     "old": "macedonia"
+  },
+  {
+    "real": "Congo",
+    "old": "congo-brazzaville"
+  },
+  {
+    "real": "Vatican",
+    "old": "holy see"
   }
 ]

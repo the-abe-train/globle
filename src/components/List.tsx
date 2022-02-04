@@ -44,10 +44,9 @@ export default function List({ guesses, win, globeRef }: Props) {
       )}
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
-          const { NAME_LEN, ABBREV, NAME, WB_A2, ISO_A2 } = guess.properties;
+          const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
           const name = NAME_LEN >= 10 ? ABBREV : NAME;
-          const flag =
-            ISO_A2.length === 2 ? ISO_A2.toLowerCase() : WB_A2.toLowerCase();
+          const flag = (FLAG || "").toLocaleLowerCase();
           return (
             <li key={idx}>
               <button
@@ -55,7 +54,7 @@ export default function List({ guesses, win, globeRef }: Props) {
                 className="flex items-center cursor-pointer"
               >
                 <img
-                  src={`https://flagcdn.com/w20/${flag}.png`}
+                  src={`https://flagcdn.com/w20/${flag.toLowerCase()}.png`}
                   alt={name}
                   className=""
                 />

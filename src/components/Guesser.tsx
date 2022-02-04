@@ -3,7 +3,6 @@ import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
-import smallCountries from "../small_countries.json";
 import alternateNames from "../alternate_names.json";
 const countryData: Country[] = require("../country_data.json").features;
 
@@ -14,33 +13,31 @@ type Props = {
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const smallNames = smallCountries.map((name) => name.toLowerCase());
-
 export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
 
   function findCountry(countryName: string) {
     let foundCountry = countryData.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN } = country.properties;
+      const { NAME, NAME_LONG, ABBREV, ADMIN, NAME_ALT, BRK_NAME } =
+        country.properties;
+      const nameAlt = NAME_ALT || "";
+      // const brkName = BRK_NAME || ""
       return (
         NAME.toLowerCase() === countryName.toLowerCase() ||
         NAME_LONG.toLowerCase() === countryName.toLowerCase() ||
+        nameAlt === countryName.toLowerCase() ||
         ADMIN.toLowerCase() === countryName.toLowerCase() ||
         ABBREV.toLowerCase() === countryName.toLowerCase() ||
-        ABBREV.replaceAll(".", "").toLowerCase() === countryName.toLowerCase()
+        ABBREV.replaceAll(".", "").toLowerCase() ===
+          countryName.toLowerCase() ||
+        BRK_NAME.toLowerCase() === countryName.toLowerCase()
       );
     });
     return foundCountry;
   }
 
   function runChecks() {
-    if (smallNames.includes(guessName.toLowerCase())) {
-      const idx = smallNames.indexOf(guessName.toLowerCase());
-      const smallName = smallCountries[idx];
-      setError(`${smallName} is too small to appear on this map`);
-      return;
-    }
     const oldNamePair = alternateNames.find((pair) => {
       return pair.old === guessName;
     });

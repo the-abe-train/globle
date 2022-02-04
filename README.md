@@ -1,29 +1,30 @@
 # Notes about Globle
 
 ## Listed countries
-- The list of countries for this game is based on the [Worldometer](https://www.worldometers.info/geography/alphabetical-list-of-countries/). 
-- England, Scotland, Wales, and Northern Ireland are a part of the United Kingdom, as per Worldometer.
-- Some island countires were omitted because they do not render properly on the globe. When guessed, the player is prompted with a notice that although the country exists, it is not a valid guess. I am working on a solution to this issue.
+- The list of countries for this game is the same as that used by [Sporcle](https://www.sporcle.com/blog/2013/01/what-is-a-country/)
 - Some alternate spellings and previous names are accepted, e.g. Burma for Myanmar.
+- France and UK have many territories scattered throughout the globe, and they confuse the proximity algorithm, so they are not highlighted when those countries are guessed.
 - Geogrpahy can be a sensitive topic, and some countries' borders are disputed. If you believe a correction should be made, please politely raise an issue or DM me on Twitter.
 
+## Tip
+If you are really struggling to find the answer, I recommend going to Google Maps or Earth. Better to learn about a new country than never get the answer!
+
+## Accessibility
+I recognize that there are some a11y issues with the game, notably:
+1. The colour gradient can be difficult to navigate for people with vision impairments, and
+2. Very small countries (such as Micronesia) are barely visible on the globe.
+If you have a suggestion on how to improve these concerns, please raise a GitHub issue.
+
 ## Attributions
-- This game was inspired by Wordle and the "Hot or Cold" geography games from Sporcle.com
+- This game was inspired by Wordle and the "Secret Country" geography games from [Sporcle](https://sporcle.com)
 - Country outlines in the Help screen provided by Vemaps.com
 - Favicons are from favicon.io
 
-# Tech stack
-- React (Create React App)
-- react-globe.gl
-
 # Running the project on your local machine
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). If you want to run the project on your local machine,
+1. Clone this repo
+2. `npm install`
+3. `npm start`
 
 # License
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
