@@ -83,11 +83,12 @@ export default function Statistics({ setShowStats }: Props) {
   // Clipboard
   const [showCopyMsg, setShowCopyMsg] = useState(false);
   const options = { year: "numeric", month: "short", day: "numeric" };
-  const event = new Date(`${today} 00:00`);
+  const event = new Date();
   // @ts-ignore
   const unambiguousDate = event.toLocaleDateString("en-CA", options);
+  const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
-    const shareString = `🌎 ${unambiguousDate} 🌍
+    const shareString = `🌎 ${date} 🌍
 Today's guesses: ${
       lastWin === today ? usedGuesses[usedGuesses.length - 1] : "--"
     }
