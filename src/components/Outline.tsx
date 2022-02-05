@@ -17,6 +17,7 @@ export default function Outline({ countryName, width }: Props) {
   const country = countryData.find((p) => p.properties.NAME === countryName);
   if (!country)
     throw new Error("Country in Help screen not found in Country Data");
+  const countryCopy: Country = { ...country };
 
   const sampleAnswerName = "Japan";
   const sampleAnswer = countryData.find(
@@ -25,11 +26,11 @@ export default function Outline({ countryName, width }: Props) {
   if (!sampleAnswer)
     throw new Error("Country in Help screen not found in Country Data");
 
-  country["proximity"] = polygonDistance(country, sampleAnswer);
+  countryCopy["proximity"] = polygonDistance(countryCopy, sampleAnswer);
 
   const outline = getPath(countryName);
 
-  const colour = getColour(country, sampleAnswer, nightMode);
+  const colour = getColour(countryCopy, sampleAnswer, nightMode);
 
   return (
     <figure className="flex w-4/5 space-x-6 md:flex-col md:justify-left md:space-x-0">
