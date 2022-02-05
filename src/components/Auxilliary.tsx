@@ -65,7 +65,12 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
         tabIndex={0}
         onKeyPress={keyPressToggle}
       >
-        <div className="mx-auto cursor-pointer" style={extraStyle}>
+        <div
+          className="mx-auto cursor-pointer"
+          style={extraStyle}
+          onClick={goToGame}
+          onTouchStart={goToGame}
+        >
           <Suspense fallback={renderLoader()}>
             <ReactGlobe
               ref={globeRef}
