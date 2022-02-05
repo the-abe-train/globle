@@ -88,7 +88,9 @@ export default function Statistics({ setShowStats }: Props) {
   const unambiguousDate = event.toLocaleDateString("en-CA", options);
   async function copyToClipboard() {
     const shareString = `🌎 ${unambiguousDate} 🌍
-Today's guesses: ${lastWin === today ? usedGuesses : "--"}
+Today's guesses: ${
+      lastWin === today ? usedGuesses[usedGuesses.length - 1] : "--"
+    }
 Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
