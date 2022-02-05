@@ -34,10 +34,11 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   }
 
   function runChecks() {
+    const trimmedName = guessName.trim();
     const oldNamePair = alternateNames.find((pair) => {
-      return pair.old === guessName;
+      return pair.old === trimmedName;
     });
-    const userGuess = oldNamePair ? oldNamePair.real : guessName;
+    const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
     const guessCountry = findCountry(userGuess);
     if (
       guesses.find((c) => {
