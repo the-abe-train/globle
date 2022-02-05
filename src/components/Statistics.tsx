@@ -82,10 +82,13 @@ export default function Statistics({ setShowStats }: Props) {
 
   // Clipboard
   const [showCopyMsg, setShowCopyMsg] = useState(false);
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const event = new Date(`${today} 00:00`);
+  // @ts-ignore
+  const unambiguousDate = event.toLocaleDateString("en-CA", options);
   async function copyToClipboard() {
-    const shareString = `My GLOBLE Stats 🌎
-Date: ${today}
-Today's score: ${lastWin === today ? usedGuesses : "--"}
+    const shareString = `🌎 ${unambiguousDate} 🌍
+Today's guesses: ${lastWin === today ? usedGuesses : "--"}
 Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
