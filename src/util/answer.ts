@@ -3,6 +3,10 @@ import { today } from "./dates";
 
 const countryData: Country[] = require("../country_data.json").features;
 
+const sortData = countryData.sort((a, b) => {
+  return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
+});
+
 function generateKey(list: any[]) {
   const [year, month, date] = today.split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
@@ -11,7 +15,7 @@ function generateKey(list: any[]) {
   return key;
 }
 
-const key = generateKey(countryData);
+const key = generateKey(sortData);
 
-export const answerCountry = countryData[key];
+export const answerCountry = sortData[key];
 export const answerName = answerCountry.properties.NAME;
