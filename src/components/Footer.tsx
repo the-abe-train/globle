@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
 
@@ -29,6 +29,16 @@ export default function Footer() {
             <path d={getPath("github")} />
           </svg>
         </a>
+      </span>
+      <span>
+        Learn the what qualifies as a &nbsp;
+        <a
+          className="underline"
+          href="https://www.sporcle.com/blog/2013/01/what-is-a-country/"
+        >
+          valid country
+        </a>
+        &nbsp; in this game.
       </span>
     </footer>
   );

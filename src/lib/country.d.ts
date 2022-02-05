@@ -57,6 +57,8 @@ export type Country = {
     WIKIPEDIA: number;
     FIPS_10_: string;
     ISO_A2: string;
+    ISO_A2_EH: string;
+    FLAG: string;
     ISO_A3: string;
     ISO_A3_EH: string;
     ISO_N3: string;
@@ -92,5 +94,5 @@ export type Country = {
     | {
         type: "MultiPolygon";
         coordinates: number[][][][];
-      }
+      };
 };

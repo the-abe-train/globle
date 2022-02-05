@@ -3,6 +3,7 @@ import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
+import alternateNames from "../alternate_names.json";
 const countryData: Country[] = require("../country_data.json").features;
 
 type Props = {
@@ -18,23 +19,29 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
 
   function findCountry(countryName: string) {
     let country = countryData.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN } = country.properties;
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME } = country.properties;
       return (
         NAME.toLowerCase() === countryName.toLowerCase() ||
         NAME_LONG.toLowerCase() === countryName.toLowerCase() ||
         ADMIN.toLowerCase() === countryName.toLowerCase() ||
         ABBREV.toLowerCase() === countryName.toLowerCase() ||
-        ABBREV.replaceAll(".", "").toLowerCase() === countryName.toLowerCase()
+        ABBREV.replaceAll(".", "").toLowerCase() ===
+          countryName.toLowerCase() ||
+        BRK_NAME.toLowerCase() === countryName.toLowerCase()
       );
     });
     return country;
   }
 
   function runChecks() {
-    const guessCountry = findCountry(guessName.trim());
+    const oldNamePair = alternateNames.find((pair) => {
+      return pair.old === guessName;
+    });
+    const userGuess = oldNamePair ? oldNamePair.real : guessName;
+    const guessCountry = findCountry(userGuess);
     if (
       guesses.find((c) => {
-        return c.properties.NAME.toLowerCase() === guessName.toLowerCase();
+        return c.properties.NAME.toLowerCase() === userGuess.toLowerCase();
       })
     ) {
       setError("Country already guessed");

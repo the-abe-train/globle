@@ -5,6 +5,7 @@ import { Transition } from "react-transition-group";
 import useCheckMobile from "../hooks/useCheckMobile";
 import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
+import { today } from "../util/dates";
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
@@ -81,8 +82,13 @@ export default function Statistics({ setShowStats }: Props) {
 
   // Clipboard
   const [showCopyMsg, setShowCopyMsg] = useState(false);
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const event = new Date(`${today} 00:00`);
+  // @ts-ignore
+  const unambiguousDate = event.toLocaleDateString("en-CA", options);
   async function copyToClipboard() {
-    const shareString = `My GLOBLE Stats 🌎
+    const shareString = `🌎 ${unambiguousDate} 🌍
+Today's guesses: ${lastWin === today ? usedGuesses : "--"}
 Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
