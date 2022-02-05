@@ -31,13 +31,14 @@ export default function Footer() {
         </a>
       </span>
       <span>
-        To see the what counts as a valid country,
+        Learn the what qualifies as a &nbsp;
         <a
           className="underline"
           href="https://www.sporcle.com/blog/2013/01/what-is-a-country/"
         >
-          click here.
+          valid country
         </a>
+        &nbsp; in this game.
       </span>
     </footer>
   );
