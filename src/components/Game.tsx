@@ -6,6 +6,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Guesses, Stats } from "../lib/localStorage";
 import { dateDiffInDays, today } from "../util/dates";
 import { polygonDistance } from "../util/distance";
+import {getColourEmoji} from "../util/colour";
 
 const Globe = lazy(() => import("./Globe"));
 const Guesser = lazy(() => import("./Guesser"));
@@ -30,6 +31,7 @@ export default function Game({ reSpin, setShowStats }: Props) {
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
+    emojiGuesses: '',
   };
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
@@ -81,12 +83,18 @@ export default function Game({ reSpin, setShowStats }: Props) {
           ? currentStreak
           : storedStats.maxStreak;
       const usedGuesses = [...storedStats.usedGuesses, guesses.length];
+      const chunks = [];
+      for (let i = 0; i < guesses.length; i += 8) {
+        chunks.push(guesses.slice(i, i + 8));
+      }
+      const emojiGuesses = chunks.map(each => each.map(guess => getColourEmoji(guess, guesses[guesses.length - 1])).join('')).join('\n');
       const newStats = {
         lastWin,
         gamesWon,
         currentStreak,
         maxStreak,
         usedGuesses,
+        emojiGuesses
       };
       storeStats(newStats);
 

@@ -25,13 +25,14 @@ export default function Statistics({ setShowStats }: Props) {
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
+    emojiGuesses: '',
   };
 
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
     firstStats
   );
-  const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses } =
+  const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses, emojiGuesses } =
     storedStats;
 
   const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
@@ -93,12 +94,9 @@ export default function Statistics({ setShowStats }: Props) {
   const unambiguousDate = event.toLocaleDateString("en-CA", options);
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
-    const shareString = `🌎 ${date} 🌍
-Today's guesses: ${todaysGuesses}
-Current streak: ${currentStreak}
-Average guesses: ${showAvgGuesses}
-
-#globle`;
+    const shareString = `Globle ${date}
+🔥${currentStreak} | Average score: ${showAvgGuesses}
+${lastWin === today ? emojiGuesses : "--"}`;
     if ("canShare" in navigator && isMobile && !isFirefox) {
       return await navigator.share({
         title: "Globle Stats",
@@ -183,8 +181,8 @@ no-repeat fixed black`
       </table>
       <div className="py-6 flex">
         <button
-          className="bg-red-700 text-white rounded-md px-6 py-2 block 
-          text-base font-medium hover:bg-red-900 
+          className="bg-red-700 text-white rounded-md px-6 py-2 block
+          text-base font-medium hover:bg-red-900
           focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
           onClick={promptReset}
         >
