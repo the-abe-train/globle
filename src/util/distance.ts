@@ -48,6 +48,8 @@ function calcProximity(points1: number[][], points2: number[][]) {
 }
 
 export function polygonDistance(country1: Country, country2: Country) {
+  // console.log("Country 1:", country1.properties.NAME);
+  // console.log("Country 2", country2.properties.NAME);
   const points1 = polygonPoints(country1);
   const points2 = polygonPoints(country2);
   return calcProximity(points1, points2);

@@ -58,14 +58,19 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
   }
 
   return (
-    <div className="dark:text-gray-300 relative min-h-96 ">
+    <div className="dark:text-gray-300 relative min-h-96">
       {children}
       <div
         className="w-1/2 flex flex-col justify-center align-middle mx-auto"
         tabIndex={0}
         onKeyPress={keyPressToggle}
       >
-        <div className="mx-auto cursor-pointer" style={extraStyle}>
+        <div
+          className="mx-auto cursor-pointer"
+          style={extraStyle}
+          onClick={goToGame}
+          onTouchStart={goToGame}
+        >
           <Suspense fallback={renderLoader()}>
             <ReactGlobe
               ref={globeRef}
