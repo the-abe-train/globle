@@ -1,34 +1,26 @@
 [
   {
-    "real": "Eswatini",
+    "real": "eswatini",
     "old": "swaziland"
   },
   {
-    "real": "Myanmar",
+    "real": "myanmar",
     "old": "burma"
   },
   {
-    "real": "North Macedonia",
+    "real": "north macedonia",
     "old": "macedonia"
   },
   {
-    "real": "Congo",
+    "real": "congo",
     "old": "congo-brazzaville"
   },
   {
-    "real": "Vatican",
+    "real": "vatican",
     "old": "holy see"
   },
   {
-    "real": "Vatican",
+    "real": "vatican",
     "old": "vatican city"
-  },
-  {
-    "real": "Saint Lucia",
-    "old": "st. lucia"
-  },
-  {
-    "real": "St. Vin. and Gren.",
-    "old": "st. vincent and the grenadines"
   }
 ]

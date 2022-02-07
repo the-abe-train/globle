@@ -19,21 +19,26 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME } = country.properties;
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT } =
+        country.properties;
       return (
-        NAME.toLowerCase() === countryName.toLowerCase() ||
-        NAME_LONG.toLowerCase() === countryName.toLowerCase() ||
-        ADMIN.toLowerCase() === countryName.toLowerCase() ||
-        ABBREV.toLowerCase() === countryName.toLowerCase() ||
-        ABBREV.replaceAll(".", "").toLowerCase() ===
-          countryName.toLowerCase() ||
-        BRK_NAME.toLowerCase() === countryName.toLowerCase()
+        NAME.toLowerCase() === countryName ||
+        NAME_LONG.toLowerCase() === countryName ||
+        ADMIN.toLowerCase() === countryName ||
+        ABBREV.toLowerCase() === countryName ||
+        ABBREV.replaceAll(".", "").toLowerCase() === countryName ||
+        BRK_NAME.toLowerCase() === countryName ||
+        NAME_SORT.toLowerCase() === countryName
       );
     });
   }
 
   function runChecks() {
-    const trimmedName = guessName.trim();
+    const trimmedName = guessName
+      .trim()
+      .toLowerCase()
+      .replaceAll("&", "and")
+      .replaceAll(/^st\s/g, "st. ");
     const oldNamePair = alternateNames.find((pair) => {
       return pair.old === trimmedName;
     });
