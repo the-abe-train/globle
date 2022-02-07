@@ -31,7 +31,7 @@ export default function Footer() {
         </a>
       </span>
       <span>
-        Learn the what qualifies as a &nbsp;
+        Learn what qualifies as a &nbsp;
         <a
           className="underline"
           href="https://www.sporcle.com/blog/2013/01/what-is-a-country/"
