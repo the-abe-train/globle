@@ -17,8 +17,8 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
 
-  function findCountry(countryName: string) {
-    let country = countryData.find((country) => {
+  function findCountry(countryName: string, list: Country[]) {
+    return list.find((country) => {
       const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME } = country.properties;
       return (
         NAME.toLowerCase() === countryName.toLowerCase() ||
@@ -30,7 +30,6 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         BRK_NAME.toLowerCase() === countryName.toLowerCase()
       );
     });
-    return country;
   }
 
   function runChecks() {
@@ -39,12 +38,9 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       return pair.old === trimmedName;
     });
     const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
-    const guessCountry = findCountry(userGuess);
-    if (
-      guesses.find((c) => {
-        return c.properties.NAME.toLowerCase() === userGuess.toLowerCase();
-      })
-    ) {
+    const guessCountry = findCountry(userGuess, countryData);
+    const alreadyGuessed = findCountry(userGuess, guesses);
+    if (alreadyGuessed) {
       setError("Country already guessed");
       return;
     }
