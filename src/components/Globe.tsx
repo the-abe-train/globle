@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
@@ -7,6 +7,7 @@ import { turnGlobe } from "../util/turnGlobe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
 import useCheckMobile from "../hooks/useCheckMobile";
+const territoryData: Country[] = require("../data/territories.json").features;
 
 type Props = {
   guesses: Country[];
@@ -14,6 +15,9 @@ type Props = {
 };
 
 export default function Globe({ guesses, globeRef }: Props) {
+  // State
+  const [places, setPlaces] = useState(guesses);
+
   // Theme
   const { nightMode, highContrast } = useContext(ThemeContext).theme;
 
@@ -29,6 +33,17 @@ export default function Globe({ guesses, globeRef }: Props) {
 
   // After each guess
   useEffect(() => {
+    // Add territories to guesses to make shapes
+    const territories: Country[] = [];
+    guesses.forEach((guess) => {
+      const territory = territoryData.find((territory) => {
+        return guess.properties.NAME === territory.properties.SOVEREIGNT;
+      });
+      if (territory) territories.push(territory);
+    });
+    setPlaces(guesses.concat(territories));
+
+    // Turn globe to new spot
     const controls: any = globeRef.current.controls();
     controls.autoRotate = false;
     const newGuess = [...guesses].pop();
@@ -61,29 +76,36 @@ export default function Globe({ guesses, globeRef }: Props) {
   }, [globeRef]);
 
   // Label colour
-  function labelColour(country: Country) {
+
+
+  function getLabel(country: Country) {
     const name = country.properties.ADMIN;
     const prox = country.proximity;
-    const dayColour = prox > 500_000 ? "black" : "gray-300";
+    const dayColour = prox < 500_000 ? "gray-300" : "gray-900";
     const nightColour = "gray-300";
-    return `<b class="text-${dayColour} dark:text-${nightColour}">${name}</b>`;
+    const label = `<b class="text-${dayColour} dark:text-${nightColour}">${name}</b>`;
+    return label;
   }
 
   return (
-    <div ref={containerRef} className="mx-auto cursor-grab" style={extraStyle}>
+    <div
+      ref={containerRef}
+      className="mx-auto cursor-grab text-center"
+      style={extraStyle}
+    >
       <ReactGlobe
         ref={globeRef}
         globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
         width={size}
         height={size}
         backgroundColor="#00000000"
-        polygonsData={guesses}
+        polygonsData={places}
         polygonCapColor={(c) =>
           // @ts-ignore
-          getColour(c, answerCountry, nightMode, highContrast)
+          getColour(c, answerCountry, nightMode)
         }
         // @ts-ignore
-        polygonLabel={labelColour}
+        polygonLabel={getLabel}
         onGlobeClick={(d) => turnGlobe(d, globeRef)}
         onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
         polygonSideColor="#00000000"

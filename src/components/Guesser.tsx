@@ -3,8 +3,8 @@ import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
-import alternateNames from "../alternate_names.json";
-const countryData: Country[] = require("../country_data.json").features;
+import alternateNames from "../data/alternate_names.json";
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   guesses: Country[];
@@ -33,6 +33,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     });
   }
 
+  // Check territories function
   function runChecks() {
     const trimmedName = guessName
       .trim()
@@ -78,7 +79,8 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       >
         <input
           className="shadow px-2 py-1 md:py-0
-          text-gray-700 dark:bg-slate-300 focus:outline-none focus:shadow-outline disabled:bg-slate-400
+          text-gray-700 dark:bg-slate-300 focus:outline-none 
+          focus:shadow-outline disabled:bg-slate-400
           border rounded disabled:border-slate-400
           w-full"
           type="text"

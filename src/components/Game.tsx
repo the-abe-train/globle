@@ -9,7 +9,7 @@ import { dateDiffInDays, today } from "../util/dates";
 const Globe = lazy(() => import("./Globe"));
 const Guesser = lazy(() => import("./Guesser"));
 const List = lazy(() => import("./List"));
-const countryData: Country[] = require("../country_data.json").features;
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   reSpin: boolean;

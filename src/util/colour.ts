@@ -13,6 +13,7 @@ export const getColour = (
   nightMode: boolean,
   highContrast: boolean
 ) => {
+  if (guess.properties?.TYPE === "Territory") return "gray";
   if (guess.properties.NAME === answer.properties.NAME) return "green";
   if (guess.proximity == null) {
     guess["proximity"] = polygonDistance(guess, answer);
