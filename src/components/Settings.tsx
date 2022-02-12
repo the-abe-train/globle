@@ -22,15 +22,18 @@ function Toggle({ checked }: { checked: boolean }) {
 export default function Settings() {
   const themeContext = useContext(ThemeContext);
   const [toggleTheme, setToggleTheme] = useState(!themeContext.theme.nightMode);
+  const [toggleHighContrast, setToggleHighContrast] = useState(
+    !themeContext.theme.highContrast
+  );
   const [toggleScope, setToggleScope] = useState(true);
 
   const { setTheme } = themeContext;
 
   useEffect(() => {
     if (setTheme) {
-      setTheme({ nightMode: !toggleTheme });
+      setTheme({ nightMode: !toggleTheme, highContrast: !toggleHighContrast });
     }
-  }, [toggleTheme, setTheme]);
+  }, [toggleTheme, toggleHighContrast, setTheme]);
 
   function keyPressToggle(
     e: React.KeyboardEvent<HTMLLabelElement>,
@@ -50,6 +53,13 @@ export default function Settings() {
       toggle: toggleTheme,
       on: "Day Theme",
       off: "Night Theme",
+    },
+    {
+      name: "accessibility",
+      setToggle: setToggleHighContrast,
+      toggle: toggleHighContrast,
+      on: "Default Contrast",
+      off: "High Contrast",
     },
     {
       name: "scope",

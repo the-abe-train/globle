@@ -19,7 +19,7 @@ export default function Globe({ guesses, globeRef }: Props) {
   const [places, setPlaces] = useState(guesses);
 
   // Theme
-  const { nightMode } = useContext(ThemeContext).theme;
+  const { nightMode, highContrast } = useContext(ThemeContext).theme;
 
   // Check device
   const isMobile = useCheckMobile();
@@ -76,6 +76,8 @@ export default function Globe({ guesses, globeRef }: Props) {
   }, [globeRef]);
 
   // Label colour
+
+
   function getLabel(country: Country) {
     const name = country.properties.ADMIN;
     const prox = country.proximity;

@@ -13,6 +13,7 @@ type Props = {
 
 export default function Outline({ countryName, width }: Props) {
   const { nightMode } = useContext(ThemeContext).theme;
+  const { highContrast } = useContext(ThemeContext).theme;
 
   const country = countryData.find((p) => p.properties.NAME === countryName);
   if (!country)
@@ -30,7 +31,7 @@ export default function Outline({ countryName, width }: Props) {
 
   const outline = getPath(countryName);
 
-  const colour = getColour(countryCopy, sampleAnswer, nightMode);
+  const colour = getColour(countryCopy, sampleAnswer, nightMode, highContrast);
 
   return (
     <figure className="flex w-4/5 space-x-6 md:flex-col md:justify-left md:space-x-0">
