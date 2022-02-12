@@ -34,7 +34,6 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   }
 
   // Check territories function
-
   function runChecks() {
     const trimmedName = guessName
       .trim()
@@ -80,7 +79,8 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       >
         <input
           className="shadow px-2 py-1 md:py-0
-          text-gray-700 dark:bg-slate-300 focus:outline-none focus:shadow-outline disabled:bg-slate-400
+          text-gray-700 dark:bg-slate-300 focus:outline-none 
+          focus:shadow-outline disabled:bg-slate-400
           border rounded disabled:border-slate-400
           w-full"
           type="text"
