@@ -15,8 +15,7 @@ type Props = {
 
 export default function Globe({ guesses, globeRef }: Props) {
   // Theme
-  const { nightMode } = useContext(ThemeContext).theme;
-  const { highContrast } = useContext(ThemeContext).theme;
+  const { nightMode, highContrast } = useContext(ThemeContext).theme;
 
   // Check device
   const isMobile = useCheckMobile();
@@ -61,6 +60,15 @@ export default function Globe({ guesses, globeRef }: Props) {
     });
   }, [globeRef]);
 
+  // Label colour
+  function labelColour(country: Country) {
+    const name = country.properties.ADMIN;
+    const prox = country.proximity;
+    const dayColour = prox > 500_000 ? "black" : "gray-300";
+    const nightColour = "gray-300";
+    return `<b class="text-${dayColour} dark:text-${nightColour}">${name}</b>`;
+  }
+
   return (
     <div ref={containerRef} className="mx-auto cursor-grab" style={extraStyle}>
       <ReactGlobe
@@ -75,9 +83,7 @@ export default function Globe({ guesses, globeRef }: Props) {
           getColour(c, answerCountry, nightMode, highContrast)
         }
         // @ts-ignore
-        polygonLabel={({ properties: d }) => `
-        <b class="text-black dark:text-gray-300">${d.ADMIN}</b> 
-        `}
+        polygonLabel={labelColour}
         onGlobeClick={(d) => turnGlobe(d, globeRef)}
         onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
         polygonSideColor="#00000000"
