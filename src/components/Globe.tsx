@@ -60,6 +60,15 @@ export default function Globe({ guesses, globeRef }: Props) {
     });
   }, [globeRef]);
 
+  // Label colour
+  function getLabel(country: Country) {
+    const name = country.properties.ADMIN;
+    const prox = country.proximity;
+    const dayColour = prox > 500_000 ? "black" : "gray-300";
+    const nightColour = "gray-300";
+    return `<b class="text-${dayColour} dark:text-${nightColour}">${name}</b>`;
+  }
+
   return (
     <div ref={containerRef} className="mx-auto cursor-grab" style={extraStyle}>
       <ReactGlobe
@@ -69,12 +78,12 @@ export default function Globe({ guesses, globeRef }: Props) {
         height={size}
         backgroundColor="#00000000"
         polygonsData={guesses}
+        polygonCapColor={(c) =>
+          // @ts-ignore
+          getColour(c, answerCountry, nightMode)
+        }
         // @ts-ignore
-        polygonCapColor={(c) => getColour(c, answerCountry, nightMode)}
-        // @ts-ignore
-        polygonLabel={({ properties: d }) => `
-        <b class="text-black dark:text-gray-300">${d.ADMIN}</b> 
-        `}
+        polygonLabel={getLabel}
         onGlobeClick={(d) => turnGlobe(d, globeRef)}
         onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
         polygonSideColor="#00000000"

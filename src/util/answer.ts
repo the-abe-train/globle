@@ -1,7 +1,7 @@
 import { Country } from "../lib/country";
 import { today } from "./dates";
 
-const countryData: Country[] = require("../country_data.json").features;
+const countryData: Country[] = require("../data/country_data.json").features;
 
 const sortData = countryData.sort((a, b) => {
   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);

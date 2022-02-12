@@ -4,7 +4,7 @@ import { getColour } from "../util/colour";
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
-const countryData: Country[] = require("../country_data.json").features;
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   countryName: string;
