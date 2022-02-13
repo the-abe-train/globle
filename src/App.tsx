@@ -35,7 +35,7 @@ function App() {
     } else if (screen === "Info") {
       return (
         <Auxilliary screen={screen} setScreen={setScreen}>
-          <Info />
+          <Info setScreen={setScreen} />
         </Auxilliary>
       );
     } else if (screen === "Settings") {
