@@ -27,6 +27,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         ADMIN.toLowerCase() === countryName ||
         ABBREV.toLowerCase() === countryName ||
         ABBREV.replaceAll(".", "").toLowerCase() === countryName ||
+        NAME.replaceAll("-", " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
         NAME_SORT.toLowerCase() === countryName
       );
