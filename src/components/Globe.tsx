@@ -76,15 +76,23 @@ export default function Globe({ guesses, globeRef }: Props) {
   }, [globeRef]);
 
   // Label colour
-
-
   function getLabel(country: Country) {
     const name = country.properties.ADMIN;
     const prox = country.proximity;
-    const dayColour = prox < 500_000 ? "gray-300" : "gray-900";
+    const dayColour = prox < 750_000 ? "gray-300" : "gray-900";
     const nightColour = "gray-300";
     const label = `<b class="text-${dayColour} dark:text-${nightColour}">${name}</b>`;
     return label;
+  }
+
+  // Polygon altitude
+  function getAltitude(country: Country) {
+    if (!highContrast || country.properties.TYPE === "Territory") return 0.01;
+    const prox = country.proximity;
+    let proxFraction = prox / 2_000_000;
+    proxFraction = Math.min(Math.max(proxFraction, 0.01), 0.95);
+    let alt = (1 - proxFraction) / 10;
+    return alt;
   }
 
   return (
@@ -102,13 +110,15 @@ export default function Globe({ guesses, globeRef }: Props) {
         polygonsData={places}
         polygonCapColor={(c) =>
           // @ts-ignore
-          getColour(c, answerCountry, nightMode)
+          getColour(c, answerCountry, nightMode, highContrast)
         }
         // @ts-ignore
         polygonLabel={getLabel}
+        // @ts-ignore
+        polygonAltitude={getAltitude}
+        polygonSideColor="blue"
         onGlobeClick={(d) => turnGlobe(d, globeRef)}
         onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
-        polygonSideColor="#00000000"
         polygonStrokeColor="#00000000"
         atmosphereColor={nightMode ? "rgba(63, 201, 255)" : "lightskyblue"}
       />

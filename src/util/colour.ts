@@ -13,7 +13,10 @@ export const getColour = (
   nightMode: boolean,
   highContrast: boolean
 ) => {
-  if (guess.properties?.TYPE === "Territory") return "gray";
+  if (guess.properties?.TYPE === "Territory") {
+    if (highContrast) return "white";
+    return "grey";
+  }
   if (guess.properties.NAME === answer.properties.NAME) return "green";
   if (guess.proximity == null) {
     guess["proximity"] = polygonDistance(guess, answer);
@@ -23,7 +26,8 @@ export const getColour = (
     : nightMode
     ? interpolateBuPu
     : interpolateOrRd;
-  const colorScale = scaleSequentialSqrt(gradient).domain([15_000_000, 0]);
+  const MAX_DISTANCE = 15_000_000;
+  const colorScale = scaleSequentialSqrt(gradient).domain([MAX_DISTANCE, 0]);
   const colour = colorScale(guess.proximity);
   return colour;
 };
