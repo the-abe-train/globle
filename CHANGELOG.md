@@ -7,6 +7,7 @@
 - Created a new high-contrast mode for colour blind players (thank you GitHub user AH-Dietrich for the contribution!)
 - Added an appendix to address people's frequent questions and concerns about the game
 - Removed the zoom limit on recentering
+- Fixed bug that jumbled the order of guesses upon refresh
 
 ## v1.1.0 - Feb 4, 2022
 

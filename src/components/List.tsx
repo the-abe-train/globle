@@ -11,20 +11,23 @@ type Props = {
   globeRef: React.MutableRefObject<GlobeMethods>;
 };
 
+function reorderGuesses(guessList: Country[]) {
+  return [...guessList].sort((a, b) => {
+    if (a.properties.NAME === answerName) {
+      return -1;
+    } else if (b.properties.NAME === answerName) {
+      return 1;
+    } else {
+      return a.proximity - b.proximity;
+    }
+  });
+}
+
 export default function List({ guesses, win, globeRef }: Props) {
-  const [orderedGuesses, setOrderedGuesses] = useState<Country[]>([]);
+  const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
 
   useEffect(() => {
-    const newOrder = [...guesses].sort((a, b) => {
-      if (a.properties.NAME === answerName) {
-        return -1;
-      } else if (b.properties.NAME === answerName) {
-        return 1;
-      } else {
-        return a.proximity - b.proximity;
-      }
-    });
-    setOrderedGuesses(newOrder);
+    setOrderedGuesses(reorderGuesses(guesses));
   }, [guesses]);
 
   const qualifier = win ? "Answer" : "Closest";
