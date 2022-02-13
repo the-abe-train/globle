@@ -3,6 +3,7 @@ import Auxilliary from "./components/Auxilliary";
 import Game from "./components/Game";
 import Header from "./components/Header";
 import Help from "./components/Help";
+import Info from "./components/Info";
 import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
@@ -29,6 +30,12 @@ function App() {
       return (
         <Auxilliary screen={screen} setScreen={setScreen}>
           <Help />
+        </Auxilliary>
+      );
+    } else if (screen === "Info") {
+      return (
+        <Auxilliary screen={screen} setScreen={setScreen}>
+          <Info />
         </Auxilliary>
       );
     } else if (screen === "Settings") {

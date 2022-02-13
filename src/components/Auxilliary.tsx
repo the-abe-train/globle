@@ -86,7 +86,7 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
           <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
         </p>
       </div>
-      {screen === "Help" && <Footer />}
+      <Footer />
     </div>
   );
 }
