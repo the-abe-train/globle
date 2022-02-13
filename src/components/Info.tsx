@@ -1,6 +1,6 @@
 export default function Info() {
   return (
-    <div>
+    <div className="my-2 space-y-7">
       <h2
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}
@@ -10,32 +10,31 @@ export default function Info() {
       <ul className="list-disc space-y-4 w-11/12 mx-auto my-2">
         <li>
           {" "}
-          The distance between countries that defines the colour of the guess is
-          the minimum distance between borders of the guess and the answer.
+          Distance between countries is defined as the minimum distance between
+          borders of the guess country and the mystery country.
         </li>
         <li>
           {" "}
-          For players that are colour-blind or otherwise vision-impared, there
-          is a High Contrast mode which can be activated in the Settings screen.
+          Colour Blind mode is available in Settings for players that are colour
+          blind or otherwise vision-impared.
         </li>
         <li>
           {" "}
-          To determine what qualifies as a valid country, the game uses the
-          framework outlined{" "}
+          Globle uses{" "}
           <a
             className="underline"
             href="https://www.sporcle.com/blog/2013/01/what-is-a-country/"
           >
-            here
-          </a>
-          .
+            this framework
+          </a>{" "}
+          to determine what constitutes a valid guess.
         </li>
         <li>
           {" "}
-          Some territories will appear in a grey colour when their sovereign
+          Some territories will appear in a neutral colour when their sovereign
           country is guessed. The location of these territories does not impact
-          the colour determination of the sovereign country. Most small
-          territories do not appear in the game at all.
+          the colour of the sovereign country. Most small territories do not
+          appear in the game.
         </li>
         <li>
           {" "}
