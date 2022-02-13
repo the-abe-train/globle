@@ -5,7 +5,7 @@ export default function Help() {
   const isMobile = useCheckMobile();
   const countrySize = isMobile ? 125 : 150;
   return (
-    <div className="my-4 space-y-7">
+    <div className="my-2 space-y-7">
       <h2
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}

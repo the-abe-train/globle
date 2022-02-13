@@ -6,7 +6,7 @@ export default function Footer() {
   const iconWidth = 14;
   const { nightMode } = useContext(ThemeContext).theme;
   return (
-    <footer className="absolute -bottom-20 left-0 py-4 text-xs">
+    <footer className="pt-8 pb-4 text-xs">
       <span className="flex space-x-3">
         <a href="https://the-abe-train.com">by The Abe Train</a>
         <a href="https://twitter.com/theAbeTrain" aria-label="Twitter">

@@ -58,10 +58,10 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
   }
 
   return (
-    <div className="dark:text-gray-300 relative min-h-96">
+    <div className="dark:text-gray-300 flex flex-col h-full">
       {children}
       <div
-        className="w-1/2 flex flex-col justify-center align-middle mx-auto"
+        className="w-2/3 flex flex-col justify-center align-middle mx-auto"
         tabIndex={0}
         onKeyPress={keyPressToggle}
       >
@@ -86,7 +86,9 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
           <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
         </p>
       </div>
-      <Footer />
+      <div className="flex-grow flex items-end">
+        <Footer />
+      </div>
     </div>
   );
 }
