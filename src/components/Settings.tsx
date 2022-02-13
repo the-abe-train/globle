@@ -58,8 +58,8 @@ export default function Settings() {
       name: "accessibility",
       setToggle: setToggleHighContrast,
       toggle: toggleHighContrast,
-      on: "High Contrast Off",
-      off: "High Contrast On",
+      on: "Colour Blind Mode Off",
+      off: "Colour Blind Mode On",
     },
     {
       name: "scope",
@@ -96,7 +96,7 @@ export default function Settings() {
               />
               <Toggle checked={toggle} />
             </label>
-            <span className="text-lg w-40">{toggle ? on : off}</span>
+            <span className="text-lg w-48">{toggle ? on : off}</span>
           </div>
         );
       })}
