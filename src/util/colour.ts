@@ -15,7 +15,7 @@ export const getColour = (
 ) => {
   if (guess.properties?.TYPE === "Territory") {
     if (highContrast) return "white";
-    return "grey";
+    return "#BBBBBB";
   }
   if (guess.properties.NAME === answer.properties.NAME) return "green";
   if (guess.proximity == null) {
