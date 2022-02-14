@@ -22,7 +22,10 @@ function Toggle({ checked }: { checked: boolean }) {
 export default function Settings() {
   const themeContext = useContext(ThemeContext);
   const [toggleTheme, setToggleTheme] = useState(!themeContext.theme.nightMode);
-  const [toggleHighContrast, setToggleHighContrast] = useState(!themeContext.theme.highContrast);
+  const [toggleHighContrast, setToggleHighContrast] = useState(
+    !themeContext.theme.highContrast
+  );
+
   const [toggleScope, setToggleScope] = useState(true);
 
   const { setTheme } = themeContext;
@@ -56,8 +59,8 @@ export default function Settings() {
       name: "accessibility",
       setToggle: setToggleHighContrast,
       toggle: toggleHighContrast,
-      on: "Default Contrast",
-      off: "High Contrast",
+      on: "Colour Blind Mode Off",
+      off: "Colour Blind Mode On",
     },
     {
       name: "scope",
@@ -69,11 +72,14 @@ export default function Settings() {
   ];
 
   return (
-    <div className="flex-col space-y-8 mx-auto my-10 w-72 h-36">
+    <div className="flex-col space-y-8 mx-auto my-10 w-fit">
       {options.map((option, idx) => {
         const { name, toggle, setToggle, on, off } = option;
         return (
-          <div key={idx} className="flex items-center justify-between">
+          <div
+            key={idx}
+            className="flex items-center justify-between space-x-8"
+          >
             <label
               htmlFor={name}
               className="relative cursor-pointer focus-visible:ring"
@@ -91,7 +97,7 @@ export default function Settings() {
               />
               <Toggle checked={toggle} />
             </label>
-            <span className="text-lg w-36">{toggle ? on : off}</span>
+            <span className="text-lg w-48">{toggle ? on : off}</span>
           </div>
         );
       })}

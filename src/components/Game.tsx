@@ -1,15 +1,16 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
-import { answerName } from "../util/answer";
+import { answerCountry, answerName } from "../util/answer";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Guesses, Stats } from "../lib/localStorage";
 import { dateDiffInDays, today } from "../util/dates";
+import { polygonDistance } from "../util/distance";
 
 const Globe = lazy(() => import("./Globe"));
 const Guesser = lazy(() => import("./Guesser"));
 const List = lazy(() => import("./List"));
-const countryData: Country[] = require("../country_data.json").features;
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   reSpin: boolean;
@@ -46,6 +47,7 @@ export default function Game({ reSpin, setShowStats }: Props) {
         return country.properties.NAME === guess;
       });
       if (!foundCountry) throw new Error("Country mapping broken");
+      foundCountry["proximity"] = polygonDistance(foundCountry, answerCountry);
       return foundCountry;
     });
   }

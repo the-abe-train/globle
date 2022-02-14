@@ -1,5 +1,14 @@
 # Change log
 
+## v1.2.0 - Feb 13, 2022
+
+- Added "territories" to the game, which appear in a neutral colour when their sovereign country is guessed
+- Restructured Greenland, French Guiana, and Puerto Rico into territories
+- Created a new high-contrast mode for colour blind players (thank you GitHub user AH-Dietrich for the contribution!)
+- Added an FAQ section to address frequent questions and concerns about the game
+- Removed the zoom limit on recentering
+- Fixed bug that jumbled the order of guesses upon refresh
+
 ## v1.1.0 - Feb 4, 2022
 
 **Statistics**
