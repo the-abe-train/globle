@@ -25,6 +25,7 @@ export default function Settings() {
   const [toggleHighContrast, setToggleHighContrast] = useState(
     !themeContext.theme.highContrast
   );
+
   const [toggleScope, setToggleScope] = useState(true);
 
   const { setTheme } = themeContext;

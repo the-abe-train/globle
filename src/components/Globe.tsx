@@ -21,6 +21,7 @@ export default function Globe({ guesses, globeRef }: Props) {
   // Theme
   const { nightMode, highContrast } = useContext(ThemeContext).theme;
 
+
   // Check device
   const isMobile = useCheckMobile();
 
