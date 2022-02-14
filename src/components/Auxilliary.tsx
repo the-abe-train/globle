@@ -58,7 +58,7 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
   }
 
   return (
-    <div className="dark:text-gray-300 flex flex-col h-full">
+    <div className="dark:text-gray-300 flex flex-col">
       {children}
       <div
         className="w-2/3 flex flex-col justify-center align-middle mx-auto"
@@ -86,9 +86,22 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
           <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
         </p>
       </div>
-      <div className="flex-grow flex items-end">
-        <Footer />
-      </div>
+      {(screen === "Help" || screen === "Settings") && (
+        <span>
+          Have a question?{" "}
+          <button
+            className="underline cursor-pointer text-left pt-12"
+            onClick={() => setScreen("Info")}
+          >
+            Check out the FAQ.
+          </button>
+        </span>
+      )}
+      {(screen === "Help" || screen === "Info") && (
+        <div className="flex-grow flex items-end">
+          <Footer setScreen={setScreen} />
+        </div>
+      )}
     </div>
   );
 }
