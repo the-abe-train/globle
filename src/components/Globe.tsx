@@ -16,6 +16,7 @@ type Props = {
 export default function Globe({ guesses, globeRef }: Props) {
   // Theme
   const { nightMode } = useContext(ThemeContext).theme;
+  const { highContrast } = useContext(ThemeContext).theme;
 
   // Check device
   const isMobile = useCheckMobile();
@@ -70,7 +71,7 @@ export default function Globe({ guesses, globeRef }: Props) {
         backgroundColor="#00000000"
         polygonsData={guesses}
         // @ts-ignore
-        polygonCapColor={(c) => getColour(c, answerCountry, nightMode)}
+        polygonCapColor={(c) => getColour(c, answerCountry, nightMode, highContrast)}
         // @ts-ignore
         polygonLabel={({ properties: d }) => `
         <b class="text-black dark:text-gray-300">${d.ADMIN}</b> 
