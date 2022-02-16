@@ -11,6 +11,7 @@ function generateKeyOld(list: any[]) {
   const [year, month, date] = today.split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
   const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
+  console.log(SHUFFLE_KEY);
   const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY)) % list.length;
   return key;
 }
@@ -19,6 +20,7 @@ function generateKeyNew(list: any[]) {
   const [year, month, date] = today.split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
   const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
+  console.log(SHUFFLE_KEY);
   const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY + "5")) % list.length;
   return key;
 }
