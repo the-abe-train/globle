@@ -7,7 +7,7 @@ const sortData = countryData.sort((a, b) => {
   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
 });
 
-function generateKey(list: any[]) {
+function generateKeyOld(list: any[]) {
   const [year, month, date] = today.split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
   const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
@@ -15,7 +15,22 @@ function generateKey(list: any[]) {
   return key;
 }
 
-const key = generateKey(sortData);
+function generateKeyNew(list: any[]) {
+  const [year, month, date] = today.split("-");
+  const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
+  const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
+  const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY + "5")) % list.length;
+  return key;
+}
 
-export const answerCountry = sortData[key];
+let key: number;
+if (today <= "2022-02-16") {
+  key = generateKeyOld(sortData);
+} else {
+  key = generateKeyNew(countryData);
+}
+
+export const answerCountry = countryData[key];
 export const answerName = answerCountry.properties.NAME;
+
+console.log(today, key, answerName);
