@@ -26,8 +26,8 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         NAME_LONG.toLowerCase() === countryName ||
         ADMIN.toLowerCase() === countryName ||
         ABBREV.toLowerCase() === countryName ||
-        ABBREV.replaceAll(".", "").toLowerCase() === countryName ||
-        NAME.replaceAll("-", " ").toLowerCase() === countryName ||
+        ABBREV.replace(/\./g, "").toLowerCase() === countryName ||
+        NAME.replace(/-/g, " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
         NAME_SORT.toLowerCase() === countryName
       );
@@ -39,8 +39,8 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     const trimmedName = guessName
       .trim()
       .toLowerCase()
-      .replaceAll("&", "and")
-      .replaceAll(/^st\s/g, "st. ");
+      .replace(/&/g, "and")
+      .replace(/^st\s/g, "st. ");
     const oldNamePair = alternateNames.find((pair) => {
       return pair.old === trimmedName;
     });
