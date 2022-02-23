@@ -91,8 +91,8 @@ export default function Info({ setScreen }: Props) {
         <dd key={2}>
           There are many countries with multiple acceptable names. Some
           alternate spellings and previous names are accepted, e.g. Burma for
-          Myanmar. As well, acronyms are accaptable for some multi-word
-          countries, e.g. UAE for United Arab Emerates.
+          Myanmar. As well, acronyms are acceptable for some multi-word
+          countries, e.g. UAE for United Arab Emirates.
         </dd>
       ),
     },
