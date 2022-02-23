@@ -91,6 +91,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
           onChange={(e) => setGuessName(e.currentTarget.value)}
           disabled={win}
           placeholder={guesses.length === 0 ? "Enter country name here" : ""}
+          autoComplete="new-password"
         />
         <button
           className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
