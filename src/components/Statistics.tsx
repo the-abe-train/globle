@@ -97,19 +97,20 @@ Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
 https://globle-game.com`;
-    setMsg("Copied to clipboard!");
-    setShowCopyMsg(true);
-    setTimeout(() => setShowCopyMsg(false), 2000);
     if ("canShare" in navigator) {
       navigator.share({
         title: "Globle Stats",
         text: shareString,
-        url: "https://globle-game.com",
       });
-    } else if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(shareString);
     } else {
-      return document.execCommand("copy", true, shareString);
+      setMsg("Copied to clipboard!");
+      setShowCopyMsg(true);
+      setTimeout(() => setShowCopyMsg(false), 2000);
+      if ("clipboard" in navigator) {
+        return await navigator.clipboard.writeText(shareString);
+      } else {
+        return document.execCommand("copy", true, shareString);
+      }
     }
   }
 
