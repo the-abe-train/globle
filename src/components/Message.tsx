@@ -1,4 +1,5 @@
-import useCheckMobile from "../hooks/useCheckMobile";
+// import useCheckMobile from "../hooks/useCheckMobile";
+import { isMobile } from "react-device-detect";
 import { answerName } from "../util/answer";
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 };
 
 export function Message({ win, error, guesses }: Props) {
-  const isMobile = useCheckMobile();
+  // const isMobile = useCheckMobile();
   if (error) {
     return <p className="text-red-700 ">{error}</p>;
   } else if (win) {

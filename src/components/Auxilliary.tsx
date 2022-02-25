@@ -8,9 +8,10 @@ import {
 } from "react";
 import { GlobeMethods } from "react-globe.gl";
 import { ThemeContext } from "../context/ThemeContext";
-import useCheckMobile from "../hooks/useCheckMobile";
 import Footer from "./Footer";
+import { isMobile } from "react-device-detect";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
+// import useCheckMobile from "../hooks/useCheckMobile";
 
 type Props = {
   children: ReactChild;
@@ -20,7 +21,7 @@ type Props = {
 
 export default function Auxilliary({ children, setScreen, screen }: Props) {
   // Window size
-  const isMobile = useCheckMobile();
+  // isMobile
 
   // Globe size settings
   const globeSize = 150;
