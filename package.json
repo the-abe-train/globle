@@ -14,6 +14,7 @@
     "d3-scale-chromatic": "^3.0.0",
     "eslint-config-react-app": "^7.0.0",
     "react": "^17.0.2",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-globe.gl": "^2.20.1",
     "react-scripts": "5.0.0",
@@ -54,7 +55,7 @@
     "@types/react-transition-group": "^4.4.4",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.15",
-    "source-map-explorer": "^2.5.2"
+    "source-map-explorer": "^2.5.2",
+    "tailwindcss": "^3.0.15"
   }
 }

@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import useCheckMobile from "../hooks/useCheckMobile";
+// import useCheckMobile from "../hooks/useCheckMobile";
 import { getPath } from "../util/svg";
+import { isMobile } from "react-device-detect";
 
 export default function Footer() {
   const iconWidth = 14;
   const { nightMode } = useContext(ThemeContext).theme;
-  const isMobile = useCheckMobile();
+  // const isMobile = useCheckMobile();
   return (
     <footer className="pt-8 pb-4 text-xs flex items-end justify-between w-full">
       <span className="flex space-x-3">

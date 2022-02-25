@@ -6,7 +6,8 @@ import { answerCountry } from "../util/answer";
 import { turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
-import useCheckMobile from "../hooks/useCheckMobile";
+// import useCheckMobile from "../hooks/useCheckMobile";
+import { isMobile } from "react-device-detect";
 const territoryData: Country[] = require("../data/territories.json").features;
 
 type Props = {
@@ -22,7 +23,7 @@ export default function Globe({ guesses, globeRef }: Props) {
   const { nightMode, highContrast } = useContext(ThemeContext).theme;
 
   // Check device
-  const isMobile = useCheckMobile();
+  // const isMobile = useCheckMobile();
 
   // Globe size settings
   const size = isMobile ? 320 : 600; // px on one side

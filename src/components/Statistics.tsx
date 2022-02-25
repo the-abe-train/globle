@@ -2,10 +2,12 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
 import { Transition } from "react-transition-group";
-import useCheckMobile from "../hooks/useCheckMobile";
+// import useCheckMobile from "../hooks/useCheckMobile";
+import { isMobile } from "react-device-detect";
 import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
 import { today } from "../util/dates";
+import { isFirefox } from "react-device-detect";
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,7 +16,7 @@ type Props = {
 type TransitionState = "entering" | "entered" | "exiting" | "exited";
 
 export default function Statistics({ setShowStats }: Props) {
-  const isMobile = useCheckMobile();
+  // const isMobile = useCheckMobile();
 
   // Stats data
   const firstStats = {
@@ -40,9 +42,7 @@ export default function Statistics({ setShowStats }: Props) {
 
   const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
 
-  const avgShorthand = useCheckMobile()
-    ? "Avg. guesses"
-    : "Average guesses needed";
+  const avgShorthand = isMobile ? "Avg. guesses" : "Average guesses needed";
 
   const statsTable = [
     { label: "Last win", value: showLastWin },
@@ -99,8 +99,8 @@ Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
 https://globle-game.com`;
-    if ("canShare" in navigator && isMobile) {
-      navigator.share({
+    if ("canShare" in navigator && isMobile && !isFirefox) {
+      return await navigator.share({
         title: "Globle Stats",
         text: shareString,
       });

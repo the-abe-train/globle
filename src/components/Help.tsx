@@ -1,8 +1,9 @@
-import useCheckMobile from "../hooks/useCheckMobile";
+// import useCheckMobile from "../hooks/useCheckMobile";
+import { isMobile } from "react-device-detect";
 import Outline from "./Outline";
 
 export default function Help() {
-  const isMobile = useCheckMobile();
+  // const isMobile = useCheckMobile();
   const countrySize = isMobile ? 125 : 150;
   return (
     <div className="my-2 space-y-7">
