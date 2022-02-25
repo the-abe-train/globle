@@ -14,6 +14,8 @@ type Props = {
 type TransitionState = "entering" | "entered" | "exiting" | "exited";
 
 export default function Statistics({ setShowStats }: Props) {
+  const isMobile = useCheckMobile();
+
   // Stats data
   const firstStats = {
     gamesWon: 0,
@@ -97,7 +99,7 @@ Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
 https://globle-game.com`;
-    if ("canShare" in navigator) {
+    if ("canShare" in navigator && isMobile) {
       navigator.share({
         title: "Globle Stats",
         text: shareString,
