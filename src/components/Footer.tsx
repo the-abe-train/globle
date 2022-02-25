@@ -2,15 +2,11 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
 
-type Props = {
-  setScreen: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export default function Footer({ setScreen }: Props) {
+export default function Footer() {
   const iconWidth = 14;
   const { nightMode } = useContext(ThemeContext).theme;
   return (
-    <footer className="pt-8 pb-4 text-xs flex justify-between w-full">
+    <footer className="pt-8 pb-4 text-xs sm:flex justify-between w-full">
       <span className="flex space-x-3">
         <a href="https://the-abe-train.com">by The Abe Train</a>
         <a href="https://twitter.com/theAbeTrain" aria-label="Twitter">
@@ -34,14 +30,17 @@ export default function Footer({ setScreen }: Props) {
           </svg>
         </a>
       </span>
-      {/* <span>
-        <button
-          className="underline cursor-pointer"
-          onClick={() => setScreen("Info")}
+      <p className="mt-2 sm:mt-0">
+        Enjoying the game?{" "}
+        <a
+          className="underline"
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.buymeacoffee.com/theabetrain"
         >
-          FAQ
-        </button>
-      </span> */}
+          Buy me a coffee!
+        </a>
+      </p>
     </footer>
   );
 }
