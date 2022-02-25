@@ -3,7 +3,7 @@ import { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
 import { answerName } from "../util/answer";
 import { findCentre } from "../util/centre";
-import { turnGlobe } from "../util/turnGlobe";
+import { turnGlobe } from "../util/globe";
 
 type Props = {
   guesses: Country[];
@@ -39,7 +39,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   }
 
   return (
-    <div className="mx-2 md:ml-10 md:mr-0 py-8 dark:text-white z-30">
+    <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
           <b>{qualifier}</b>
