@@ -104,8 +104,8 @@ export default function Globe({ guesses, globeRef }: Props) {
     globeRef.current.pointOfView(coords, 250);
   }
 
-  const btnFill = nightMode ? "bg-[#5E2F7D]" : "bg-[#F3BC63]";
-  const btnBorder = nightMode ? "border-[#7D2F67]" : "border-[#FF8E57]";
+  const btnFill = nightMode ? "bg-[#582679]" : "bg-[#F3BC63]";
+  const btnBorder = nightMode ? "border-[#350a46]" : "border-[#FF8E57]";
   const btnText = nightMode ? "text-white font-bold" : "";
 
   return (
