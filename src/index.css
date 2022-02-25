@@ -12,3 +12,14 @@ body {
   margin: 0;
   height: 100%;
 }
+
+.globe {
+  -webkit-tap-highlight-color: transparent;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.globe:active {
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}

@@ -33,6 +33,8 @@ export default function Statistics({ setShowStats }: Props) {
   const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
   const avgGuesses = Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
   const showAvgGuesses = usedGuesses.length === 0 ? "--" : avgGuesses;
+  const todaysGuesses =
+    lastWin === today ? usedGuesses[usedGuesses.length - 1] : "--";
 
   const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
 
@@ -42,6 +44,7 @@ export default function Statistics({ setShowStats }: Props) {
 
   const statsTable = [
     { label: "Last win", value: showLastWin },
+    { label: "Today's guesses", value: todaysGuesses },
     { label: "Games won", value: gamesWon },
     { label: "Current streak", value: currentStreak },
     { label: "Max streak", value: maxStreak },
@@ -89,20 +92,25 @@ export default function Statistics({ setShowStats }: Props) {
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
     const shareString = `🌎 ${date} 🌍
-Today's guesses: ${
-      lastWin === today ? usedGuesses[usedGuesses.length - 1] : "--"
-    }
+Today's guesses: ${todaysGuesses}
 Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
 https://globle-game.com`;
-    setMsg("Copied to clipboard!");
-    setShowCopyMsg(true);
-    setTimeout(() => setShowCopyMsg(false), 2000);
-    if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(shareString);
+    if ("canShare" in navigator) {
+      navigator.share({
+        title: "Globle Stats",
+        text: shareString,
+      });
     } else {
-      return document.execCommand("copy", true, shareString);
+      setMsg("Copied to clipboard!");
+      setShowCopyMsg(true);
+      setTimeout(() => setShowCopyMsg(false), 2000);
+      if ("clipboard" in navigator) {
+        return await navigator.clipboard.writeText(shareString);
+      } else {
+        return document.execCommand("copy", true, shareString);
+      }
     }
   }
 
@@ -173,7 +181,9 @@ no-repeat fixed black`
       </table>
       <div className="py-6 flex">
         <button
-          className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
+          className="bg-red-700 text-white rounded-md px-6 py-2 block 
+          text-base font-medium hover:bg-red-900 
+          focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
           onClick={promptReset}
         >
           Reset

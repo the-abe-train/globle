@@ -3,7 +3,7 @@ import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
 import { answerCountry } from "../util/answer";
-import { turnGlobe } from "../util/turnGlobe";
+import { turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
 import useCheckMobile from "../hooks/useCheckMobile";
@@ -21,7 +21,6 @@ export default function Globe({ guesses, globeRef }: Props) {
   // Theme
   const { nightMode, highContrast } = useContext(ThemeContext).theme;
 
-
   // Check device
   const isMobile = useCheckMobile();
 
@@ -37,10 +36,10 @@ export default function Globe({ guesses, globeRef }: Props) {
     // Add territories to guesses to make shapes
     const territories: Country[] = [];
     guesses.forEach((guess) => {
-      const territory = territoryData.find((territory) => {
+      const foundTerritories = territoryData.filter((territory) => {
         return guess.properties.NAME === territory.properties.SOVEREIGNT;
       });
-      if (territory) territories.push(territory);
+      if (foundTerritories) territories.push(...foundTerritories);
     });
     setPlaces(guesses.concat(territories));
 
@@ -96,33 +95,66 @@ export default function Globe({ guesses, globeRef }: Props) {
     return alt;
   }
 
+  function zoom(z: number) {
+    const controls: any = globeRef.current.controls();
+    controls.autoRotate = false;
+    const coords = globeRef.current.pointOfView();
+    const { altitude } = globeRef.current.pointOfView();
+    coords["altitude"] = Math.max(altitude + z, 0.05);
+    globeRef.current.pointOfView(coords, 250);
+  }
+
+  const btnFill = nightMode ? "bg-[#582679]" : "bg-[#F3BC63]";
+  const btnBorder = nightMode ? "border-[#350a46]" : "border-[#FF8E57]";
+  const btnText = nightMode ? "text-white font-bold" : "";
+
   return (
-    <div
-      ref={containerRef}
-      className="mx-auto cursor-grab text-center"
-      style={extraStyle}
-    >
-      <ReactGlobe
-        ref={globeRef}
-        globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
-        width={size}
-        height={size}
-        backgroundColor="#00000000"
-        polygonsData={places}
-        polygonCapColor={(c) =>
+    <div>
+      <div
+        ref={containerRef}
+        className="globe mx-auto cursor-grab text-center select-none"
+        style={extraStyle}
+      >
+        <ReactGlobe
+          className="select-none decoration-transparent cursor-grab "
+          style={{ "-webkit-tap-highlight-color": "transparent" }}
+          ref={globeRef}
+          globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
+          width={size}
+          height={size}
+          backgroundColor="#00000000"
+          polygonsData={places}
+          polygonCapColor={(c) =>
+            // @ts-ignore
+            getColour(c, answerCountry, nightMode, highContrast)
+          }
           // @ts-ignore
-          getColour(c, answerCountry, nightMode, highContrast)
-        }
-        // @ts-ignore
-        polygonLabel={getLabel}
-        // @ts-ignore
-        polygonAltitude={getAltitude}
-        polygonSideColor="blue"
-        onGlobeClick={(d) => turnGlobe(d, globeRef)}
-        onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
-        polygonStrokeColor="#00000000"
-        atmosphereColor={nightMode ? "rgba(63, 201, 255)" : "lightskyblue"}
-      />
+          polygonLabel={getLabel}
+          // @ts-ignore
+          polygonAltitude={getAltitude}
+          polygonSideColor="blue"
+          onGlobeClick={(d) => turnGlobe(d, globeRef)}
+          onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
+          polygonStrokeColor="#00000000"
+          atmosphereColor={nightMode ? "rgba(63, 201, 255)" : "lightskyblue"}
+        />
+      </div>
+      {isMobile && (
+        <div className="w-full flex justify-between text-md ">
+          <button
+            className={`border-[1px] rounded-md select-none ${btnText} ${btnFill} px-4 ${btnBorder}`}
+            onTouchStart={() => zoom(0.2)}
+          >
+            -
+          </button>
+          <button
+            className={`border-[1px] rounded-md select-none ${btnText} ${btnFill} px-4 ${btnBorder}`}
+            onTouchStart={() => zoom(-0.2)}
+          >
+            +
+          </button>
+        </div>
+      )}
     </div>
   );
 }

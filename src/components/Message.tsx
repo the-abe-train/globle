@@ -13,7 +13,7 @@ export function Message({ win, error, guesses }: Props) {
     return <p className="text-red-700 ">{error}</p>;
   } else if (win) {
     return (
-      <p className="text-green-800 dark:text-green-300 ">
+      <p className="text-green-800 dark:text-green-300 font-bold ">
         The Mystery Country is {answerName}!
       </p>
     );

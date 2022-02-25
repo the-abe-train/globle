@@ -99,7 +99,7 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
       )}
       {(screen === "Help" || screen === "Info") && (
         <div className="flex-grow flex items-end">
-          <Footer setScreen={setScreen} />
+          <Footer />
         </div>
       )}
     </div>
