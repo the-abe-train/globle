@@ -1,5 +1,15 @@
 # Change log
 
+## v1.3.0 - Feb 25, 2022
+- Added zoom buttons for mobile
+- Add today's guesses to statistics popup
+- Added Share API for mobile players
+- Added Cape Verde as alternate spelling for Cabo Verde
+- Made Corsica, Svalbard, and Andaman and Nicobar Islands into territories
+- Improved styling on globe and winning text
+- Added analytics disclaimer to README
+- Added "buy me a coffee" link to the footer of the Help page
+
 ## v1.2.0 - Feb 13, 2022
 
 - Added "territories" to the game, which appear in a neutral colour when their sovereign country is guessed
