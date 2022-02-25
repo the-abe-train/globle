@@ -112,10 +112,12 @@ export default function Globe({ guesses, globeRef }: Props) {
     <div>
       <div
         ref={containerRef}
-        className="mx-auto cursor-grab text-center"
+        className="globe mx-auto cursor-grab text-center select-none"
         style={extraStyle}
       >
         <ReactGlobe
+          className="select-none decoration-transparent cursor-grab "
+          style={{ "-webkit-tap-highlight-color": "transparent" }}
           ref={globeRef}
           globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
           width={size}
@@ -140,14 +142,14 @@ export default function Globe({ guesses, globeRef }: Props) {
       {isMobile && (
         <div className="w-full flex justify-between text-md ">
           <button
-            className={`border-[1px] rounded-md ${btnText} ${btnFill} px-4 ${btnBorder}`}
-            onClick={() => zoom(0.1)}
+            className={`border-[1px] rounded-md select-none ${btnText} ${btnFill} px-4 ${btnBorder}`}
+            onTouchStart={() => zoom(0.2)}
           >
             -
           </button>
           <button
-            className={`border-[1px] rounded-md ${btnText} ${btnFill} px-4 ${btnBorder}`}
-            onClick={() => zoom(-0.1)}
+            className={`border-[1px] rounded-md select-none ${btnText} ${btnFill} px-4 ${btnBorder}`}
+            onTouchStart={() => zoom(-0.2)}
           >
             +
           </button>
