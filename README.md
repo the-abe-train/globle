@@ -17,6 +17,9 @@ I recognize that there are some a11y issues with the game, notably:
 2. Very small countries (such as Micronesia) are barely visible on the globe.
 If you have a suggestion on how to improve these concerns, please raise a GitHub issue.
 
+## Analytics
+Globle is hosted by CloudFlare and tracks users with CloudFlare Web Analytics, a privacy-first analytics platform. The analytics are injected during hosting, so while you may see traffic to https://cloudflareinsights.com/ the script that sends information to CloudFlare is not anywhere in this repo. Click here to learn more about CloudFlare Web Analytics, [click here](https://www.cloudflare.com/en-gb/web-analytics/).
+
 ## Attributions
 - This game was inspired by Wordle and the "Secret Country" geography games from [Sporcle](https://sporcle.com)
 - Country outlines in the Help screen provided by Vemaps.com
