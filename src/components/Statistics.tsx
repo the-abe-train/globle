@@ -100,7 +100,13 @@ https://globle-game.com`;
     setMsg("Copied to clipboard!");
     setShowCopyMsg(true);
     setTimeout(() => setShowCopyMsg(false), 2000);
-    if ("clipboard" in navigator) {
+    if ("canShare" in navigator) {
+      navigator.share({
+        title: "Globle Stats",
+        text: shareString,
+        url: "https://globle-game.com",
+      });
+    } else if ("clipboard" in navigator) {
       return await navigator.clipboard.writeText(shareString);
     } else {
       return document.execCommand("copy", true, shareString);
@@ -174,7 +180,9 @@ no-repeat fixed black`
       </table>
       <div className="py-6 flex">
         <button
-          className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
+          className="bg-red-700 text-white rounded-md px-6 py-2 block 
+          text-base font-medium hover:bg-red-900 
+          focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
           onClick={promptReset}
         >
           Reset
