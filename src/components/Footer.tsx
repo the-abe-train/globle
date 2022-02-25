@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import useCheckMobile from "../hooks/useCheckMobile";
 import { getPath } from "../util/svg";
 
 export default function Footer() {
   const iconWidth = 14;
   const { nightMode } = useContext(ThemeContext).theme;
+  const isMobile = useCheckMobile();
   return (
-    <footer className="pt-8 pb-4 text-xs sm:flex justify-between w-full">
+    <footer className="pt-8 pb-4 text-xs flex items-end justify-between w-full">
       <span className="flex space-x-3">
         <a href="https://the-abe-train.com">by The Abe Train</a>
         <a href="https://twitter.com/theAbeTrain" aria-label="Twitter">
@@ -30,8 +32,8 @@ export default function Footer() {
           </svg>
         </a>
       </span>
-      <p className="mt-2 sm:mt-0">
-        Enjoying the game?{" "}
+      <p className="">
+        Enjoying the game? {isMobile && <br />}
         <a
           className="underline"
           target="_blank"
@@ -39,7 +41,8 @@ export default function Footer() {
           href="https://www.buymeacoffee.com/theabetrain"
         >
           Buy me a coffee!
-        </a>
+        </a>{" "}
+        ☕
       </p>
     </footer>
   );
