@@ -19,7 +19,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT } =
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, WB_A2, WB_A3} =
         country.properties;
       return (
         NAME.toLowerCase() === countryName ||
@@ -29,7 +29,9 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         ABBREV.replace(/\./g, "").toLowerCase() === countryName ||
         NAME.replace(/-/g, " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
-        NAME_SORT.toLowerCase() === countryName
+        NAME_SORT.toLowerCase() === countryName ||
+        WB_A2.toLowerCase() === countryName ||
+        WB_A3.toLowerCase() == countryName
       );
     });
   }
