@@ -19,7 +19,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, ISO_A2, WB_A2, WB_A3, ISO_A2_EH} =
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, ISO_A2, WB_A2, WB_A3} =
         country.properties;
       return (
         NAME.toLowerCase() === countryName ||
