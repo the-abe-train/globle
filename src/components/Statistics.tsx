@@ -1,19 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
-import { Transition } from "react-transition-group";
-// import useCheckMobile from "../hooks/useCheckMobile";
 import { isMobile } from "react-device-detect";
 import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
 import { today } from "../util/dates";
 import { isFirefox } from "react-device-detect";
+import Fade from "../transitions/Fade";
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-type TransitionState = "entering" | "entered" | "exiting" | "exited";
 
 export default function Statistics({ setShowStats }: Props) {
   // const isMobile = useCheckMobile();
@@ -73,16 +70,21 @@ export default function Statistics({ setShowStats }: Props) {
   const [msg, setMsg] = useState("");
   const [showResetMsg, setShowResetMsg] = useState(false);
   const [resetComplete, setResetComplete] = useState(false);
+  // const [question, setQuestion] = useState(false);
   function promptReset() {
     setMsg("Are you sure you want to reset your score?");
+    // setQuestion(true);
     setResetComplete(false);
     setShowResetMsg(true);
   }
   function resetStats() {
     storeStats(firstStats);
-    setMsg("Stats erased.");
-    setResetComplete(true);
-    setTimeout(() => setShowResetMsg(false), 2000);
+    setShowResetMsg(false);
+    setTimeout(() => {
+      setMsg("Stats erased.");
+      setShowCopyMsg(true);
+    }, 200);
+    setTimeout(() => setShowCopyMsg(false), 2200);
   }
 
   // Clipboard
@@ -105,6 +107,7 @@ https://globle-game.com`;
         text: shareString,
       });
     } else {
+      // setQuestion(false);
       setMsg("Copied to clipboard!");
       setShowCopyMsg(true);
       setTimeout(() => setShowCopyMsg(false), 2000);
@@ -116,35 +119,11 @@ https://globle-game.com`;
     }
   }
 
-  // Tranisition
-  const msgRef = useRef(null!);
-  const duration = 3000;
-
-  const transitionStyles = {
-    entering: { opacity: 1 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
-    exited: { opacity: 0 },
-  };
-
   // Backgorund style
   const { nightMode } = useContext(ThemeContext).theme;
-  const background = nightMode
-    ? `radial-gradient(ellipse at top, rgba(22, 1, 82, 0.4), transparent), 
-radial-gradient(ellipse at bottom, rgba(125, 48, 116, 0.2), transparent) 
-no-repeat fixed black`
-    : `radial-gradient(ellipse at top, rgba(63, 201, 255, 0.2), transparent), 
-  radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.2), transparent) 
-  no-repeat fixed white`;
 
   return (
-    <div
-      className="text-gray-900 dark:text-gray-300 dark:bg-slate-900 
-      border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl 
-      absolute z-10 top-24 sm:max-w-sm inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
-      ref={modalRef}
-      style={{ background }}
-    >
+    <div ref={modalRef}>
       <button
         className="absolute top-3 right-4"
         onClick={() => setShowStats(false)}
@@ -199,55 +178,38 @@ no-repeat fixed black`
           Share
         </button>
       </div>
-      <Transition nodeRef={msgRef} in={showResetMsg} timeout={duration}>
-        {(state: TransitionState) => (
-          <div
-            ref={msgRef}
-            className={`transition-opacity ease-in-out delay-${duration} border-4 border-sky-300 dark:border-slate-700 bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
-            absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
-            style={{
-              ...transitionStyles[state],
-              background,
-            }}
+      <Fade
+        show={showResetMsg}
+        background="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
+        dark:bg-slate-900 drop-shadow-xl 
+        absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+      >
+        <p className="text-gray-900 dark:text-gray-300">{msg}</p>
+        <div className="py-4 flex justify-center space-x-8">
+          <button
+            className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
+            onClick={resetStats}
+            disabled={resetComplete}
           >
-            <div>
-              <p className="text-gray-900 dark:text-gray-300  ">{msg}</p>
-
-              <div className="py-6 flex justify-center space-x-8">
-                <button
-                  className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
-                  onClick={resetStats}
-                  disabled={resetComplete}
-                >
-                  Yes
-                </button>
-                <button
-                  className="bg-blue-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  onClick={() => setShowResetMsg(false)}
-                  disabled={resetComplete}
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </Transition>
-      <Transition nodeRef={msgRef} in={showCopyMsg} timeout={duration}>
-        {(state: TransitionState) => (
-          <div
-            className={`transition-opacity ease-in-out delay-${duration} 
-            border-4 border-sky-300 dark:border-slate-700 drop-shadow-xl 
-            absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
-            style={{
-              ...transitionStyles[state],
-              background,
-            }}
+            Yes
+          </button>
+          <button
+            className="bg-blue-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            onClick={() => setShowResetMsg(false)}
+            disabled={resetComplete}
           >
-            <p className="text-gray-900 dark:text-gray-300">{msg}</p>
-          </div>
-        )}
-      </Transition>
+            No
+          </button>
+        </div>
+      </Fade>
+      <Fade
+        show={showCopyMsg}
+        background="border-4 border-sky-300 dark:border-slate-700 
+        bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
+      absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+      >
+        <p className="text-gray-900 dark:text-gray-300">{msg}</p>
+      </Fade>
     </div>
   );
 }
