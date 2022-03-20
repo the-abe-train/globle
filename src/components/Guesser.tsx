@@ -52,7 +52,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       return;
     }
     if (!guessCountry) {
-      setError("Invalid country name");
+      setError("Invalid guess");
       return;
     }
     if (guessCountry.properties.NAME === answerName) {
