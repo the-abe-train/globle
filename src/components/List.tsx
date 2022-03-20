@@ -30,6 +30,11 @@ export default function List({ guesses, win, globeRef }: Props) {
     setOrderedGuesses(reorderGuesses(guesses));
   }, [guesses]);
 
+  function formatKm(m: number) {
+    const km = m / 1000;
+    return km.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   const qualifier = win ? "Answer" : "Closest";
 
   function turnToCountry(e: SyntheticEvent, idx: number) {
@@ -37,6 +42,9 @@ export default function List({ guesses, win, globeRef }: Props) {
     const coords = findCentre(clickedCountry);
     turnGlobe(coords, globeRef);
   }
+
+  const closest = orderedGuesses.at(0);
+  const farthest = orderedGuesses.at(orderedGuesses.length - 1);
 
   return (
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
@@ -48,6 +56,7 @@ export default function List({ guesses, win, globeRef }: Props) {
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
+          const { proximity } = guess;
           const name = NAME_LEN >= 10 ? ABBREV : NAME;
           const flag = (FLAG || "").toLocaleLowerCase();
           return (
@@ -61,12 +70,17 @@ export default function List({ guesses, win, globeRef }: Props) {
                   alt={name}
                   className=""
                 />
-                <span className="mx-1 text-md">{name}</span>
+                <span className="ml-2 text-md">{name}</span>
               </button>
             </li>
           );
         })}
       </ul>
+      {closest && farthest && (
+        <div className="mt-8">
+          <p>Closest border: {formatKm(closest?.proximity)} km away</p>
+        </div>
+      )}
     </div>
   );
 }
