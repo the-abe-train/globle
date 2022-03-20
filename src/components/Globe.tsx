@@ -3,11 +3,11 @@ import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
 import { answerCountry } from "../util/answer";
-import { turnGlobe } from "../util/globe";
+import { globeImg, turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
 // import useCheckMobile from "../hooks/useCheckMobile";
-import { isMobile } from "react-device-detect";
+import { browserVersion, isMobile, isSafari } from "react-device-detect";
 const territoryData: Country[] = require("../data/territories.json").features;
 
 type Props = {
@@ -21,9 +21,6 @@ export default function Globe({ guesses, globeRef }: Props) {
 
   // Theme
   const { nightMode, highContrast } = useContext(ThemeContext).theme;
-
-  // Check device
-  // const isMobile = useCheckMobile();
 
   // Globe size settings
   const size = isMobile ? 320 : 600; // px on one side
@@ -120,7 +117,8 @@ export default function Globe({ guesses, globeRef }: Props) {
           className="select-none decoration-transparent cursor-grab "
           style={{ "-webkit-tap-highlight-color": "transparent" }}
           ref={globeRef}
-          globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
+          // globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
+          globeImageUrl={globeImg(nightMode)}
           width={size}
           height={size}
           backgroundColor="#00000000"

@@ -10,6 +10,7 @@ import { GlobeMethods } from "react-globe.gl";
 import { ThemeContext } from "../context/ThemeContext";
 import Footer from "./Footer";
 import { isMobile } from "react-device-detect";
+import { globeImg } from "../util/globe";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
 // import useCheckMobile from "../hooks/useCheckMobile";
 
@@ -75,7 +76,7 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
           <Suspense fallback={renderLoader()}>
             <ReactGlobe
               ref={globeRef}
-              globeImageUrl={`images/earth-${timeOfDay}.webp`}
+              globeImageUrl={globeImg(nightMode)}
               width={globeSize}
               height={globeSize}
               backgroundColor="#00000000"
