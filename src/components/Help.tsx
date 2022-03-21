@@ -4,6 +4,7 @@ import { isMobile } from "react-device-detect";
 import { ThemeContext } from "../context/ThemeContext";
 import Fade from "../transitions/Fade";
 import Outline from "./Outline";
+import { FormattedMessage } from "react-intl";
 
 export default function Help() {
   // Theme
@@ -43,19 +44,25 @@ export default function Help() {
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}
       >
-        How to play
+        <FormattedMessage id="helpTitle" />
       </h2>
       <p>
-        Every day, there is a new Mystery Country. Your goal is to guess the
-        mystery country using the fewest number of guesses. Each incorrect guess
-        will appear on the globe with a colour indicating how close it is to the
-        Mystery Country. The{" "}
-        <b className={nightMode ? "text-purple-400" : "text-red-800"}>hotter</b>{" "}
-        the colour, the closer you are to the answer.
+        <FormattedMessage
+          id="help1"
+          values={{
+            b: (chunks: string) => (
+              <b className={nightMode ? "text-purple-400" : "text-red-800"}>
+                {chunks}
+              </b>
+            ),
+          }}
+        />
       </p>
       <p>
-        For example, if the Mystery Country is <b>Japan</b>, then the following
-        countries would appear with these colours if guessed:
+        <FormattedMessage
+          id="help2"
+          values={{ b: (chunks: string) => <b>{chunks}</b> }}
+        />
       </p>
       <div className="block mx-4">
         <div
@@ -66,12 +73,7 @@ export default function Help() {
         >
           {countries.map((country, idx) => {
             return (
-              <Fade
-                show={country.show}
-                background="bg-transparent"
-                key={idx}
-                // preexist={true}
-              >
+              <Fade show={country.show} background="bg-transparent" key={idx}>
                 <Outline
                   key={idx}
                   countryName={country.name}
@@ -82,7 +84,9 @@ export default function Help() {
           })}
         </div>
       </div>
-      <p>A new Mystery Country will be available every day!</p>
+      <p>
+        <FormattedMessage id="help3" />
+      </p>
     </div>
   );
 }

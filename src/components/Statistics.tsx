@@ -6,6 +6,9 @@ import { getPath } from "../util/svg";
 import { ThemeContext } from "../context/ThemeContext";
 import { today } from "../util/dates";
 import { isFirefox } from "react-device-detect";
+import { FormattedMessage } from "react-intl";
+import { LocaleContext } from "../i18n/LocaleContext";
+import localeList from "../i18n/messages";
 import Fade from "../transitions/Fade";
 
 type Props = {
@@ -13,7 +16,8 @@ type Props = {
 };
 
 export default function Statistics({ setShowStats }: Props) {
-  // const isMobile = useCheckMobile();
+  const localeContext = useContext(LocaleContext);
+  const { locale } = localeContext;
 
   // Stats data
   const firstStats = {
@@ -39,14 +43,16 @@ export default function Statistics({ setShowStats }: Props) {
 
   const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
 
-  const avgShorthand = isMobile ? "Avg. guesses" : "Average guesses needed";
+  const avgShorthand = isMobile
+    ? localeList[locale]["Stats7"]
+    : localeList[locale]["Stats6"];
 
   const statsTable = [
-    { label: "Last win", value: showLastWin },
-    { label: "Today's guesses", value: todaysGuesses },
-    { label: "Games won", value: gamesWon },
-    { label: "Current streak", value: currentStreak },
-    { label: "Max streak", value: maxStreak },
+    { label: localeList[locale]["Stats1"], value: showLastWin },
+    { label: localeList[locale]["Stats2"], value: todaysGuesses },
+    { label: localeList[locale]["Stats3"], value: gamesWon },
+    { label: localeList[locale]["Stats4"], value: currentStreak },
+    { label: localeList[locale]["Stats5"], value: maxStreak },
     { label: avgShorthand, value: showAvgGuesses },
   ];
 
@@ -72,7 +78,7 @@ export default function Statistics({ setShowStats }: Props) {
   const [resetComplete, setResetComplete] = useState(false);
   // const [question, setQuestion] = useState(false);
   function promptReset() {
-    setMsg("Are you sure you want to reset your score?");
+    setMsg(localeList[locale]["Stats10"]);
     // setQuestion(true);
     setResetComplete(false);
     setShowResetMsg(true);
@@ -81,7 +87,7 @@ export default function Statistics({ setShowStats }: Props) {
     storeStats(firstStats);
     setShowResetMsg(false);
     setTimeout(() => {
-      setMsg("Stats erased.");
+      setMsg(localeList[locale]["Stats11"]);
       setShowCopyMsg(true);
     }, 200);
     setTimeout(() => setShowCopyMsg(false), 2200);
@@ -96,11 +102,11 @@ export default function Statistics({ setShowStats }: Props) {
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
     const shareString = `🌎 ${date} 🌍
-Today's guesses: ${todaysGuesses}
-Current streak: ${currentStreak}
-Average guesses: ${showAvgGuesses}
+${localeList[locale]["Stats2"]}: ${todaysGuesses}
+${localeList[locale]["Stats4"]}: ${currentStreak}
+${localeList[locale]["Stats7"]}: ${showAvgGuesses}
 
-https://globle-game.com`;
+#globle`;
     if ("canShare" in navigator && isMobile && !isFirefox) {
       return await navigator.share({
         title: "Globle Stats",
@@ -108,7 +114,7 @@ https://globle-game.com`;
       });
     } else {
       // setQuestion(false);
-      setMsg("Copied to clipboard!");
+      setMsg(localeList[locale]["Stats12"]);
       setShowCopyMsg(true);
       setTimeout(() => setShowCopyMsg(false), 2000);
       if ("clipboard" in navigator) {
@@ -118,9 +124,6 @@ https://globle-game.com`;
       }
     }
   }
-
-  // Backgorund style
-  const { nightMode } = useContext(ThemeContext).theme;
 
   return (
     <div ref={modalRef}>
@@ -142,17 +145,23 @@ https://globle-game.com`;
         className="text-3xl text-center font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}
       >
-        Statistics
+        <FormattedMessage id="StatsTitle" />
       </h2>
       <table cellPadding="4rem" className="mx-auto" width="100%">
         <tbody>
           {statsTable.map((row, idx) => {
             return (
               <tr key={idx}>
-                <td className="pt-4 border-b-2 border-dotted border-slate-700 text-lg font-medium">
+                <td
+                  className="pt-4 border-b-2 border-dotted border-slate-700 
+                text-lg font-medium"
+                >
                   {row.label}
                 </td>
-                <td className="pt-4 border-b-2 border-dotted border-slate-700 text-lg font-medium">
+                <td
+                  className="pt-4 border-b-2 border-dotted border-slate-700 
+                text-lg font-medium"
+                >
                   {row.value}
                 </td>
               </tr>
@@ -167,7 +176,7 @@ https://globle-game.com`;
           focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
           onClick={promptReset}
         >
-          Reset
+          <FormattedMessage id="Stats8" />
         </button>
         <button
           className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
@@ -175,7 +184,7 @@ https://globle-game.com`;
           focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow mx-10"
           onClick={copyToClipboard}
         >
-          Share
+          <FormattedMessage id="Stats9" />
         </button>
       </div>
       <Fade

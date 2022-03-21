@@ -1,10 +1,11 @@
 // import useCheckMobile from "../hooks/useCheckMobile";
 import { isMobile } from "react-device-detect";
 import { answerName } from "../util/answer";
+import { FormattedMessage } from "react-intl";
 
 type Props = {
   win: boolean;
-  error: string;
+  error: any;
   guesses: number;
 };
 
@@ -15,20 +16,22 @@ export function Message({ win, error, guesses }: Props) {
   } else if (win) {
     return (
       <p className="text-green-800 dark:text-green-300 font-bold ">
-        The Mystery Country is {answerName}!
+        <FormattedMessage id="Game7" values={{ answer: answerName }} />
       </p>
     );
   } else if (guesses === 0) {
     return (
       <p className="text-gray-700 dark:text-gray-400 ">
-        Enter the name of any country to make your first guess.
+        <FormattedMessage id="Game3" />
       </p>
     );
   } else if (guesses === 1) {
     return (
       <p className="text-gray-700 dark:text-gray-400 ">
-        Drag, {isMobile ? "tap" : "click"}, and zoom-in on the globe to help you
-        find your next guess.
+        <FormattedMessage
+          id="Game4"
+          values={{ click: isMobile ? "tap" : "click" }}
+        />
       </p>
     );
   } else {

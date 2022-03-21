@@ -4,6 +4,7 @@ import { getColour } from "../util/colour";
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
+import { FormattedMessage } from "react-intl";
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -51,7 +52,7 @@ export default function Outline({ countryName, width }: Props) {
         </g>
       </svg>
       <figcaption className="text-left sm:text-center font-bold my-auto">
-        {countryName}
+        <FormattedMessage id={countryName} />
       </figcaption>
     </figure>
   );

@@ -8,12 +8,22 @@ import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 import Fade from "./transitions/Fade";
+import { useIntl } from "react-intl";
+import localeList from "./i18n/messages";
+import { LocaleContext } from "./i18n/LocaleContext";
+import type { Locale } from "./lib/locale";
 
 function App() {
   // State
   const [screen, setScreen] = useState("Help");
   const [reSpin, setReSpin] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const { locale, setLocale } = useContext(LocaleContext);
+
+  const browserLocale = useIntl().locale as Locale;
+  if (setLocale && browserLocale in localeList) {
+    setLocale(browserLocale);
+  }
 
   // Context
   const themeContext = useContext(ThemeContext);
@@ -51,14 +61,6 @@ function App() {
   };
 
   const dark = themeContext.theme.nightMode ? "dark" : "";
-
-  const background = dark
-    ? `radial-gradient(ellipse at top, rgba(22, 1, 82, 0.4), transparent), 
-radial-gradient(ellipse at bottom, rgba(125, 48, 116, 0.2), transparent) 
-no-repeat fixed black`
-    : `radial-gradient(ellipse at top, rgba(63, 201, 255, 0.2), transparent), 
-radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.2), transparent) 
-no-repeat fixed white`;
 
   return (
     <div

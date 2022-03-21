@@ -1,9 +1,12 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
-import { Country } from "../lib/country";
+import { Country, LanguageName } from "../lib/country";
 import { answerName } from "../util/answer";
 import { findCentre } from "../util/centre";
 import { turnGlobe } from "../util/globe";
+import { LocaleContext } from "../i18n/LocaleContext";
+import { Locale } from "../lib/locale";
+import { FormattedMessage } from "react-intl";
 
 type Props = {
   guesses: Country[];
@@ -25,6 +28,12 @@ function reorderGuesses(guessList: Country[]) {
 
 export default function List({ guesses, win, globeRef }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
+  const { locale } = useContext(LocaleContext);
+  const langNameMap: Record<Locale, LanguageName> = {
+    "es-MX": "NAME_ES",
+    "en-CA": "NAME_EN",
+  };
+  const langName = langNameMap[locale];
 
   useEffect(() => {
     setOrderedGuesses(reorderGuesses(guesses));
@@ -57,8 +66,12 @@ export default function List({ guesses, win, globeRef }: Props) {
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
           const { proximity } = guess;
-          const name = NAME_LEN >= 10 ? ABBREV : NAME;
           const flag = (FLAG || "").toLocaleLowerCase();
+          let name = NAME_LEN >= 10 ? ABBREV : NAME;
+          if (locale !== "en-CA") {
+            name = guess.properties[langName];
+          }
+
           return (
             <li key={idx}>
               <button
@@ -78,7 +91,9 @@ export default function List({ guesses, win, globeRef }: Props) {
       </ul>
       {closest && farthest && (
         <div className="mt-8">
-          <p>Closest border: {formatKm(closest?.proximity)} km away</p>
+          <p>
+            <FormattedMessage id="Game8" />: {formatKm(closest?.proximity)} km
+          </p>
         </div>
       )}
     </div>
