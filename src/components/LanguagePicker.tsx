@@ -8,7 +8,7 @@ import { Locale } from "../lib/locale";
 
 const langMap = {
   "en-CA": "English",
-  "es-MX": "Spanish",
+  "es-MX": "Español",
 };
 
 const languages = Object.keys(messages) as Locale[];
@@ -39,7 +39,9 @@ export default function LanguagePicker() {
         "
           type="button"
         >
-          <span>{langMap[localeContext.locale]}</span>
+          <span>
+            <FormattedMessage id="name" />
+          </span>
           <svg
             className="ml-2 w-4 h-4"
             fill="none"

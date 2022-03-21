@@ -6,8 +6,7 @@ import { answerCountry } from "../util/answer";
 import { globeImg, turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
-// import useCheckMobile from "../hooks/useCheckMobile";
-import { browserVersion, isMobile, isSafari } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 const territoryData: Country[] = require("../data/territories.json").features;
 
 type Props = {

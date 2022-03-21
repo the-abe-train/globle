@@ -1,5 +1,3 @@
-import { LOCALES } from "./locales";
-
 import messages from "./messages";
 
 import { Locale } from "../lib/locale";
@@ -18,7 +16,7 @@ type LocaleContextType = {
   setLocale: React.Dispatch<React.SetStateAction<Locale>> | null;
 };
 
-const initialLocale: Locale = "es-MX";
+const initialLocale: Locale = "en-CA";
 
 const initialLocaleContext: LocaleContextType = {
   locale: initialLocale,

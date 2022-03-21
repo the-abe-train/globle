@@ -36,7 +36,8 @@ export default function Outline({ countryName, width }: Props) {
 
   return (
     <figure
-      className={`flex w-[${width}px] space-x-6 md:flex-col md:justify-left md:space-x-0 bg-transparent`}
+      className={`flex space-x-6 md:flex-col md:justify-left md:space-x-0 bg-transparent`}
+      style={{ width }}
     >
       <svg
         version="1.1"

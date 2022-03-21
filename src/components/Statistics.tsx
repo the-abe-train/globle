@@ -3,7 +3,6 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
 import { isMobile } from "react-device-detect";
 import { getPath } from "../util/svg";
-import { ThemeContext } from "../context/ThemeContext";
 import { today } from "../util/dates";
 import { isFirefox } from "react-device-detect";
 import { FormattedMessage } from "react-intl";

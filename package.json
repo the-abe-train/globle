@@ -29,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "ts": "tsc -w",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "style-check": "npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch"
   },
   "eslintConfig": {
     "extends": [

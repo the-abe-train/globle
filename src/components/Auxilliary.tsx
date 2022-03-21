@@ -13,7 +13,6 @@ import { isMobile } from "react-device-detect";
 import { globeImg } from "../util/globe";
 import { FormattedMessage } from "react-intl";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
-// import useCheckMobile from "../hooks/useCheckMobile";
 
 type Props = {
   children: ReactChild;

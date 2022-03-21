@@ -65,7 +65,6 @@ export default function List({ guesses, win, globeRef }: Props) {
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
-          const { proximity } = guess;
           const flag = (FLAG || "").toLocaleLowerCase();
           let name = NAME_LEN >= 10 ? ABBREV : NAME;
           if (locale !== "en-CA") {

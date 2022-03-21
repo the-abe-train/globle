@@ -8,22 +8,18 @@ import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 import Fade from "./transitions/Fade";
-import { useIntl } from "react-intl";
-import localeList from "./i18n/messages";
-import { LocaleContext } from "./i18n/LocaleContext";
-import type { Locale } from "./lib/locale";
 
 function App() {
   // State
   const [screen, setScreen] = useState("Help");
   const [reSpin, setReSpin] = useState(false);
   const [showStats, setShowStats] = useState(false);
-  const { locale, setLocale } = useContext(LocaleContext);
 
-  const browserLocale = useIntl().locale as Locale;
-  if (setLocale && browserLocale in localeList) {
-    setLocale(browserLocale);
-  }
+  // TODO Make sure this doesn't override manually chosen locales
+  // const browserLocale = useIntl().locale as Locale;
+  // if (setLocale && browserLocale in localeList) {
+  //   setLocale(browserLocale);
+  // }
 
   // Context
   const themeContext = useContext(ThemeContext);
