@@ -1,5 +1,20 @@
 # Change log
 
+## v1.4.0 - Mar 21, 2022
+- Translated game into Spanish
+- Fixed bug that caused the globe not to display on older browsers
+- Added "Closest border" helper to Game screen
+- Changed share message to remove URL and include emojis and hashtag
+- Created new territories for Kaliningrad, Canary Islands, Western Sahara, Martinique, and New Caledonia
+- Adjusted Cyprus borders to include Northern Cyprus
+- Added fade animation to countries on Help screen
+- Added explicit line about "Closer countries are hotter" to the Help page
+- Changed "Invalid country name" to "Invalid guess"
+- Removed yes/no buttons from "Stats erased" popup
+- Fixed spelling of "possible" in the meta tag
+- Changed coffee emoji to svg
+- Replaced react-transition-group with custom HOC
+
 ## v1.3.0 - Feb 25, 2022
 - Added zoom buttons for mobile
 - Add today's guesses to statistics popup
