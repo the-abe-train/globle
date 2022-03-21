@@ -98,7 +98,7 @@ Today's guesses: ${todaysGuesses}
 Current streak: ${currentStreak}
 Average guesses: ${showAvgGuesses}
 
-https://globle-game.com`;
+#globle`;
     if ("canShare" in navigator && isMobile && !isFirefox) {
       return await navigator.share({
         title: "Globle Stats",
