@@ -4,6 +4,7 @@ export type Stats = {
   currentStreak: number;
   maxStreak: number;
   usedGuesses: number[];
+  emojiGuesses: string;
 };
 
 export type Guesses = {
