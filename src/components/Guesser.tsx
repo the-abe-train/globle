@@ -27,7 +27,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, ISO_A2, WB_A2, WB_A3} =
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, ISO_A2} =
         country.properties;
 
       return (
@@ -39,9 +39,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         NAME.replace(/-/g, " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
         NAME_SORT.toLowerCase() === countryName ||
-        ISO_A2.toLowerCase() === countryName ||
-        WB_A2.toLowerCase() === countryName ||
-        WB_A3.toLowerCase() === countryName
+        ISO_A2.toLowerCase() === countryName
         country.properties[langName].toLowerCase() === countryName
       );
     });
