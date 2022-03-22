@@ -184,11 +184,11 @@ ${lastWin === today ? emojiGuesses : "--"}
           })}
         </tbody>
       </table>
-      <div className="py-6 flex">
+      <div className="py-6 flex w-full justify-around">
         <button
           className="bg-red-700 text-white rounded-md px-6 py-2 block
           text-base font-medium hover:bg-red-900
-          focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
+          focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4"
           onClick={promptReset}
         >
           <FormattedMessage id="Stats8" />
@@ -196,7 +196,8 @@ ${lastWin === today ? emojiGuesses : "--"}
         <button
           className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
           text-white rounded-md px-8 py-2 block text-base font-medium 
-          focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow mx-10"
+          focus:outline-none focus:ring-2 focus:ring-blue-300 
+          justify-around sm:flex-grow sm:mx-10"
           onClick={copyToClipboard}
         >
           <FormattedMessage id="Stats9" />
@@ -209,16 +210,18 @@ ${lastWin === today ? emojiGuesses : "--"}
         absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
         <p className="text-gray-900 dark:text-gray-300">{msg}</p>
-        <div className="py-4 flex justify-center space-x-8">
+        <div className="py-4 flex justify-center sm:space-x-8">
           <button
-            className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
+            className="bg-red-700 text-white rounded-md px-6 py-2 block 
+            text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
             onClick={resetStats}
             disabled={resetComplete}
           >
             Yes
           </button>
           <button
-            className="bg-blue-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="bg-blue-700 text-white rounded-md px-6 py-2 block 
+            text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
             onClick={() => setShowResetMsg(false)}
             disabled={resetComplete}
           >
