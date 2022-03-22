@@ -52,7 +52,7 @@ export const English: Messages = {
   Stats3: "Games won",
   Stats4: "Current streak",
   Stats5: "Max streak",
-  Stats6: "Average guesses needed",
+  Stats6: "Average guesses",
   Stats7: "Avg. Guesses",
   Stats8: "Reset",
   Stats9: "Share",
@@ -67,4 +67,5 @@ export const English: Messages = {
   Settings5: "Countries",
   Settings6: "Cities",
   Settings7: "Language",
+  Settings8: "Globle: Cities Edition coming soon!",
 };

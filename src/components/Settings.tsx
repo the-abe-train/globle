@@ -3,6 +3,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import { LocaleContext } from "../i18n/LocaleContext";
 import LanguagePicker from "./LanguagePicker";
 import localeList from "../i18n/messages";
+import { FormattedMessage } from "react-intl";
 
 function Toggle({ checked }: { checked: boolean }) {
   if (checked) {
@@ -111,7 +112,9 @@ export default function Settings() {
         );
       })}
       {!toggleScope && (
-        <p className="text-red-700">Globle: Cities Edition coming soon!</p>
+        <p className="text-red-700">
+          <FormattedMessage id="Settings8" />
+        </p>
       )}
     </div>
   );

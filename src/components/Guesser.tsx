@@ -8,6 +8,7 @@ import { LocaleContext } from "../i18n/LocaleContext";
 import { Locale } from "../lib/locale";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
+import { langNameMap } from "../i18n/locales";
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -20,21 +21,14 @@ type Props = {
 export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
-  const localeContext = useContext(LocaleContext);
+  const { locale } = useContext(LocaleContext);
 
-  const { locale } = localeContext;
-
-  const langNameMap: Record<Locale, LanguageName> = {
-    "es-MX": "NAME_ES",
-    "en-CA": "NAME_EN",
-  };
   const langName = langNameMap[locale];
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
       const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT } =
         country.properties;
-      // const langCondition = country.properties[langName].toLowerCase() ===
 
       return (
         NAME.toLowerCase() === countryName ||
@@ -61,12 +55,12 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       return pair.old === trimmedName;
     });
     const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
-    const guessCountry = findCountry(userGuess, countryData);
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
       return;
     }
+    const guessCountry = findCountry(userGuess, countryData);
     if (!guessCountry) {
       setError(localeList[locale]["Game5"]);
       return;

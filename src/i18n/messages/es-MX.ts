@@ -40,7 +40,7 @@ export const Spanish: Messages = {
     "Arrastra, haz {click}, y zoom-in en el globo para ubicar tu siguiente país.",
   Game5: "Intento inválido",
   Game6: "Pais ya adivinado",
-  Game7: "¡El País del Misterio es {answer}!",
+  Game7: "¡El País Secreto es {answer}!",
   Game8: "Frontera más cercana",
   StatsTitle: "Estadísticas",
   Stats1: "Última victoria	",
@@ -48,8 +48,8 @@ export const Spanish: Messages = {
   Stats3: "Victorias",
   Stats4: "Racha actual",
   Stats5: "Racha max",
-  Stats6: "Promedio de intentos necesarios",
-  Stats7: "Intentos necesarios",
+  Stats6: "Promedio de intentos",
+  Stats7: "Promedio de intentos",
   Stats8: "Reajustar",
   Stats9: "Compartir",
   Stats10: "¿Estás seguro de que quieres restablecer tu puntuación?",
@@ -63,6 +63,7 @@ export const Spanish: Messages = {
   Settings5: "Países",
   Settings6: "Ciudades",
   Settings7: "Idioma",
+  Settings8: "Próximamente Globle Edición de Ciudades",
 };
 
 // export default {

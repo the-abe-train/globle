@@ -62,6 +62,7 @@ export type Messages = {
   Settings5: string;
   Settings6: string;
   Settings7: string;
+  Settings8: string;
 };
 
 export type LocaleMessages = Record<Locale, Messages>;
