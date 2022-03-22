@@ -1,22 +1,22 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Stats } from "../lib/localStorage";
-import { Transition } from "react-transition-group";
-// import useCheckMobile from "../hooks/useCheckMobile";
 import { isMobile } from "react-device-detect";
 import { getPath } from "../util/svg";
-import { ThemeContext } from "../context/ThemeContext";
 import { today } from "../util/dates";
 import { isFirefox } from "react-device-detect";
+import { FormattedMessage } from "react-intl";
+import { LocaleContext } from "../i18n/LocaleContext";
+import localeList from "../i18n/messages";
+import Fade from "../transitions/Fade";
 
 type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type TransitionState = "entering" | "entered" | "exiting" | "exited";
-
 export default function Statistics({ setShowStats }: Props) {
-  // const isMobile = useCheckMobile();
+  const localeContext = useContext(LocaleContext);
+  const { locale } = localeContext;
 
   // Stats data
   const firstStats = {
@@ -25,15 +25,21 @@ export default function Statistics({ setShowStats }: Props) {
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
-    emojiGuesses: '',
+    emojiGuesses: "",
   };
 
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
     firstStats
   );
-  const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses, emojiGuesses } =
-    storedStats;
+  const {
+    gamesWon,
+    lastWin,
+    currentStreak,
+    maxStreak,
+    usedGuesses,
+    emojiGuesses,
+  } = storedStats;
 
   const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
   const avgGuesses = Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
@@ -43,14 +49,16 @@ export default function Statistics({ setShowStats }: Props) {
 
   const showLastWin = lastWin >= "2022-01-01" ? lastWin : "--";
 
-  const avgShorthand = isMobile ? "Avg. guesses" : "Average guesses needed";
+  const avgShorthand = isMobile
+    ? localeList[locale]["Stats7"]
+    : localeList[locale]["Stats6"];
 
   const statsTable = [
-    { label: "Last win", value: showLastWin },
-    { label: "Today's guesses", value: todaysGuesses },
-    { label: "Games won", value: gamesWon },
-    { label: "Current streak", value: currentStreak },
-    { label: "Max streak", value: maxStreak },
+    { label: localeList[locale]["Stats1"], value: showLastWin },
+    { label: localeList[locale]["Stats2"], value: todaysGuesses },
+    { label: localeList[locale]["Stats3"], value: gamesWon },
+    { label: localeList[locale]["Stats4"], value: currentStreak },
+    { label: localeList[locale]["Stats5"], value: maxStreak },
     { label: avgShorthand, value: showAvgGuesses },
   ];
 
@@ -74,16 +82,21 @@ export default function Statistics({ setShowStats }: Props) {
   const [msg, setMsg] = useState("");
   const [showResetMsg, setShowResetMsg] = useState(false);
   const [resetComplete, setResetComplete] = useState(false);
+  // const [question, setQuestion] = useState(false);
   function promptReset() {
-    setMsg("Are you sure you want to reset your score?");
+    setMsg(localeList[locale]["Stats10"]);
+    // setQuestion(true);
     setResetComplete(false);
     setShowResetMsg(true);
   }
   function resetStats() {
     storeStats(firstStats);
-    setMsg("Stats erased.");
-    setResetComplete(true);
-    setTimeout(() => setShowResetMsg(false), 2000);
+    setShowResetMsg(false);
+    setTimeout(() => {
+      setMsg(localeList[locale]["Stats11"]);
+      setShowCopyMsg(true);
+    }, 200);
+    setTimeout(() => setShowCopyMsg(false), 2200);
   }
 
   // Clipboard
@@ -94,16 +107,29 @@ export default function Statistics({ setShowStats }: Props) {
   const unambiguousDate = event.toLocaleDateString("en-CA", options);
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
-    const shareString = `Globle ${date}
-🔥${currentStreak} | Average score: ${showAvgGuesses}
-${lastWin === today ? emojiGuesses : "--"}`;
+    let shareString = `🌎 ${date} 🌍
+${localeList[locale]["Stats2"]}: ${todaysGuesses}
+${localeList[locale]["Stats4"]}: ${currentStreak}
+${localeList[locale]["Stats7"]}: ${showAvgGuesses}
+
+#globle`;
+
+    if (emojiGuesses) {
+      shareString = `🌎 ${date} 🌍
+🔥 ${currentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
+${lastWin === today ? emojiGuesses : "--"}
+
+#globle`;
+    }
+
     if ("canShare" in navigator && isMobile && !isFirefox) {
       return await navigator.share({
         title: "Globle Stats",
         text: shareString,
       });
     } else {
-      setMsg("Copied to clipboard!");
+      // setQuestion(false);
+      setMsg(localeList[locale]["Stats12"]);
       setShowCopyMsg(true);
       setTimeout(() => setShowCopyMsg(false), 2000);
       if ("clipboard" in navigator) {
@@ -114,35 +140,8 @@ ${lastWin === today ? emojiGuesses : "--"}`;
     }
   }
 
-  // Tranisition
-  const msgRef = useRef(null!);
-  const duration = 3000;
-
-  const transitionStyles = {
-    entering: { opacity: 1 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
-    exited: { opacity: 0 },
-  };
-
-  // Backgorund style
-  const { nightMode } = useContext(ThemeContext).theme;
-  const background = nightMode
-    ? `radial-gradient(ellipse at top, rgba(22, 1, 82, 0.4), transparent), 
-radial-gradient(ellipse at bottom, rgba(125, 48, 116, 0.2), transparent) 
-no-repeat fixed black`
-    : `radial-gradient(ellipse at top, rgba(63, 201, 255, 0.2), transparent), 
-  radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.2), transparent) 
-  no-repeat fixed white`;
-
   return (
-    <div
-      className="text-gray-900 dark:text-gray-300 dark:bg-slate-900 
-      border-2 border-sky-700 dark:border-slate-700 drop-shadow-xl 
-      absolute z-10 top-24 sm:max-w-sm inset-x-0 mx-auto py-2 px-6 rounded-md space-y-2"
-      ref={modalRef}
-      style={{ background }}
-    >
+    <div ref={modalRef}>
       <button
         className="absolute top-3 right-4"
         onClick={() => setShowStats(false)}
@@ -161,17 +160,23 @@ no-repeat fixed black`
         className="text-3xl text-center font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}
       >
-        Statistics
+        <FormattedMessage id="StatsTitle" />
       </h2>
       <table cellPadding="4rem" className="mx-auto" width="100%">
         <tbody>
           {statsTable.map((row, idx) => {
             return (
               <tr key={idx}>
-                <td className="pt-4 border-b-2 border-dotted border-slate-700 text-lg font-medium">
+                <td
+                  className="pt-4 border-b-2 border-dotted border-slate-700 
+                text-lg font-medium"
+                >
                   {row.label}
                 </td>
-                <td className="pt-4 border-b-2 border-dotted border-slate-700 text-lg font-medium">
+                <td
+                  className="pt-4 border-b-2 border-dotted border-slate-700 
+                text-lg font-medium"
+                >
                   {row.value}
                 </td>
               </tr>
@@ -179,73 +184,59 @@ no-repeat fixed black`
           })}
         </tbody>
       </table>
-      <div className="py-6 flex">
+      <div className="py-6 flex w-full justify-around">
         <button
           className="bg-red-700 text-white rounded-md px-6 py-2 block
           text-base font-medium hover:bg-red-900
-          focus:outline-none focus:ring-2 focus:ring-red-300 mx-4"
+          focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4"
           onClick={promptReset}
         >
-          Reset
+          <FormattedMessage id="Stats8" />
         </button>
         <button
           className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
           text-white rounded-md px-8 py-2 block text-base font-medium 
-          focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow mx-10"
+          focus:outline-none focus:ring-2 focus:ring-blue-300 
+          justify-around sm:flex-grow sm:mx-10"
           onClick={copyToClipboard}
         >
-          Share
+          <FormattedMessage id="Stats9" />
         </button>
       </div>
-      <Transition nodeRef={msgRef} in={showResetMsg} timeout={duration}>
-        {(state: TransitionState) => (
-          <div
-            ref={msgRef}
-            className={`transition-opacity ease-in-out delay-${duration} border-4 border-sky-300 dark:border-slate-700 bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
-            absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
-            style={{
-              ...transitionStyles[state],
-              background,
-            }}
+      <Fade
+        show={showResetMsg}
+        background="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
+        dark:bg-slate-900 drop-shadow-xl 
+        absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+      >
+        <p className="text-gray-900 dark:text-gray-300">{msg}</p>
+        <div className="py-4 flex justify-center sm:space-x-8">
+          <button
+            className="bg-red-700 text-white rounded-md px-6 py-2 block 
+            text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
+            onClick={resetStats}
+            disabled={resetComplete}
           >
-            <div>
-              <p className="text-gray-900 dark:text-gray-300  ">{msg}</p>
-
-              <div className="py-6 flex justify-center space-x-8">
-                <button
-                  className="bg-red-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
-                  onClick={resetStats}
-                  disabled={resetComplete}
-                >
-                  Yes
-                </button>
-                <button
-                  className="bg-blue-700 text-white rounded-md px-6 py-2 block text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  onClick={() => setShowResetMsg(false)}
-                  disabled={resetComplete}
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </Transition>
-      <Transition nodeRef={msgRef} in={showCopyMsg} timeout={duration}>
-        {(state: TransitionState) => (
-          <div
-            className={`transition-opacity ease-in-out delay-${duration} 
-            border-4 border-sky-300 dark:border-slate-700 drop-shadow-xl 
-            absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2`}
-            style={{
-              ...transitionStyles[state],
-              background,
-            }}
+            Yes
+          </button>
+          <button
+            className="bg-blue-700 text-white rounded-md px-6 py-2 block 
+            text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            onClick={() => setShowResetMsg(false)}
+            disabled={resetComplete}
           >
-            <p className="text-gray-900 dark:text-gray-300">{msg}</p>
-          </div>
-        )}
-      </Transition>
+            No
+          </button>
+        </div>
+      </Fade>
+      <Fade
+        show={showCopyMsg}
+        background="border-4 border-sky-300 dark:border-slate-700 
+        bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
+      absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+      >
+        <p className="text-gray-900 dark:text-gray-300">{msg}</p>
+      </Fade>
     </div>
   );
 }
