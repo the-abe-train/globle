@@ -117,7 +117,7 @@ ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
     if (emojiGuesses) {
       shareString = `🌎 ${date} 🌍
 🔥 ${currentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
-${lastWin === today ? emojiGuesses : "--"}
+${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
 
 #globle`;
     }
@@ -157,12 +157,16 @@ ${lastWin === today ? emojiGuesses : "--"}
         </svg>
       </button>
       <h2
-        className="text-3xl text-center font-extrabold"
+        className="text-3xl text-center font-extrabold dark:text-gray-300"
         style={{ fontFamily: "'Montserrat'" }}
       >
         <FormattedMessage id="StatsTitle" />
       </h2>
-      <table cellPadding="4rem" className="mx-auto" width="100%">
+      <table
+        cellPadding="4rem"
+        className="mx-auto dark:text-gray-300"
+        width="100%"
+      >
         <tbody>
           {statsTable.map((row, idx) => {
             return (
