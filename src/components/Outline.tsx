@@ -37,7 +37,7 @@ export default function Outline({ countryName, width }: Props) {
   return (
     <figure
       className={`flex space-x-6 md:flex-col md:justify-left md:space-x-0 bg-transparent`}
-      style={{ width }}
+      // style={{ width: isDesktop ? width : "" }}
     >
       <svg
         version="1.1"

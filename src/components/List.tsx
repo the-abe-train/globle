@@ -52,8 +52,8 @@ export default function List({ guesses, win, globeRef }: Props) {
     turnGlobe(coords, globeRef);
   }
 
-  const closest = orderedGuesses.at(0);
-  const farthest = orderedGuesses.at(orderedGuesses.length - 1);
+  const closest = orderedGuesses[0];
+  const farthest = orderedGuesses[orderedGuesses.length - 1];
 
   return (
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
