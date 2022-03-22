@@ -7,12 +7,19 @@ import Info from "./components/Info";
 import Settings from "./components/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
+import Fade from "./transitions/Fade";
 
 function App() {
   // State
   const [screen, setScreen] = useState("Help");
   const [reSpin, setReSpin] = useState(false);
   const [showStats, setShowStats] = useState(false);
+
+  // TODO Make sure this doesn't override manually chosen locales
+  // const browserLocale = useIntl().locale as Locale;
+  // if (setLocale && browserLocale in localeList) {
+  //   setLocale(browserLocale);
+  // }
 
   // Context
   const themeContext = useContext(ThemeContext);
@@ -61,7 +68,15 @@ function App() {
         setReSpin={setReSpin}
         setShowStats={setShowStats}
       />
-      {showStats && <Statistics setShowStats={setShowStats} />}
+      <Fade
+        show={showStats}
+        background="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
+        dark:bg-slate-900 drop-shadow-xl 
+      absolute z-10 top-32 w-fit inset-x-0 mx-auto py-6 px-6 rounded-md 
+      space-y-2"
+      >
+        <Statistics setShowStats={setShowStats} />
+      </Fade>
       {pickScreen()}
     </div>
   );

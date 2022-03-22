@@ -1,9 +1,12 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
-import { Country } from "../lib/country";
+import { Country, LanguageName } from "../lib/country";
 import { answerName } from "../util/answer";
 import { findCentre } from "../util/centre";
 import { turnGlobe } from "../util/globe";
+import { LocaleContext } from "../i18n/LocaleContext";
+import { Locale } from "../lib/locale";
+import { FormattedMessage } from "react-intl";
 
 type Props = {
   guesses: Country[];
@@ -25,10 +28,21 @@ function reorderGuesses(guessList: Country[]) {
 
 export default function List({ guesses, win, globeRef }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
+  const { locale } = useContext(LocaleContext);
+  const langNameMap: Record<Locale, LanguageName> = {
+    "es-MX": "NAME_ES",
+    "en-CA": "NAME_EN",
+  };
+  const langName = langNameMap[locale];
 
   useEffect(() => {
     setOrderedGuesses(reorderGuesses(guesses));
   }, [guesses]);
+
+  function formatKm(m: number) {
+    const km = m / 1000;
+    return km.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   const qualifier = win ? "Answer" : "Closest";
 
@@ -37,6 +51,9 @@ export default function List({ guesses, win, globeRef }: Props) {
     const coords = findCentre(clickedCountry);
     turnGlobe(coords, globeRef);
   }
+
+  const closest = orderedGuesses.at(0);
+  const farthest = orderedGuesses.at(orderedGuesses.length - 1);
 
   return (
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
@@ -48,8 +65,12 @@ export default function List({ guesses, win, globeRef }: Props) {
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
-          const name = NAME_LEN >= 10 ? ABBREV : NAME;
           const flag = (FLAG || "").toLocaleLowerCase();
+          let name = NAME_LEN >= 10 ? ABBREV : NAME;
+          if (locale !== "en-CA") {
+            name = guess.properties[langName];
+          }
+
           return (
             <li key={idx}>
               <button
@@ -61,12 +82,19 @@ export default function List({ guesses, win, globeRef }: Props) {
                   alt={name}
                   className=""
                 />
-                <span className="mx-1 text-md">{name}</span>
+                <span className="ml-2 text-md">{name}</span>
               </button>
             </li>
           );
         })}
       </ul>
+      {closest && farthest && (
+        <div className="mt-8">
+          <p>
+            <FormattedMessage id="Game8" />: {formatKm(closest?.proximity)} km
+          </p>
+        </div>
+      )}
     </div>
   );
 }

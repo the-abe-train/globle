@@ -10,8 +10,9 @@ import { GlobeMethods } from "react-globe.gl";
 import { ThemeContext } from "../context/ThemeContext";
 import Footer from "./Footer";
 import { isMobile } from "react-device-detect";
+import { globeImg } from "../util/globe";
+import { FormattedMessage } from "react-intl";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
-// import useCheckMobile from "../hooks/useCheckMobile";
 
 type Props = {
   children: ReactChild;
@@ -34,7 +35,6 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
   const globeRef = useRef<GlobeMethods>(null!);
 
   const { nightMode } = useContext(ThemeContext).theme;
-  const timeOfDay = nightMode ? "night" : "day";
 
   useEffect(() => {
     setTimeout(() => {
@@ -49,7 +49,11 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
     setScreen("Game");
   }
 
-  const renderLoader = () => <p>Loading</p>;
+  const renderLoader = () => (
+    <p>
+      <FormattedMessage id="Loading" />
+    </p>
+  );
 
   function keyPressToggle(e: React.KeyboardEvent<HTMLDivElement>) {
     const keys = ["Enter", " ", "Return"];
@@ -62,7 +66,7 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
     <div className="dark:text-gray-300 flex flex-col">
       {children}
       <div
-        className="w-2/3 flex flex-col justify-center align-middle mx-auto"
+        className="w-fit flex flex-col justify-center align-middle mx-auto"
         tabIndex={0}
         onKeyPress={keyPressToggle}
       >
@@ -75,7 +79,7 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
           <Suspense fallback={renderLoader()}>
             <ReactGlobe
               ref={globeRef}
-              globeImageUrl={`images/earth-${timeOfDay}.webp`}
+              globeImageUrl={globeImg(nightMode)}
               width={globeSize}
               height={globeSize}
               backgroundColor="#00000000"
@@ -83,18 +87,30 @@ export default function Auxilliary({ children, setScreen, screen }: Props) {
             />
           </Suspense>
         </div>
-        <p className="text-center">
-          <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
-        </p>
+        <b className="text-center">
+          <FormattedMessage
+            id="Aux1"
+            values={{
+              b: (chunks: string) => {
+                try {
+                  const [click, tap] = JSON.parse(chunks);
+                  return isMobile ? <b>{tap}</b> : <b>{click}</b>;
+                } catch (e) {
+                  return <b>{chunks}</b>;
+                }
+              },
+            }}
+          />
+        </b>
       </div>
       {(screen === "Help" || screen === "Settings") && (
-        <span>
-          Have a question?{" "}
+        <span className="mt-10 mb-4">
+          <FormattedMessage id="Aux2" />{" "}
           <button
-            className="underline cursor-pointer text-left pt-12"
+            className="underline cursor-pointer inline"
             onClick={() => setScreen("Info")}
           >
-            Check out the FAQ.
+            <FormattedMessage id="Aux3" />
           </button>
         </span>
       )}

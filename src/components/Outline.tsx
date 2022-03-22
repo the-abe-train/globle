@@ -4,6 +4,7 @@ import { getColour } from "../util/colour";
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
+import { FormattedMessage } from "react-intl";
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -34,7 +35,10 @@ export default function Outline({ countryName, width }: Props) {
   const colour = getColour(countryCopy, sampleAnswer, nightMode, highContrast);
 
   return (
-    <figure className="flex w-4/5 space-x-6 md:flex-col md:justify-left md:space-x-0">
+    <figure
+      className={`flex space-x-6 md:flex-col md:justify-left md:space-x-0 bg-transparent`}
+      style={{ width }}
+    >
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -48,8 +52,8 @@ export default function Outline({ countryName, width }: Props) {
           <path fill={colour} d={outline} stroke="black" />
         </g>
       </svg>
-      <figcaption className="text-left md:text-center font-bold my-auto">
-        {countryName}
+      <figcaption className="text-left sm:text-center font-bold my-auto">
+        <FormattedMessage id={countryName} />
       </figcaption>
     </figure>
   );
