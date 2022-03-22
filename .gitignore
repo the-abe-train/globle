@@ -12,6 +12,7 @@
 /build
 
 # misc
+.idea/
 .DS_Store
 .env.local
 .env.development.local
@@ -26,3 +27,4 @@ yarn-error.log*
 .prettierrc
 .env
 dist/
+
