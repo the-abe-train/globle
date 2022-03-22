@@ -84,6 +84,32 @@ export type Country = {
     MIN_ZOOM: number;
     MIN_LABEL: number;
     MAX_LABEL: number;
+    NAME_AR: string;
+    NAME_BN: string;
+    NAME_DE: string;
+    NAME_EN: string;
+    NAME_ES: string;
+    NAME_FA: string;
+    NAME_FR: string;
+    NAME_EL: string;
+    NAME_HE: string;
+    NAME_HI: string;
+    NAME_HU: string;
+    NAME_ID: string;
+    NAME_IT: string;
+    NAME_JA: string;
+    NAME_KO: string;
+    NAME_NL: string;
+    NAME_PL: string;
+    NAME_PT: string;
+    NAME_RU: string;
+    NAME_SV: string;
+    NAME_TR: string;
+    NAME_UK: string;
+    NAME_UR: string;
+    NAME_VI: string;
+    NAME_ZH: string;
+    NAME_ZHT: string;
   };
   bbox: number[];
   geometry:
@@ -96,3 +122,31 @@ export type Country = {
         coordinates: number[][][][];
       };
 };
+
+type LanguageName =
+  | "NAME_AR"
+  | "NAME_BN"
+  | "NAME_DE"
+  | "NAME_EN"
+  | "NAME_ES"
+  | "NAME_FA"
+  | "NAME_FR"
+  | "NAME_EL"
+  | "NAME_HE"
+  | "NAME_HI"
+  | "NAME_HU"
+  | "NAME_ID"
+  | "NAME_IT"
+  | "NAME_JA"
+  | "NAME_KO"
+  | "NAME_NL"
+  | "NAME_PL"
+  | "NAME_PT"
+  | "NAME_RU"
+  | "NAME_SV"
+  | "NAME_TR"
+  | "NAME_UK"
+  | "NAME_UR"
+  | "NAME_VI"
+  | "NAME_ZH"
+  | "NAME_ZHT";

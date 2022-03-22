@@ -32,16 +32,6 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
               <path fill={svgColour} d={getPath("help")}></path>
             </svg>
           </button>
-          {/* <button onClick={() => setScreen("Info")} aria-label="Info">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-            >
-              <path fill={svgColour} d={getPath("info")}></path>
-            </svg>
-          </button> */}
         </div>
         <button
           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 "
