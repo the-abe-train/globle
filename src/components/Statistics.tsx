@@ -25,15 +25,21 @@ export default function Statistics({ setShowStats }: Props) {
     currentStreak: 0,
     maxStreak: 0,
     usedGuesses: [],
-    emojiGuesses: '',
+    emojiGuesses: "",
   };
 
   const [storedStats, storeStats] = useLocalStorage<Stats>(
     "statistics",
     firstStats
   );
-  const { gamesWon, lastWin, currentStreak, maxStreak, usedGuesses, emojiGuesses } =
-    storedStats;
+  const {
+    gamesWon,
+    lastWin,
+    currentStreak,
+    maxStreak,
+    usedGuesses,
+    emojiGuesses,
+  } = storedStats;
 
   const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
   const avgGuesses = Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
@@ -101,17 +107,20 @@ export default function Statistics({ setShowStats }: Props) {
   const unambiguousDate = event.toLocaleDateString("en-CA", options);
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
-
-    const shareString = `🌎 ${date} 🌍
+    let shareString = `🌎 ${date} 🌍
 ${localeList[locale]["Stats2"]}: ${todaysGuesses}
 ${localeList[locale]["Stats4"]}: ${currentStreak}
 ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
 
 #globle`;
 
-    const shareString = `Globle ${date}
-🔥${currentStreak} | Average score: ${showAvgGuesses}
-${lastWin === today ? emojiGuesses : "--"}`;
+    if (emojiGuesses) {
+      shareString = `🌎 ${date} 🌍
+🔥 ${currentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
+${lastWin === today ? emojiGuesses : "--"}
+
+#globle`;
+    }
 
     if ("canShare" in navigator && isMobile && !isFirefox) {
       return await navigator.share({
