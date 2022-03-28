@@ -30,6 +30,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
+    "pt-BR": "NAME_PT",
     "es-MX": "NAME_ES",
     "en-CA": "NAME_EN",
   };
