@@ -41,10 +41,10 @@ export const Portuguese: Messages = {
   Game2: "Inserir",
   Game3: "Insira o nome de qualquer país para fazer sua primeira tentativa.",
   Game4:
-    "Arraste, {clique}, e dê zoom no globo para te ajudar a decidir seu próximo palpite.",
+    "Arraste, {click}, e dê zoom no globo para te ajudar a decidir seu próximo palpite.",
   Game5: "Tentativa inválida",
   Game6: "Você já chutou este país",
-  Game7: "O país misterioso é {resposta}!",
+  Game7: "O país misterioso é {answer}!",
   Game8: "Fronteira mais próxima",
   StatsTitle: "Estatísticas",
   Stats1: "Última vitória",
