@@ -1,5 +1,10 @@
-# Notes about Globle
+# Globle Infinite
+This is a fork of the original globle game made by the-abe-train [here](https://github.com/the-abe-train/globle)  
+This fork, like the original is licensed under the Attribution-NonCommercial-ShareAlive 4.0 Interntaional (CC BY-NC-SA 4.0) license  
 
+This version will allow you to play as many globle games in a day as you wish, with a new random country every time
+
+# Notes about Globle
 **Version 1.4.0** - [Change log](CHANGELOG.md)
 
 ## Listed countries
