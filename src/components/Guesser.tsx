@@ -9,6 +9,7 @@ import { Locale } from "../lib/locale";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+import Input from "./Input";
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -88,21 +89,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         onSubmit={addGuess}
         className="w-80 flex space-x-4 mx-auto my-2 justify-center"
       >
-        <input
-          className="shadow px-2 py-1 md:py-0
-          text-gray-700 dark:bg-slate-300 focus:outline-none 
-          focus:shadow-outline disabled:bg-slate-400
-          border rounded disabled:border-slate-400
-          w-full"
-          type="text"
-          name="guesser"
-          id="guesser"
-          value={guessName}
-          onChange={(e) => setGuessName(e.currentTarget.value)}
-          disabled={win}
-          placeholder={guesses.length === 0 ? localeList[locale]["Game1"] : ""}
-          autoComplete="new-password"
-        />
+        <Input value={guessName} onChange={(e) => setGuessName(e.currentTarget.value)} win={win} guesses={guesses} />
         <button
           className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
           font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline "
