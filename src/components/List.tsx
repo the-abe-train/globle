@@ -32,6 +32,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   const langNameMap: Record<Locale, LanguageName> = {
     "es-MX": "NAME_ES",
     "en-CA": "NAME_EN",
+    "fr-FR": "NAME_FR",
   };
   const langName = langNameMap[locale];
 
