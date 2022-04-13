@@ -9,6 +9,7 @@ import { Locale } from "../lib/locale";
 const langMap = {
   "en-CA": "English",
   "es-MX": "Español",
+  "fr-FR": "Français",
 };
 
 const languages = Object.keys(messages) as Locale[];
