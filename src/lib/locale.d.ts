@@ -1,4 +1,4 @@
-export type Locale = "en-CA" | "es-MX" | "pt-BR" | "de-DE";
+export type Locale = "en-CA" | "es-MX" | "pt-BR" | "de-DE" | "fr-FR";
 
 export type Messages = {
   name: sting;
