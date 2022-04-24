@@ -40,8 +40,7 @@ export const German: Messages = {
   Game1: "Gib dein Land hier ein",
   Game2: "Eingeben",
   Game3: "Gib hier den Namen des Landes ein um zu beginnen.",
-  Game4:
-    "Zieh, {click}, und zoom in den Globus um dir beim nächsten Versuch zu helfen.",
+  Game4: `Zieh, <span>["klick auf", "drücke"]</span>, und zoom in den Globus um dir beim nächsten Versuch zu helfen.`,
   Game5: "Ungültiger Versuch",
   Game6: "Das Land wurde schon versucht",
   Game7: "Das geheime Land ist {answer}!",

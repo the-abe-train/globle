@@ -40,8 +40,7 @@ export const English: Messages = {
   Game1: "Enter country name here",
   Game2: "Enter",
   Game3: "Enter the name of any country to make your first guess.",
-  Game4:
-    "Drag, {click}, and zoom-in on the globe to help you find your next guess.",
+  Game4: `Drag, <span>["click", "tap"]</span>, and zoom-in on the globe to help you find your next guess.`,
   Game5: "Invalid guess",
   Game6: "Country already guessed",
   Game7: "The Mystery Country is {answer}!",

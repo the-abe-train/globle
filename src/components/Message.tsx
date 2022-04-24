@@ -40,7 +40,16 @@ export function Message({ win, error, guesses }: Props) {
       <p className="text-gray-700 dark:text-gray-400 ">
         <FormattedMessage
           id="Game4"
-          values={{ click: isMobile ? "tap" : "click" }}
+          values={{
+            span: (chunks: string) => {
+              try {
+                const [click, tap] = JSON.parse(chunks);
+                return isMobile ? <span>{tap}</span> : <span>{click}</span>;
+              } catch (e) {
+                return <span>{chunks}</span>;
+              }
+            },
+          }}
         />
       </p>
     );

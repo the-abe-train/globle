@@ -7,7 +7,7 @@ import { Portuguese } from "./pt-BR";
 const localeList: LocaleMessages = {
   "en-CA": English,
   "es-MX": Spanish,
-  "de-DE": German
+  "de-DE": German,
   "pt-BR": Portuguese,
 };
 
