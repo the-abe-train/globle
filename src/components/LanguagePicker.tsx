@@ -7,6 +7,7 @@ import messages from "../i18n/messages";
 import { Locale } from "../lib/locale";
 
 const langMap = {
+  "pt-BR": "Português",
   "en-CA": "English",
   "es-MX": "Español",
   "de-DE": "Deutsch"
