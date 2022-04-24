@@ -61,7 +61,7 @@ export default function List({ guesses, win, globeRef }: Props) {
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
-          <b>{qualifier}</b>
+          <b><FormattedMessage id={qualifier} /></b>
         </p>
       )}
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">

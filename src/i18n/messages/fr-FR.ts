@@ -69,4 +69,9 @@ export const French: Messages = {
   Settings7: "Langue",
   Settings8: "Globle: Édition Ville arrive bientôt !",
   Settings9: "S'entraîner",
+  Answer: "Réponse",
+  Closest: "Pays les plus proches",
+  PracticeMode: "Vous être dans le mode entraînement.",
+  PracticeExit: "Quitter le mode entraînement",
+  PracticeNew: "Nouvelle partie d'entraînement"
 };

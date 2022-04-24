@@ -64,6 +64,11 @@ export type Messages = {
   Settings7: string;
   Settings8: string;
   Settings9: string;
+  Answer: string;
+  Closest: string;
+  PracticeMode: string;
+  PracticeExit: string;
+  PracticeNew: string;
 };
 
 export type LocaleMessages = Record<Locale, Messages>;
