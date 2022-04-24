@@ -7,9 +7,11 @@ import messages from "../i18n/messages";
 import { Locale } from "../lib/locale";
 
 const langMap = {
+  "pt-BR": "Português",
   "en-CA": "English",
   "es-MX": "Español",
   "fr-FR": "Français",
+  "de-DE": "Deutsch"
 };
 
 const languages = Object.keys(messages) as Locale[];
@@ -32,9 +34,9 @@ export default function LanguagePicker() {
       <div className="relative">
         <button
           onClick={() => setOpen(!open)}
-          className="text-white bg-blue-700 hover:bg-blue-800 
-        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm 
-        px-4 py-2.5 text-center inline-flex items-center 
+          className="text-white bg-blue-700 hover:bg-blue-800
+        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm
+        px-4 py-2.5 text-center inline-flex items-center
         dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
         w-32 justify-between
         "
@@ -60,7 +62,7 @@ export default function LanguagePicker() {
         </button>
         {open && (
           <div
-            className="z-10 w-32 text-base list-none bg-white rounded divide-y 
+            className="z-10 w-32 text-base list-none bg-white rounded divide-y
         divide-gray-100 shadow dark:bg-gray-700
         absolute top-full
         transition "
@@ -70,8 +72,8 @@ export default function LanguagePicker() {
                 const locale = lang;
                 return (
                   <li
-                    className="block py-2 px-4 text-sm text-gray-700 
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 
+                    className="block py-2 px-4 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
                   dark:hover:text-white"
                     onClick={() => changeLocale(locale)}
                     key={idx}
