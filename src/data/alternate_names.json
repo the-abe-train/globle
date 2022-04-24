@@ -1,38 +1,66 @@
-[
-  {
-    "real": "eswatini",
-    "alternative": "swaziland"
-  },
-  {
-    "real": "myanmar",
-    "alternative": "burma"
-  },
-  {
-    "real": "north macedonia",
-    "alternative": "macedonia"
-  },
-  {
-    "real": "congo",
-    "alternative": "congo-brazzaville"
-  },
-  {
-    "real": "vatican",
-    "alternative": "holy see"
-  },
-  {
-    "real": "vatican",
-    "alternative": "vatican city"
-  },
-  {
-    "real": "cabo verde",
-    "alternative": "cape verde"
-  },
-  {
-    "real": "democratic republic of the congo",
-    "alternative": "democratic republic of congo"
-  },
-  {
-    "real": "democratic republic of the congo",
-    "alternative": "dr congo"
-  }
-]
+{
+  "en-CA": [
+    {
+      "real": "eswatini",
+      "alternative": "swaziland"
+    },
+    {
+      "real": "myanmar",
+      "alternative": "burma"
+    },
+    {
+      "real": "north macedonia",
+      "alternative": "macedonia"
+    },
+    {
+      "real": "congo",
+      "alternative": "congo-brazzaville"
+    },
+    {
+      "real": "vatican",
+      "alternative": "holy see"
+    },
+    {
+      "real": "vatican",
+      "alternative": "vatican city"
+    },
+    {
+      "real": "cabo verde",
+      "alternative": "cape verde"
+    },
+    {
+      "real": "democratic republic of the congo",
+      "alternative": "democratic republic of congo"
+    },
+    {
+      "real": "democratic republic of the congo",
+      "alternative": "dr congo"
+    }
+  ],
+  "fr-FR": [
+    {
+      "real": "eswatini",
+      "alternative": "swaziland"
+    },
+    {
+      "real": "myanmar",
+      "alternative": "byrmanie"
+    },
+    {
+      "real": "united arab emirates",
+      "alternative": "eau"
+    },
+    {
+      "real": "united arab emirates",
+      "alternative": "émirats"
+    },
+    {
+      "real": "czechia",
+      "alternative": "république tchèque"
+    }
+  ],
+  "es-MX": [],
+  "de-DE": [],
+  "pt-BR": []
+}
+
