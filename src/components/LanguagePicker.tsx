@@ -10,6 +10,7 @@ const langMap = {
   "pt-BR": "Português",
   "en-CA": "English",
   "es-MX": "Español",
+  "fr-FR": "Français",
   "de-DE": "Deutsch"
 };
 
