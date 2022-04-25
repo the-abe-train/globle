@@ -39,9 +39,9 @@ export const French: Messages = {
   GameTitle: "Jeu",
   Game1: "Entrez le nom d'un pays ici",
   Game2: "Entrer",
-  Game3: "Entrez le nom de n'importe quel pays pour faire votre première tentative.",
-  Game4:
-    "Glissez, {cliquez}, et zoomez sur le globe pour vous aider à trouver votre prochaine tentative.",
+  Game3:
+    "Entrez le nom de n'importe quel pays pour faire votre première tentative.",
+  Game4: `Glissez, <span>["cliquez", "tap"]</span>, et zoomez sur le globe pour vous aider à trouver votre prochaine tentative.`,
   Game5: "Tentative invalide",
   Game6: "Pays déjà tenté",
   Game7: "Le pays mystère est {answer}!",
