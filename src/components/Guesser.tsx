@@ -5,7 +5,6 @@ import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
 import alternateNames from "../data/alternate_names.json";
 import { LocaleContext } from "../i18n/LocaleContext";
-import { Locale } from "../lib/locale";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
@@ -52,9 +51,9 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       .replace(/&/g, "and")
       .replace(/^st\s/g, "st. ");
     const oldNamePair = alternateNames.find((pair) => {
-      return pair.old === trimmedName;
+      return pair.real === trimmedName;
     });
-    const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    const userGuess = oldNamePair ? oldNamePair.alternative : trimmedName;
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
