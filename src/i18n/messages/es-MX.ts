@@ -64,6 +64,7 @@ export const Spanish: Messages = {
   Settings6: "Ciudades",
   Settings7: "Idioma",
   Settings8: "Próximamente Globle Edición de Ciudades",
+  Settings9: "Practicar",
 };
 
 // export default {

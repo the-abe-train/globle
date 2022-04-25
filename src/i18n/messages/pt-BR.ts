@@ -67,4 +67,5 @@ export const Portuguese: Messages = {
   Settings6: "Cidades",
   Settings7: "Idioma",
   Settings8: "Globle: Edição Cidades em breve!",
+  Settings9: "Praticar",
 };

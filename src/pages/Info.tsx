@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 import { LocaleContext } from "../i18n/LocaleContext";
 
 type ItemProps = {
@@ -35,7 +36,7 @@ type Props = {
   setScreen: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function Info({ setScreen }: Props) {
+export default function Info() {
   const localeContext = useContext(LocaleContext);
 
   const faqs = [
@@ -56,12 +57,9 @@ export default function Info({ setScreen }: Props) {
             values={{
               button: (chunks: string) => {
                 return (
-                  <button
-                    className="underline"
-                    onClick={(e) => setScreen("Settings")}
-                  >
-                    {chunks}
-                  </button>
+                  <Link to="/settings">
+                    <button className="underline">{chunks}</button>
+                  </Link>
                 );
               },
             }}

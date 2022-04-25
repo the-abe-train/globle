@@ -11,9 +11,10 @@ const territoryData: Country[] = require("../data/territories.json").features;
 type Props = {
   guesses: Country[];
   globeRef: React.MutableRefObject<GlobeMethods>;
+  practiceMode: boolean;
 };
 
-export default function Globe({ guesses, globeRef }: Props) {
+export default function Globe({ guesses, globeRef, practiceMode }: Props) {
   // State
   const [places, setPlaces] = useState(guesses);
 
@@ -30,7 +31,6 @@ export default function Globe({ guesses, globeRef }: Props) {
   // On first render
   useEffect(() => {
     const controls: any = globeRef.current.controls();
-    console.log("Activate auto rotate");
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1;
     setTimeout(() => {
@@ -54,7 +54,6 @@ export default function Globe({ guesses, globeRef }: Props) {
     const newGuess = [...guesses].pop();
     if (newGuess) {
       const controls: any = globeRef.current.controls();
-      console.log("Ending auto rotate");
       controls.autoRotate = false;
       const newSpot = findCentre(newGuess);
       turnGlobe(newSpot, globeRef, "zoom");
@@ -72,6 +71,17 @@ export default function Globe({ guesses, globeRef }: Props) {
       controls.autoRotate = false;
     });
   }, [globeRef]);
+
+  // Polygon colour
+  function polygonColour(country: Country) {
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      );
+      return getColour(country, answerCountry, nightMode, highContrast);
+    }
+    return getColour(country, answerCountry, nightMode, highContrast);
+  }
 
   // Label colour
   function getLabel(country: Country) {
@@ -123,10 +133,8 @@ export default function Globe({ guesses, globeRef }: Props) {
           height={size}
           backgroundColor="#00000000"
           polygonsData={places}
-          polygonCapColor={(c) =>
-            // @ts-ignore
-            getColour(c, answerCountry, nightMode, highContrast)
-          }
+          // @ts-ignore
+          polygonCapColor={polygonColour}
           // @ts-ignore
           polygonLabel={getLabel}
           // @ts-ignore

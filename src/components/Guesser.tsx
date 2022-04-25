@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useState } from "react";
-import { Country, LanguageName } from "../lib/country";
+import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
@@ -15,9 +15,16 @@ type Props = {
   setGuesses: React.Dispatch<React.SetStateAction<Country[]>>;
   win: boolean;
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
+  practiceMode: boolean;
 };
 
-export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
+export default function Guesser({
+  guesses,
+  setGuesses,
+  win,
+  setWin,
+  practiceMode,
+}: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
   const { locale } = useContext(LocaleContext);
@@ -64,7 +71,15 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       setError(localeList[locale]["Game5"]);
       return;
     }
-    if (guessCountry.properties.NAME === answerName) {
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      ) as Country;
+      const answerName = answerCountry.properties.NAME;
+      if (guessCountry.properties.NAME === answerName) {
+        setWin(true);
+      }
+    } else if (guessCountry.properties.NAME === answerName) {
       setWin(true);
     }
     return guessCountry;
@@ -74,6 +89,20 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     e.preventDefault();
     setError("");
     let guessCountry = runChecks();
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      );
+      if (guessCountry && answerCountry) {
+        guessCountry["proximity"] = polygonDistance(
+          guessCountry,
+          answerCountry
+        );
+        setGuesses([...guesses, guessCountry]);
+        setGuessName("");
+        return;
+      }
+    }
     if (guessCountry && answerCountry) {
       guessCountry["proximity"] = polygonDistance(guessCountry, answerCountry);
       setGuesses([...guesses, guessCountry]);
@@ -111,7 +140,12 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
           <FormattedMessage id="Game2" />
         </button>
       </form>
-      <Message win={win} error={error} guesses={guesses.length} />
+      <Message
+        win={win}
+        error={error}
+        guesses={guesses.length}
+        practiceMode={practiceMode}
+      />
     </div>
   );
 }

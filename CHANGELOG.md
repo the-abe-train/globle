@@ -1,5 +1,16 @@
 # Change log
 
+## v1.5.0 - Apr 25, 2022
+- Added practice mode
+- Added translations for French, German, and Portuguese (thank you international translators!)
+- Guessing or clicking on small countries now zooms in.
+- Added routing (React Router v6)
+- Improved translation methodology to make the code more flexible for future translators (Issue #68)
+- Added "along the Earth's surface" to FAQ about distance calculation
+- Remove fallback code for old sharing message
+- Fixed animation logic with useInterval hook on the intro screen
+- Adjusted borders for Andaman and Nicobar Islands
+
 ## v1.4.0 - Mar 21, 2022
 - Translated game into Spanish
 - Fixed bug that caused the globe not to display on older browsers

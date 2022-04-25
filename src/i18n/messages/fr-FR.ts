@@ -68,4 +68,5 @@ export const French: Messages = {
   Settings6: "Villes",
   Settings7: "Langue",
   Settings8: "Globle: Édition Ville arrive bientôt !",
+  Settings9: "S'entraîner",
 };

@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Auxilliary from "./components/Auxilliary";
 import Game from "./pages/Game";
 import Header from "./components/Header";
 import Help from "./pages/Help";
-import Info from "./components/Info";
+import Info from "./pages/Info";
 import Settings from "./pages/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
@@ -12,7 +11,6 @@ import Fade from "./transitions/Fade";
 
 function App() {
   // State
-  const [screen, setScreen] = useState("Help");
   const [reSpin, setReSpin] = useState(false);
   const [showStats, setShowStats] = useState(false);
 
@@ -21,35 +19,8 @@ function App() {
 
   // Re-render globe
   useEffect(() => {
-    if (screen === "Game") setReSpin(true);
-  }, [screen]);
-  useEffect(() => {
     if (reSpin) setTimeout(() => setReSpin(false), 1);
   }, [reSpin]);
-
-  // const pickScreen = () => {
-  //   if (screen === "Help") {
-  //     return (
-  //       <Auxilliary screen={screen} setScreen={setScreen}>
-  //         <Help />
-  //       </Auxilliary>
-  //     );
-  //   } else if (screen === "Info") {
-  //     return (
-  //       <Auxilliary screen={screen} setScreen={setScreen}>
-  //         <Info setScreen={setScreen} />
-  //       </Auxilliary>
-  //     );
-  //   } else if (screen === "Settings") {
-  //     return (
-  //       <Auxilliary screen={screen} setScreen={setScreen}>
-  //         <Settings />
-  //       </Auxilliary>
-  //     );
-  //   } else {
-  //     return <Game reSpin={reSpin} setShowStats={setShowStats} />;
-  //   }
-  // };
 
   const dark = themeContext.theme.nightMode ? "dark" : "";
 
@@ -73,9 +44,16 @@ function App() {
         <Route path="/" element={<Help />} />
         <Route
           path="/game"
-          element={<Game reSpin={reSpin} setShowStats={setShowStats} />}
+          element={
+            <Game
+              reSpin={reSpin}
+              setReSpin={setReSpin}
+              setShowStats={setShowStats}
+            />
+          }
         />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/info" element={<Info />} />
       </Routes>
     </div>
   );

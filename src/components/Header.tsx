@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
 
@@ -11,9 +11,15 @@ type Props = {
 export default function Header({ setReSpin, setShowStats }: Props) {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
+  // Set up practice mode
+  const [params] = useSearchParams();
+  const practiceMode = !!params.get("practice_mode");
 
   function reRenderGlobe() {
     setReSpin(true);
+    if (practiceMode) {
+      return navigate("/");
+    }
     navigate("/game");
   }
 
