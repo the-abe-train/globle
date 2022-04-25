@@ -23,7 +23,7 @@ export const English: Messages = {
   Loading: "Loading...",
   FAQTitle: "FAQ",
   q1: "1. How is the distance between the answer and my guess calculated?",
-  a1: "Distance between countries is defined as the minimum distance between their borders.",
+  a1: "Distance between countries is defined as the minimum distance between their borders along the Earth's surface.",
   q2: "2. How can I play the game if I am colour blind or visually impaired?",
   a2: "A high-contrast Colour Blind mode can be activated in <button>Settings</button>.",
   q3: "3. How does the game decide what is a valid country?",
