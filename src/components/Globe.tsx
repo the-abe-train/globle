@@ -1,9 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
-import { findCentre } from "../util/centre";
 import { answerCountry } from "../util/answer";
-import { globeImg, turnGlobe } from "../util/globe";
+import { findCentre, globeImg, turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
 import { isMobile } from "react-device-detect";
@@ -28,6 +27,16 @@ export default function Globe({ guesses, globeRef }: Props) {
     clipPath: `circle(${size / 2}px at ${size / 2}px ${size / 2}px)`,
   };
 
+  // On first render
+  useEffect(() => {
+    const controls: any = globeRef.current.controls();
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1;
+    setTimeout(() => {
+      globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
+    }, 400);
+  }, [globeRef]);
+
   // After each guess
   useEffect(() => {
     // Add territories to guesses to make shapes
@@ -46,19 +55,9 @@ export default function Globe({ guesses, globeRef }: Props) {
     const newGuess = [...guesses].pop();
     if (newGuess) {
       const newSpot = findCentre(newGuess);
-      turnGlobe(newSpot, globeRef);
+      turnGlobe(newSpot, globeRef, "zoom");
     }
   }, [guesses, globeRef]);
-
-  // On first render
-  useEffect(() => {
-    const controls: any = globeRef.current.controls();
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 1;
-    setTimeout(() => {
-      globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
-    }, 400);
-  }, [globeRef]);
 
   // Stop rotate on drag
   const containerRef = useRef<HTMLDivElement>(null!);
@@ -92,6 +91,7 @@ export default function Globe({ guesses, globeRef }: Props) {
     return alt;
   }
 
+  // Clicking the zoom buttons on mobile
   function zoom(z: number) {
     const controls: any = globeRef.current.controls();
     controls.autoRotate = false;
