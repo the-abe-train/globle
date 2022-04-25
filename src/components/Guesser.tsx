@@ -58,9 +58,10 @@ export default function Guesser({
       .replace(/&/g, "and")
       .replace(/^st\s/g, "st. ");
     const oldNamePair = alternateNames.find((pair) => {
-      return pair.real === trimmedName;
+      return pair.alternative === trimmedName;
     });
-    const userGuess = oldNamePair ? oldNamePair.alternative : trimmedName;
+    const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    console.log("User guess", userGuess);
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
