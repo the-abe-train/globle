@@ -61,7 +61,6 @@ export default function Guesser({
       return pair.alternative === trimmedName;
     });
     const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
-    console.log("User guess", userGuess);
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);

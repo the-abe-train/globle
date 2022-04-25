@@ -40,12 +40,6 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
     firstStats
   );
 
-  // Test first render
-  useEffect(() => {
-    console.log("first render");
-    setReSpin(true);
-  }, []);
-
   // Set up practice mode
   const [params] = useSearchParams();
   const navigate = useNavigate();
