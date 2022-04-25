@@ -30,6 +30,7 @@ export default function Globe({ guesses, globeRef }: Props) {
   // On first render
   useEffect(() => {
     const controls: any = globeRef.current.controls();
+    console.log("Activate auto rotate");
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1;
     setTimeout(() => {
@@ -50,10 +51,11 @@ export default function Globe({ guesses, globeRef }: Props) {
     setPlaces(guesses.concat(territories));
 
     // Turn globe to new spot
-    const controls: any = globeRef.current.controls();
-    controls.autoRotate = false;
     const newGuess = [...guesses].pop();
     if (newGuess) {
+      const controls: any = globeRef.current.controls();
+      console.log("Ending auto rotate");
+      controls.autoRotate = false;
       const newSpot = findCentre(newGuess);
       turnGlobe(newSpot, globeRef, "zoom");
     }
@@ -116,7 +118,6 @@ export default function Globe({ guesses, globeRef }: Props) {
           className="select-none decoration-transparent cursor-grab "
           style={{ "-webkit-tap-highlight-color": "transparent" }}
           ref={globeRef}
-          // globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
           globeImageUrl={globeImg(nightMode)}
           width={size}
           height={size}

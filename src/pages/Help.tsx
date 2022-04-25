@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { ThemeContext } from "../context/ThemeContext";
 import Fade from "../transitions/Fade";
-import Outline from "./Outline";
+import Outline from "../components/Outline";
 import { FormattedMessage } from "react-intl";
 import useInterval from "../hooks/useInterval";
+import Auxilliary from "../components/Auxilliary";
 
 export default function Help() {
   // Theme
@@ -66,6 +67,7 @@ export default function Help() {
       <p>
         <FormattedMessage id="help3" />
       </p>
+      <Auxilliary screen="Help" />
     </div>
   );
 }
