@@ -57,6 +57,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
     localStorage.setItem("practice", JSON.stringify(practiceAnswer));
     navigate("/game?practice_mode=true");
     setGuesses([]);
+    setWin(false);
   }
 
   // Stored guesses to state, as countries
