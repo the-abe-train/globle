@@ -44,7 +44,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const practiceMode = !!params.get("practice_mode");
-  // const enterPracticeMode = usePracticeMode();
+
   function enterPracticeMode() {
     const practiceAnswer =
       countryData[Math.floor(Math.random() * countryData.length)];
