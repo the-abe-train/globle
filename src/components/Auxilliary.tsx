@@ -56,12 +56,12 @@ export default function Auxilliary({ screen }: Props) {
 
   return (
     <div className="dark:text-gray-300 flex flex-col">
-      <Link to="/game">
-        <div
-          className="w-fit flex flex-col justify-center align-middle mx-auto"
-          tabIndex={0}
-          onKeyPress={keyPressToggle}
-        >
+      <div
+        className="w-fit flex flex-col justify-center align-middle mx-auto"
+        tabIndex={0}
+        onKeyPress={keyPressToggle}
+      >
+        <Link to="/game">
           <div
             className="mx-auto cursor-pointer"
             style={extraStyle}
@@ -94,8 +94,8 @@ export default function Auxilliary({ screen }: Props) {
               }}
             />
           </b>
-        </div>
-      </Link>
+        </Link>
+      </div>
       {(screen === "Help" || screen === "Settings") && (
         <span className="mt-10 mb-4">
           <FormattedMessage id="Aux2" />{" "}

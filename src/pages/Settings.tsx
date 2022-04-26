@@ -107,15 +107,17 @@ export default function Settings() {
           <label
             htmlFor={name}
             key={idx}
-            className="flex items-center justify-between space-x-8"
+            className="flex items-center justify-between space-x-10"
             onKeyPress={(e) => keyPressToggle(e, toggle, setToggle)}
             tabIndex={0}
           >
-            <span className="text-lg">{toggle ? on : off}</span>
+            <span className="text-lg dark:text-gray-300">
+              {toggle ? on : off}
+            </span>
             <input
               id={name}
               type="checkbox"
-              className="sr-only relative focus-visible:ring"
+              className="sr-only relative focus-visible:ring hidden"
               checked={toggle}
               onChange={() => setToggle(!toggle)}
               tabIndex={-1}
