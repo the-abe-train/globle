@@ -19,7 +19,7 @@ export const Polish: Messages = {
   Loading: "Ładowanie...",
   FAQTitle: "FAQ",
   q1: "1. Jak obliczana jest odległość pomiędzy zgadywaną a poprawną odpowiedzią?",
-  a1: "Odległość pomiędzy krajami jest określona jako minimalna odległość między ich granicami.",
+  a1: "Odległość pomiędzy krajami jest określona jako minimalna odległość między ich granicami na powierzchni Ziemi.",
   q2: "2. Jak mogę grać, jeśli jestem daltonistą lub osobą słabowidzącą?",
   a2: "W <button>Ustawieniach</button> można aktywować tryb dla daltonistów.",
   q3: "3. W jaki sposób gra decyduje, które terytoria są państwem?",
@@ -36,8 +36,7 @@ export const Polish: Messages = {
   Game1: "Wpisz nazwę kraju",
   Game2: "Wpisz",
   Game3: "Wpisz nazwę jakiegoś kraju, aby zacząć grę",
-  Game4:
-    "Przeciągnij, {click} i powiększ kulę ziemską, żeby ułatwić sobie dalsze zgadywanie.",
+  Game4: `Przeciągnij, <span>["kliknij", "dotknij"]</span> i powiększ kulę ziemską, żeby ułatwić sobie dalsze zgadywanie.`,
   Game5: "Nieprawidłowa nazwa",
   Game6: "Ten kraj już się pojawił",
   Game7: "Tajemniczy Kraj to {answer}!",
@@ -64,4 +63,5 @@ export const Polish: Messages = {
   Settings6: "Miasta",
   Settings7: "Język",
   Settings8: "Globle: Miasta już wkrótce!",
+  // Settings9: "Trenuj",
 };
