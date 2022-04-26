@@ -32,10 +32,6 @@ function Item({ q, a }: ItemProps, idx: number) {
   }
 }
 
-type Props = {
-  setScreen: React.Dispatch<React.SetStateAction<string>>;
-};
-
 export default function Info() {
   const localeContext = useContext(LocaleContext);
 
@@ -150,7 +146,7 @@ export default function Info() {
   }
 
   return (
-    <div className="my-2 space-y-7">
+    <div className="my-2 space-y-7 dark:text-gray-300">
       <h2
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}

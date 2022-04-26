@@ -136,7 +136,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
   // Practice mode
 
   // Fallback while loading
-  const renderLoader = () => <p>Loading</p>;
+  const renderLoader = () => <p className="dark:text-gray-300">Loading</p>;
 
   return (
     <Suspense fallback={renderLoader()}>

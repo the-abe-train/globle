@@ -23,7 +23,7 @@ export default function Help() {
   }, [count]);
 
   return (
-    <div className="my-2 space-y-7">
+    <div className="my-2 space-y-7 dark:text-gray-300">
       <h2
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}
