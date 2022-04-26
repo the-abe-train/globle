@@ -1,6 +1,6 @@
 # Notes about Globle
 
-**Version 1.4.0** - [Change log](CHANGELOG.md)
+**Version 1.5.0** - [Change log](CHANGELOG.md)
 
 ## Listed countries
 - The list of countries for this game is the same as that used by [Sporcle](https://www.sporcle.com/blog/2013/01/what-is-a-country/)

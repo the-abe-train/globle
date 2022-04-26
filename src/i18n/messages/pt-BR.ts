@@ -40,8 +40,7 @@ export const Portuguese: Messages = {
   Game1: "Insira o nome de um país aqui",
   Game2: "Inserir",
   Game3: "Insira o nome de qualquer país para fazer sua primeira tentativa.",
-  Game4:
-    "Arraste, {click}, e dê zoom no globo para te ajudar a decidir seu próximo palpite.",
+  Game4: `Arraste, <span>["clique", "toque"]</span>, e dê zoom no globo para te ajudar a decidir seu próximo palpite.`,
   Game5: "Tentativa inválida",
   Game6: "Você já chutou este país",
   Game7: "O país misterioso é {answer}!",
@@ -68,4 +67,5 @@ export const Portuguese: Messages = {
   Settings6: "Cidades",
   Settings7: "Idioma",
   Settings8: "Globle: Edição Cidades em breve!",
+  Settings9: "Praticar",
 };

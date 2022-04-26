@@ -23,7 +23,7 @@ export const English: Messages = {
   Loading: "Loading...",
   FAQTitle: "FAQ",
   q1: "1. How is the distance between the answer and my guess calculated?",
-  a1: "Distance between countries is defined as the minimum distance between their borders.",
+  a1: "Distance between countries is defined as the minimum distance between their borders along the Earth's surface.",
   q2: "2. How can I play the game if I am colour blind or visually impaired?",
   a2: "A high-contrast Colour Blind mode can be activated in <button>Settings</button>.",
   q3: "3. How does the game decide what is a valid country?",
@@ -40,8 +40,7 @@ export const English: Messages = {
   Game1: "Enter country name here",
   Game2: "Enter",
   Game3: "Enter the name of any country to make your first guess.",
-  Game4:
-    "Drag, {click}, and zoom-in on the globe to help you find your next guess.",
+  Game4: `Drag, <span>["click", "tap"]</span>, and zoom-in on the globe to help you find your next guess.`,
   Game5: "Invalid guess",
   Game6: "Country already guessed",
   Game7: "The Mystery Country is {answer}!",
@@ -68,4 +67,5 @@ export const English: Messages = {
   Settings6: "Cities",
   Settings7: "Language",
   Settings8: "Globle: Cities Edition coming soon!",
+  Settings9: "Practice",
 };

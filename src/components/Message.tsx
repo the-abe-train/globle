@@ -5,20 +5,32 @@ import { FormattedMessage } from "react-intl";
 import { useContext } from "react";
 import { LocaleContext } from "../i18n/LocaleContext";
 import { langNameMap } from "../i18n/locales";
+import { Country } from "../lib/country";
 
 type Props = {
   win: boolean;
   error: any;
   guesses: number;
+  practiceMode: boolean;
 };
 
-export function Message({ win, error, guesses }: Props) {
+export function Message({ win, error, guesses, practiceMode }: Props) {
   const { locale } = useContext(LocaleContext);
 
   let name = answerName;
   if (locale !== "en-CA") {
     const langName = langNameMap[locale];
     name = answerCountry["properties"][langName];
+  }
+  if (practiceMode) {
+    const answerCountry = JSON.parse(
+      localStorage.getItem("practice") as string
+    ) as Country;
+    name = answerCountry.properties.NAME;
+    if (locale !== "en-CA") {
+      const langName = langNameMap[locale];
+      name = answerCountry["properties"][langName];
+    }
   }
 
   if (error) {
@@ -40,7 +52,16 @@ export function Message({ win, error, guesses }: Props) {
       <p className="text-gray-700 dark:text-gray-400 ">
         <FormattedMessage
           id="Game4"
-          values={{ click: isMobile ? "tap" : "click" }}
+          values={{
+            span: (chunks: string) => {
+              try {
+                const [click, tap] = JSON.parse(chunks);
+                return isMobile ? <span>{tap}</span> : <span>{click}</span>;
+              } catch (e) {
+                return <span>{chunks}</span>;
+              }
+            },
+          }}
         />
       </p>
     );

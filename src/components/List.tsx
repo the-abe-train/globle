@@ -2,8 +2,7 @@ import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
 import { Country, LanguageName } from "../lib/country";
 import { answerName } from "../util/answer";
-import { findCentre } from "../util/centre";
-import { turnGlobe } from "../util/globe";
+import { findCentre, turnGlobe, altitudeFunction } from "../util/globe";
 import { LocaleContext } from "../i18n/LocaleContext";
 import { Locale } from "../lib/locale";
 import { FormattedMessage } from "react-intl";
@@ -34,7 +33,7 @@ export default function List({ guesses, win, globeRef }: Props) {
     "es-MX": "NAME_ES",
     "en-CA": "NAME_EN",
     "fr-FR": "NAME_FR",
-    "de-DE": "NAME_DE"
+    "de-DE": "NAME_DE",
   };
   const langName = langNameMap[locale];
 
@@ -51,8 +50,8 @@ export default function List({ guesses, win, globeRef }: Props) {
 
   function turnToCountry(e: SyntheticEvent, idx: number) {
     const clickedCountry = orderedGuesses[idx];
-    const coords = findCentre(clickedCountry);
-    turnGlobe(coords, globeRef);
+    const { lat, lng, altitude } = findCentre(clickedCountry);
+    turnGlobe({ lat, lng, altitude }, globeRef, "zoom");
   }
 
   const closest = orderedGuesses[0];
