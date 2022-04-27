@@ -67,6 +67,7 @@ export default function List({ guesses, win, globeRef }: Props) {
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
         {orderedGuesses.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
+          const guessNumber = guesses.indexOf(guess) + 1;
           const flag = (FLAG || "").toLocaleLowerCase();
           let name = NAME_LEN >= 10 ? ABBREV : NAME;
           if (locale !== "en-CA") {
@@ -84,7 +85,7 @@ export default function List({ guesses, win, globeRef }: Props) {
                   alt={name}
                   className=""
                 />
-                <span className="ml-2 text-md">{name}</span>
+                <span className="ml-2 text-md">{name} <small>({guessNumber}.)</small></span>
               </button>
             </li>
           );
