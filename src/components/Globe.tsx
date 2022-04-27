@@ -14,6 +14,8 @@ type Props = {
   practiceMode: boolean;
 };
 
+const ZOOM_SPEED = 1;
+
 export default function Globe({ guesses, globeRef, practiceMode }: Props) {
   // State
   const [places, setPlaces] = useState(guesses);
@@ -113,6 +115,23 @@ export default function Globe({ guesses, globeRef, practiceMode }: Props) {
     globeRef.current.pointOfView(coords, 250);
   }
 
+  // Called when the globe position changes
+  function globeOnZoom() {
+    overrideGlobeZooming();
+  }
+
+  // Override the zoomSpeed mutation in globe.gl by calling this in the globe's
+  // onZoom callback.
+  //
+  // By the time this callback is called, an onchange event handler on
+  // `controls` defined in globe.gl's `globe.js` source file will have changed
+  // the zoomSpeed based on altitude. We will counteract that to get back the
+  // nice zooming implemented in the three.js library (`OrbitControls.js`).
+  function overrideGlobeZooming() {
+    const controls: any = globeRef.current?.controls();
+    if (controls != null) controls.zoomSpeed = ZOOM_SPEED;
+  }
+
   const btnFill = nightMode ? "bg-[#582679]" : "bg-[#F3BC63]";
   const btnBorder = nightMode ? "border-[#350a46]" : "border-[#FF8E57]";
   const btnText = nightMode ? "text-white font-bold" : "";
@@ -144,6 +163,7 @@ export default function Globe({ guesses, globeRef, practiceMode }: Props) {
           onPolygonClick={(p, e, c) => turnGlobe(c, globeRef)}
           polygonStrokeColor="#00000000"
           atmosphereColor={nightMode ? "rgba(63, 201, 255)" : "lightskyblue"}
+          onZoom={globeOnZoom}
         />
       </div>
       {isMobile && (
