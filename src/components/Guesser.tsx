@@ -8,6 +8,7 @@ import { LocaleContext } from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+var emoji_pkg = require('node-emoji');
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -33,7 +34,7 @@ export default function Guesser({
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT } =
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, ISO_A2 } =
         country.properties;
 
       return (
@@ -44,14 +45,33 @@ export default function Guesser({
         ABBREV.replace(/\./g, "").toLowerCase() === countryName ||
         NAME.replace(/-/g, " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
+        ISO_A2.toLowerCase() === countryName ||
         NAME_SORT.toLowerCase() === countryName ||
         country.properties[langName].toLowerCase() === countryName
       );
     });
   }
 
+  function checkEmoji(guessString: string) {
+    const emojis = guessString.match(/\p{Emoji}+/gu);
+    let emoji: string;
+    let flagEmojiName;
+    let isoA2Code;
+    if (emojis) {
+      emoji = emojis[0];
+      flagEmojiName = emoji_pkg.which(emoji);
+      console.log("flagEmojiName = " + flagEmojiName);
+      if (flagEmojiName) {
+        isoA2Code = flagEmojiName.split('-')[1];
+      }
+      
+    }
+    return isoA2Code;
+  }
+
   // Check territories function
   function runChecks() {
+    let emojiGuess = checkEmoji(guessName);
     const trimmedName = guessName
       .trim()
       .toLowerCase()
@@ -60,7 +80,8 @@ export default function Guesser({
     const oldNamePair = alternateNames.find((pair) => {
       return pair.alternative === trimmedName;
     });
-    const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    const oldNameTrimmedGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    const userGuess = emojiGuess ? emojiGuess : oldNameTrimmedGuess;
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
