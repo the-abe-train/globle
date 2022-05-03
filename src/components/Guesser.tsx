@@ -34,7 +34,7 @@ export default function Guesser({
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
-      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT, ISO_A2 } =
+      const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT } =
         country.properties;
 
       return (
@@ -45,14 +45,21 @@ export default function Guesser({
         ABBREV.replace(/\./g, "").toLowerCase() === countryName ||
         NAME.replace(/-/g, " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
-        ISO_A2.toLowerCase() === countryName ||
         NAME_SORT.toLowerCase() === countryName ||
         country.properties[langName].toLowerCase() === countryName
       );
     });
   }
-
+  function findCountryISOA2(countryISAOA2: string, list: Country[]) {
+    return list.find((country) => {
+      const ISO_A2 = country.properties.ISO_A2;
+      return (
+        ISO_A2.toLowerCase() === countryISAOA2
+      );
+    })?.properties.NAME.toLowerCase();
+  }
   function checkEmoji(guessString: string) {
+    
     const emojis = guessString.match(/\p{Emoji}+/gu);
     let emoji: string;
     let flagEmojiName;
@@ -60,11 +67,10 @@ export default function Guesser({
     if (emojis) {
       emoji = emojis[0];
       flagEmojiName = emoji_pkg.which(emoji);
-      console.log("flagEmojiName = " + flagEmojiName);
       if (flagEmojiName) {
         isoA2Code = flagEmojiName.split('-')[1];
+        return findCountryISOA2(isoA2Code, countryData);
       }
-      
     }
     return isoA2Code;
   }
