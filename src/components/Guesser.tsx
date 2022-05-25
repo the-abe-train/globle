@@ -8,6 +8,8 @@ import { LocaleContext } from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+import { levenshtein } from "edit-distance";
+
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
