@@ -41,6 +41,7 @@ export type Messages = {
   Game6: string;
   Game7: string;
   Game8: string;
+  Game9: string;
   StatsTitle: string;
   Stats1: string;
   Stats2: string;
