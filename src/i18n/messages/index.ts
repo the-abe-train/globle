@@ -5,6 +5,7 @@ import { French } from "./fr-FR";
 import { German } from "./de-DE";
 import { Portuguese } from "./pt-BR";
 import { Italian } from "./it_IT";
+import { Polish } from "./pl-PL";
 
 const localeList: LocaleMessages = {
   "en-CA": English,
@@ -13,6 +14,7 @@ const localeList: LocaleMessages = {
   "de-DE": German,
   "pt-BR": Portuguese,
   "it-IT": Italian,
+  "pl-PL": Polish,
 };
 
 export default localeList;
