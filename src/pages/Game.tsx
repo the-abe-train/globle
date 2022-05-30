@@ -56,7 +56,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
 
   // Stored guesses to state, as countries
   // If it's a new day though, start with a blank slate
-  // TODO I don't like that this runs with every guess. Should fix.
+  // TODO I don't like that this runs with every guess. Should fix. Update: useMemo!
   let storedCountryNames: string[] = [];
   let storedCountries: Country[] = [];
   if (today <= storedGuesses.day && !practiceMode) {
