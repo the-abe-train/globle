@@ -104,7 +104,7 @@ export default function Statistics({ setShowStats }: Props) {
   const options = { year: "numeric", month: "short", day: "numeric" };
   const event = new Date();
   // @ts-ignore
-  const unambiguousDate = event.toLocaleDateString("en-CA", options);
+  const unambiguousDate = event.toLocaleDateString(locale, options);
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
     const shareString = `🌎 ${date} 🌍
