@@ -29,7 +29,7 @@ export default function LanguagePicker() {
 
   return (
     <label className="flex justify-between items-center">
-      <span className="text-lg">
+      <span className="text-lg dark:text-gray-300">
         <FormattedMessage id="Settings7" />
       </span>
       <div className="relative">

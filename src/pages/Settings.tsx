@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { LocaleContext } from "../i18n/LocaleContext";
-import LanguagePicker from "./LanguagePicker";
+import LanguagePicker from "../components/LanguagePicker";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
+import Auxilliary from "../components/Auxilliary";
+import { useNavigate } from "react-router-dom";
+import { Country } from "../lib/country";
+const countryData: Country[] = require("../data/country_data.json").features;
 
 function Toggle({ checked }: { checked: boolean }) {
   if (checked) {
@@ -43,6 +47,8 @@ export default function Settings() {
 
   const { setTheme } = themeContext;
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (setTheme) {
       setTheme({ nightMode: !toggleTheme, highContrast: !toggleHighContrast });
@@ -58,6 +64,13 @@ export default function Settings() {
     if (keys.includes(e.key)) {
       setToggle(!toggle);
     }
+  }
+
+  function enterPracticeMode() {
+    const practiceAnswer =
+      countryData[Math.floor(Math.random() * countryData.length)];
+    localStorage.setItem("practice", JSON.stringify(practiceAnswer));
+    navigate("/game?practice_mode=true");
   }
 
   const options = [
@@ -85,23 +98,26 @@ export default function Settings() {
   ];
 
   return (
-    <div className="flex-col space-y-8 mx-auto my-10 w-fit">
+    <div className="flex-col items-center align-middle space-y-8 mx-auto my-10 w-fit">
       <LanguagePicker />
+
       {options.map((option, idx) => {
         const { name, toggle, setToggle, on, off } = option;
         return (
           <label
             htmlFor={name}
             key={idx}
-            className="flex items-center justify-between space-x-8"
+            className="flex items-center justify-between space-x-10"
             onKeyPress={(e) => keyPressToggle(e, toggle, setToggle)}
             tabIndex={0}
           >
-            <span className="text-lg">{toggle ? on : off}</span>
+            <span className="text-lg dark:text-gray-300">
+              {toggle ? on : off}
+            </span>
             <input
               id={name}
               type="checkbox"
-              className="sr-only relative focus-visible:ring"
+              className="sr-only relative focus-visible:ring hidden"
               checked={toggle}
               onChange={() => setToggle(!toggle)}
               tabIndex={-1}
@@ -111,11 +127,24 @@ export default function Settings() {
           </label>
         );
       })}
+      <button
+        onClick={enterPracticeMode}
+        className="text-white bg-blue-700 hover:bg-blue-800
+        focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
+        px-4 py-2.5 text-center items-center
+        dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+        w-32 justify-center self-center mx-auto block"
+      >
+        <span className="font-medium">
+          <FormattedMessage id="Settings9" />
+        </span>
+      </button>
       {!toggleScope && (
         <p className="text-red-700">
           <FormattedMessage id="Settings8" />
         </p>
       )}
+      <Auxilliary screen="Settings" />
     </div>
   );
 }

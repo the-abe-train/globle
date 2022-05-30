@@ -37,7 +37,7 @@ export const Spanish: Messages = {
   Game2: "Ingresar",
   Game3: "Ingresa el nombre de cualquier pais para iniciar el juego.",
   Game4:
-    "Arrastra, haz {click}, y zoom-in en el globo para ubicar tu siguiente país.",
+    "Arrastra, haz click, y zoom-in en el globo para ubicar tu siguiente país.",
   Game5: "Intento inválido",
   Game6: "Pais ya adivinado",
   Game7: "¡El País Secreto es {answer}!",
@@ -64,6 +64,7 @@ export const Spanish: Messages = {
   Settings6: "Ciudades",
   Settings7: "Idioma",
   Settings8: "Próximamente Globle Edición de Ciudades",
+  Settings9: "Practicar",
 };
 
 // export default {

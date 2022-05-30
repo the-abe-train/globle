@@ -3,43 +3,27 @@ import { useContext, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { ThemeContext } from "../context/ThemeContext";
 import Fade from "../transitions/Fade";
-import Outline from "./Outline";
+import Outline from "../components/Outline";
 import { FormattedMessage } from "react-intl";
+import useInterval from "../hooks/useInterval";
+import Auxilliary from "../components/Auxilliary";
 
 export default function Help() {
   // Theme
   const { nightMode } = useContext(ThemeContext).theme;
 
-  const [showCountry1, setShowCountry1] = useState(false);
-  const [showCountry2, setShowCountry2] = useState(false);
-  const [showCountry3, setShowCountry3] = useState(false);
-  const [showCountry4, setShowCountry4] = useState(false);
   const countrySize = isMobile ? 125 : 150;
 
-  const timeGap = 1000;
-
+  const [outlines, setOutlines] = useState<string[]>([]);
+  const [count, setCount] = useState(1);
+  useInterval(() => setCount(count + 1), 1000);
   useEffect(() => {
-    const timer1 = setTimeout(() => setShowCountry1(true), timeGap * 1);
-    const timer2 = setTimeout(() => setShowCountry2(true), timeGap * 2);
-    const timer3 = setTimeout(() => setShowCountry3(true), timeGap * 3);
-    const timer4 = setTimeout(() => setShowCountry4(true), timeGap * 4);
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
-    };
-  }, []);
-
-  const countries = [
-    { name: "France", show: showCountry1 },
-    { name: "Nepal", show: showCountry2 },
-    { name: "Mongolia", show: showCountry3 },
-    { name: "South Korea", show: showCountry4 },
-  ];
+    const countryOutlines = ["France", "Nepal", "Mongolia", "South Korea"];
+    setOutlines(countryOutlines.slice(0, count));
+  }, [count]);
 
   return (
-    <div className="my-2 space-y-7">
+    <div className="my-2 space-y-7 dark:text-gray-300">
       <h2
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}
@@ -71,14 +55,10 @@ export default function Help() {
             minHeight: isMobile ? countrySize * 3 : countrySize,
           }}
         >
-          {countries.map((country, idx) => {
+          {outlines.map((country, idx) => {
             return (
-              <Fade show={country.show} background="bg-transparent" key={idx}>
-                <Outline
-                  key={idx}
-                  countryName={country.name}
-                  width={countrySize}
-                />
+              <Fade show={true} background="bg-transparent" key={idx}>
+                <Outline key={idx} countryName={country} width={countrySize} />
               </Fade>
             );
           })}
@@ -87,6 +67,7 @@ export default function Help() {
       <p>
         <FormattedMessage id="help3" />
       </p>
+      <Auxilliary screen="Help" />
     </div>
   );
 }
