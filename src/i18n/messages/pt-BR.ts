@@ -45,6 +45,7 @@ export const Portuguese: Messages = {
   Game6: "Você já chutou este país",
   Game7: "O país misterioso é {answer}!",
   Game8: "Fronteira mais próxima",
+  Game9: `Tentativa inválida. {country}?`, //TODO: translate
   StatsTitle: "Estatísticas",
   Stats1: "Última vitória",
   Stats2: "Palpites de hoje",

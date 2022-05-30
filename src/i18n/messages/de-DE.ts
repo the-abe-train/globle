@@ -45,6 +45,7 @@ export const German: Messages = {
   Game6: "Das Land wurde schon versucht",
   Game7: "Das geheime Land ist {answer}!",
   Game8: "Nächste Grenze",
+  Game9: `Ungültiger Versuch. {country}?`, //TODO: translate
   StatsTitle: "Statistiken",
   Stats1: "Letzter Sieg",
   Stats2: "Heutige Versuche",

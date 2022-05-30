@@ -8,6 +8,8 @@ import { LocaleContext } from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+import { levenshtein } from "edit-distance";
+
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -50,6 +52,55 @@ export default function Guesser({
     });
   }
 
+  function getCloseMatches(countryName: string, list: Country[], threshold: number): string[] {
+
+    const targets: string[] = alternateNames.map(pair => pair.alternative);
+
+    if (locale === "en-CA") {
+      list.forEach((country) => {
+        const { NAME, NAME_LONG, /*ABBREV,*/ ADMIN, BRK_NAME, NAME_SORT } =
+          country.properties;
+        targets.push(...[NAME, NAME_LONG,/* ABBREV,*/ ADMIN, BRK_NAME, NAME_SORT]);
+      });
+    } else {
+      list.forEach((country) => {
+        targets.push(country.properties[langName]);
+      });
+    }
+
+    const insertCost = (char: string) => 1;
+    const removeCost = (char: string) => 1;
+    const updateCost = (charA: string, charB: string) => {
+      //Accent error count as 0.5. Different letter count as 1.
+      return charA !== charB ? (removeAccent(charA) !== removeAccent(charB) ? 1 : 0.5) : 0;
+    };
+
+    const removeAccent = (char: string) => {
+      return char.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    };
+
+    const computeDistance = (hypothesis: string, reference: string) => {
+      var result = levenshtein(hypothesis.toLowerCase(), reference.toLowerCase(), insertCost, removeCost, updateCost);
+      return result.distance;
+    }
+
+    const matches: { target: string, distance: number }[] = [];
+    targets.forEach(target => {
+      const distance = computeDistance(countryName, target);
+      if (distance <= threshold) {
+        matches.push({ distance, target })
+      }
+    });
+
+    matches.sort((a, b) => a.distance - b.distance);
+    var closeMatches = matches.map(element => element.target);
+
+    //remove duplicates
+    return closeMatches.reduce((a: string[], b: string) => {
+      if (a.indexOf(b) < 0) a.push(b);
+      return a;
+    }, []);
+  }
   // Check territories function
   function runChecks() {
     const trimmedName = guessName
@@ -68,7 +119,13 @@ export default function Guesser({
     }
     const guessCountry = findCountry(userGuess, countryData);
     if (!guessCountry) {
-      setError(localeList[locale]["Game5"]);
+      const closeMatches = getCloseMatches(userGuess, countryData, 2);
+      if (closeMatches.length > 0) {
+        setError(localeList[locale]["Game9"].replaceAll(/\{country\}/g, closeMatches.join(", ")));
+      }
+      else {
+        setError(localeList[locale]["Game5"]);
+      }
       return;
     }
     if (practiceMode) {
