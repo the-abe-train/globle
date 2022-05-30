@@ -58,15 +58,20 @@ export default function List({ guesses, win, globeRef }: Props) {
   const closest = orderedGuesses[0];
   const farthest = orderedGuesses[orderedGuesses.length - 1];
 
+  const [isSortedByDistance, setIsSortedByDistance] = useState(true);
+  const guessesToDisplay = isSortedByDistance ? orderedGuesses : guesses;
+
   return (
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
+        {isSortedByDistance ? 
           <b><FormattedMessage id={qualifier} /></b>
+              : <b>Guessed</b>
         </p>
       )}
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
-        {orderedGuesses.map((guess, idx) => {
+        {guessesToDisplay.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
           const flag = (FLAG || "").toLocaleLowerCase();
           let name = NAME_LEN >= 10 ? ABBREV : NAME;
@@ -95,6 +100,15 @@ export default function List({ guesses, win, globeRef }: Props) {
         <div className="mt-8">
           <p>
             <FormattedMessage id="Game8" />: {formatKm(closest?.proximity)} km
+            {isSortedByDistance ? null : (` (${closest.properties.NAME})`)}
+          </p>
+          <p>
+            <button
+                onClick={() => setIsSortedByDistance(!isSortedByDistance)}
+                className="mt-2"
+            >
+              <span className="text-md underline">{isSortedByDistance ? "Sort by order of guesses" : "Sort by distance"}</span>
+            </button>
           </p>
         </div>
       )}
