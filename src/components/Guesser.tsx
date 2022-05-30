@@ -8,6 +8,7 @@ import { LocaleContext } from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+var emoji_pkg = require('node-emoji');
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -49,9 +50,34 @@ export default function Guesser({
       );
     });
   }
+  function findCountryISOA2(countryISAOA2: string, list: Country[]) {
+    return list.find((country) => {
+      const ISO_A2 = country.properties.ISO_A2;
+      return (
+        ISO_A2.toLowerCase() === countryISAOA2
+      );
+    })?.properties.NAME.toLowerCase();
+  }
+  function checkEmoji(guessString: string) {
+    
+    const emojis = guessString.match(/\p{Emoji}+/gu);
+    let emoji: string;
+    let flagEmojiName;
+    let isoA2Code;
+    if (emojis) {
+      emoji = emojis[0];
+      flagEmojiName = emoji_pkg.which(emoji);
+      if (flagEmojiName) {
+        isoA2Code = flagEmojiName.split('-')[1];
+        return findCountryISOA2(isoA2Code, countryData);
+      }
+    }
+    return isoA2Code;
+  }
 
   // Check territories function
   function runChecks() {
+    let emojiGuess = checkEmoji(guessName);
     const trimmedName = guessName
       .trim()
       .toLowerCase()
@@ -60,7 +86,8 @@ export default function Guesser({
     const oldNamePair = alternateNames.find((pair) => {
       return pair.alternative === trimmedName;
     });
-    const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    const oldNameTrimmedGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    const userGuess = emojiGuess ? emojiGuess : oldNameTrimmedGuess;
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
