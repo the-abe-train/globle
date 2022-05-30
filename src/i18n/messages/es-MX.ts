@@ -65,6 +65,11 @@ export const Spanish: Messages = {
   Settings7: "Idioma",
   Settings8: "Próximamente Globle Edición de Ciudades",
   Settings9: "Practicar",
+  Answer: "Respuesta",
+  Closest: "Los países más cercanos",
+  PracticeMode: "You are in practice mode.", //TODO: Translate
+  PracticeExit: "Exit practice mode", //TODO: Translate
+  PracticeNew: "New practice game" //TODO: Translate
 };
 
 // export default {

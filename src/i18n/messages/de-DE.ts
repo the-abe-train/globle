@@ -68,4 +68,9 @@ export const German: Messages = {
   Settings7: "Sprache",
   Settings8: "Globle: Städte Edition kommt bald!",
   Settings9: "Üben",
+  Answer: "Answer", //TODO: Translate
+  Closest: "Closest", //TODO: Translate
+  PracticeMode: "You are in practice mode.", //TODO: Translate
+  PracticeExit: "Exit practice mode", //TODO: Translate
+  PracticeNew: "New practice game" //TODO: Translate
 };

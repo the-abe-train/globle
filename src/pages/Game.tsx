@@ -8,6 +8,7 @@ import { dateDiffInDays, today } from "../util/dates";
 import { polygonDistance } from "../util/distance";
 import { getColourEmoji } from "../util/colour";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const Globe = lazy(() => import("../components/Globe"));
 const Guesser = lazy(() => import("../components/Guesser"));
@@ -56,7 +57,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
 
   // Stored guesses to state, as countries
   // If it's a new day though, start with a blank slate
-  // TODO I don't like that this runs with every guess. Should fix.
+  // TODO I don't like that this runs with every guess. Should fix. Update: useMemo!
   let storedCountryNames: string[] = [];
   let storedCountries: Country[] = [];
   if (today <= storedGuesses.day && !practiceMode) {
@@ -136,7 +137,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
   // Practice mode
 
   // Fallback while loading
-  const renderLoader = () => <p className="dark:text-gray-300">Loading</p>;
+  const renderLoader = () => <p className="dark:text-gray-300"><FormattedMessage id="Loading" /></p>;
 
   return (
     <Suspense fallback={renderLoader()}>
@@ -157,7 +158,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
           <List guesses={guesses} win={win} globeRef={globeRef} />
           {practiceMode && (
             <div className="my-4 flex space-x-4 items-center just">
-              <span>You are in practice mode. </span>
+              <span><FormattedMessage id="PracticeMode" /></span>
               <button
                 className="text-white bg-blue-700 hover:bg-blue-800
         focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
@@ -166,7 +167,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
                 onClick={() => navigate("/")}
               >
                 {" "}
-                Exit practice mode
+                <FormattedMessage id="PracticeExit" />
               </button>
               <button
                 className="text-white bg-blue-700 hover:bg-blue-800
@@ -175,7 +176,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
         dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={enterPracticeMode}
               >
-                New practice game
+                <FormattedMessage id="PracticeNew" />
               </button>
             </div>
           )}
