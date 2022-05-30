@@ -1,5 +1,30 @@
 # Change log
 
+## v1.5.0 - Apr 25, 2022
+- Added Practice mode so players can play unlimited times per day to hone their geography skills without affecting their score
+- Added translations for French, German, and Portuguese (thank you international translators!)
+- Guessing or clicking on small countries now zooms in
+- Removed the check boxes visible in the Settings page on Safari
+- Added routing for the different pages (React Router v6)
+- Added "along the Earth's surface" to FAQ about distance calculation
+- Adjusted borders for Andaman and Nicobar Islands
+- Improved translation methodology to make the code more flexible for future translators (Issue #68)
+
+## v1.4.0 - Mar 21, 2022
+- Translated game into Spanish
+- Fixed bug that caused the globe not to display on older browsers
+- Added "Closest border" helper to Game screen
+- Changed share message to remove URL and include emojis and hashtag
+- Created new territories for Kaliningrad, Canary Islands, Western Sahara, Martinique, and New Caledonia
+- Adjusted Cyprus borders to include Northern Cyprus
+- Added fade animation to countries on Help screen
+- Added explicit line about "Closer countries are hotter" to the Help page
+- Changed "Invalid country name" to "Invalid guess"
+- Removed yes/no buttons from "Stats erased" popup
+- Fixed spelling of "possible" in the meta tag
+- Changed coffee emoji to svg
+- Replaced react-transition-group with custom HOC
+
 ## v1.3.0 - Feb 25, 2022
 - Added zoom buttons for mobile
 - Add today's guesses to statistics popup

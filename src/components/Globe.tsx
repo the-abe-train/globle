@@ -1,29 +1,25 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
-import { findCentre } from "../util/centre";
 import { answerCountry } from "../util/answer";
-import { turnGlobe } from "../util/globe";
+import { findCentre, globeImg, turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
-// import useCheckMobile from "../hooks/useCheckMobile";
 import { isMobile } from "react-device-detect";
 const territoryData: Country[] = require("../data/territories.json").features;
 
 type Props = {
   guesses: Country[];
   globeRef: React.MutableRefObject<GlobeMethods>;
+  practiceMode: boolean;
 };
 
-export default function Globe({ guesses, globeRef }: Props) {
+export default function Globe({ guesses, globeRef, practiceMode }: Props) {
   // State
   const [places, setPlaces] = useState(guesses);
 
   // Theme
   const { nightMode, highContrast } = useContext(ThemeContext).theme;
-
-  // Check device
-  // const isMobile = useCheckMobile();
 
   // Globe size settings
   const size = isMobile ? 320 : 600; // px on one side
@@ -31,6 +27,16 @@ export default function Globe({ guesses, globeRef }: Props) {
     width: `${size}px`,
     clipPath: `circle(${size / 2}px at ${size / 2}px ${size / 2}px)`,
   };
+
+  // On first render
+  useEffect(() => {
+    const controls: any = globeRef.current.controls();
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1;
+    setTimeout(() => {
+      globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
+    }, 400);
+  }, [globeRef]);
 
   // After each guess
   useEffect(() => {
@@ -45,24 +51,14 @@ export default function Globe({ guesses, globeRef }: Props) {
     setPlaces(guesses.concat(territories));
 
     // Turn globe to new spot
-    const controls: any = globeRef.current.controls();
-    controls.autoRotate = false;
     const newGuess = [...guesses].pop();
     if (newGuess) {
+      const controls: any = globeRef.current.controls();
+      controls.autoRotate = false;
       const newSpot = findCentre(newGuess);
-      turnGlobe(newSpot, globeRef);
+      turnGlobe(newSpot, globeRef, "zoom");
     }
   }, [guesses, globeRef]);
-
-  // On first render
-  useEffect(() => {
-    const controls: any = globeRef.current.controls();
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 1;
-    setTimeout(() => {
-      globeRef.current.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
-    }, 400);
-  }, [globeRef]);
 
   // Stop rotate on drag
   const containerRef = useRef<HTMLDivElement>(null!);
@@ -75,6 +71,17 @@ export default function Globe({ guesses, globeRef }: Props) {
       controls.autoRotate = false;
     });
   }, [globeRef]);
+
+  // Polygon colour
+  function polygonColour(country: Country) {
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      );
+      return getColour(country, answerCountry, nightMode, highContrast);
+    }
+    return getColour(country, answerCountry, nightMode, highContrast);
+  }
 
   // Label colour
   function getLabel(country: Country) {
@@ -96,6 +103,7 @@ export default function Globe({ guesses, globeRef }: Props) {
     return alt;
   }
 
+  // Clicking the zoom buttons on mobile
   function zoom(z: number) {
     const controls: any = globeRef.current.controls();
     controls.autoRotate = false;
@@ -120,15 +128,13 @@ export default function Globe({ guesses, globeRef }: Props) {
           className="select-none decoration-transparent cursor-grab "
           style={{ "-webkit-tap-highlight-color": "transparent" }}
           ref={globeRef}
-          globeImageUrl={`images/earth-${nightMode ? "night" : "day"}.webp`}
+          globeImageUrl={globeImg(nightMode)}
           width={size}
           height={size}
           backgroundColor="#00000000"
           polygonsData={places}
-          polygonCapColor={(c) =>
-            // @ts-ignore
-            getColour(c, answerCountry, nightMode, highContrast)
-          }
+          // @ts-ignore
+          polygonCapColor={polygonColour}
           // @ts-ignore
           polygonLabel={getLabel}
           // @ts-ignore

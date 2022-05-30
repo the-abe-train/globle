@@ -1,9 +1,13 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
 import alternateNames from "../data/alternate_names.json";
+import { LocaleContext } from "../i18n/LocaleContext";
+import localeList from "../i18n/messages";
+import { FormattedMessage } from "react-intl";
+import { langNameMap } from "../i18n/locales";
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -11,16 +15,27 @@ type Props = {
   setGuesses: React.Dispatch<React.SetStateAction<Country[]>>;
   win: boolean;
   setWin: React.Dispatch<React.SetStateAction<boolean>>;
+  practiceMode: boolean;
 };
 
-export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
+export default function Guesser({
+  guesses,
+  setGuesses,
+  win,
+  setWin,
+  practiceMode,
+}: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
+  const { locale } = useContext(LocaleContext);
+
+  const langName = langNameMap[locale];
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
       const { NAME, NAME_LONG, ABBREV, ADMIN, BRK_NAME, NAME_SORT } =
         country.properties;
+
       return (
         NAME.toLowerCase() === countryName ||
         NAME_LONG.toLowerCase() === countryName ||
@@ -29,7 +44,8 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         ABBREV.replace(/\./g, "").toLowerCase() === countryName ||
         NAME.replace(/-/g, " ").toLowerCase() === countryName ||
         BRK_NAME.toLowerCase() === countryName ||
-        NAME_SORT.toLowerCase() === countryName
+        NAME_SORT.toLowerCase() === countryName ||
+        country.properties[langName].toLowerCase() === countryName
       );
     });
   }
@@ -42,20 +58,28 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
       .replace(/&/g, "and")
       .replace(/^st\s/g, "st. ");
     const oldNamePair = alternateNames.find((pair) => {
-      return pair.old === trimmedName;
+      return pair.alternative === trimmedName;
     });
     const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
-    const guessCountry = findCountry(userGuess, countryData);
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
-      setError("Country already guessed");
+      setError(localeList[locale]["Game6"]);
       return;
     }
+    const guessCountry = findCountry(userGuess, countryData);
     if (!guessCountry) {
-      setError("Invalid country name");
+      setError(localeList[locale]["Game5"]);
       return;
     }
-    if (guessCountry.properties.NAME === answerName) {
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      ) as Country;
+      const answerName = answerCountry.properties.NAME;
+      if (guessCountry.properties.NAME === answerName) {
+        setWin(true);
+      }
+    } else if (guessCountry.properties.NAME === answerName) {
       setWin(true);
     }
     return guessCountry;
@@ -65,6 +89,20 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     e.preventDefault();
     setError("");
     let guessCountry = runChecks();
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      );
+      if (guessCountry && answerCountry) {
+        guessCountry["proximity"] = polygonDistance(
+          guessCountry,
+          answerCountry
+        );
+        setGuesses([...guesses, guessCountry]);
+        setGuessName("");
+        return;
+      }
+    }
     if (guessCountry && answerCountry) {
       guessCountry["proximity"] = polygonDistance(guessCountry, answerCountry);
       setGuesses([...guesses, guessCountry]);
@@ -90,7 +128,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
           value={guessName}
           onChange={(e) => setGuessName(e.currentTarget.value)}
           disabled={win}
-          placeholder={guesses.length === 0 ? "Enter country name here" : ""}
+          placeholder={guesses.length === 0 ? localeList[locale]["Game1"] : ""}
           autoComplete="new-password"
         />
         <button
@@ -99,10 +137,15 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
           type="submit"
           disabled={win}
         >
-          Enter
+          <FormattedMessage id="Game2" />
         </button>
       </form>
-      <Message win={win} error={error} guesses={guesses.length} />
+      <Message
+        win={win}
+        error={error}
+        guesses={guesses.length}
+        practiceMode={practiceMode}
+      />
     </div>
   );
 }

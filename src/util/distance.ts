@@ -50,6 +50,14 @@ function calcProximity(points1: number[][], points2: number[][]) {
 export function polygonDistance(country1: Country, country2: Country) {
   // console.log("Country 1:", country1.properties.NAME);
   // console.log("Country 2", country2.properties.NAME);
+  const name1 = country1.properties.NAME;
+  const name2 = country2.properties.NAME;
+  if (name1 === "South Africa" && name2 === "Lesotho") return 0;
+  if (name1 === "Lesotho" && name2 === "South Africa") return 0;
+  if (name1 === "Italy" && name2 === "Vatican") return 0;
+  if (name1 === "Vatican" && name2 === "Italy") return 0;
+  if (name1 === "Italy" && name2 === "San Marino") return 0;
+  if (name1 === "San Marino" && name2 === "Italy") return 0;
   const points1 = polygonPoints(country1);
   const points2 = polygonPoints(country2);
   return calcProximity(points1, points2);

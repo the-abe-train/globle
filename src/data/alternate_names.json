@@ -1,42 +1,42 @@
 [
   {
     "real": "eswatini",
-    "old": "swaziland"
+    "alternative": "swaziland"
   },
   {
     "real": "myanmar",
-    "old": "burma"
+    "alternative": "burma"
   },
   {
     "real": "north macedonia",
-    "old": "macedonia"
+    "alternative": "macedonia"
   },
   {
     "real": "congo",
-    "old": "congo-brazzaville"
+    "alternative": "congo-brazzaville"
   },
   {
     "real": "vatican",
-    "old": "holy see"
+    "alternative": "holy see"
   },
   {
     "real": "vatican",
-    "old": "vatican city"
+    "alternative": "vatican city"
   },
   {
     "real": "cabo verde",
-    "old": "cape verde"
+    "alternative": "cape verde"
   },
   {
     "real": "democratic republic of the congo",
-    "old": "democratic republic of congo"
+    "alternative": "democratic republic of congo"
   },
   {
     "real": "democratic republic of the congo",
-    "old": "dr congo"
+    "alternative": "dr congo"
   },
   {
     "real": "bosnia and herzegovina",
-    "old": "bosnia"
+    "alternative": "bosnia"
   }
 ]
