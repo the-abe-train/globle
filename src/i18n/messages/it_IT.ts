@@ -39,7 +39,8 @@ export const Italian: Messages = {
   GameTitle: "Gioco",
   Game1: "Inserisci qui il nome di un paese",
   Game2: "Inserire",
-  Game3: "Inserisci il nome di qualsiasi paese per fare il tuo primo tentativo.",
+  Game3:
+    "Inserisci il nome di qualsiasi paese per fare il tuo primo tentativo.",
   Game4: `Scorri, <span>["click", "tap"]</span> e ingrandisci il globo per trovare il tuo prossimo tentativo..`,
   Game5: "Tentativo non valido",
   Game6: "Paese già provato",
@@ -68,4 +69,11 @@ export const Italian: Messages = {
   Settings7: "Lingua",
   Settings8: "Globle: Edizione Città in arrivo!",
   Settings9: "Pratica",
+  Settings10: "Arcobaleno attivato",
+  Settings11: "Arcobaleno disattivato",
+  Answer: "Risposta",
+  Closest: "Paesi più vicini",
+  PracticeMode: "Sei in modalità allenamento.",
+  PracticeExit: "Esci dalla modalità allenamento",
+  PracticeNew: "Nuovo gioco di pratica",
 };

@@ -63,5 +63,12 @@ export const Polish: Messages = {
   Settings6: "Miasta",
   Settings7: "Język",
   Settings8: "Globle: Miasta już wkrótce!",
-  // Settings9: "Trenuj",
+  Settings9: "Trenuj",
+  Settings10: "Tęcza aktywowana",
+  Settings11: "Tęcza dezaktywowana",
+  Answer: "Odpowiadać",
+  Closest: "Najbliższy",
+  PracticeMode: "Jesteś w trybie ćwiczeń.",
+  PracticeExit: "Wyjdź z trybu ćwiczeń",
+  PracticeNew: "Nowa gra treningowa",
 };

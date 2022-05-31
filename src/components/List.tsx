@@ -2,10 +2,11 @@ import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
 import { Country, LanguageName } from "../lib/country";
 import { answerName } from "../util/answer";
-import { findCentre, turnGlobe, altitudeFunction } from "../util/globe";
+import { findCentre, turnGlobe } from "../util/globe";
 import { LocaleContext } from "../i18n/LocaleContext";
 import { Locale } from "../lib/locale";
 import { FormattedMessage } from "react-intl";
+import Toggle from "./Toggle";
 
 type Props = {
   guesses: Country[];
@@ -27,6 +28,7 @@ function reorderGuesses(guessList: Country[]) {
 
 export default function List({ guesses, win, globeRef }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
+  const [miles, setMiles] = useState(false);
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
     "pt-BR": "NAME_PT",
@@ -35,6 +37,7 @@ export default function List({ guesses, win, globeRef }: Props) {
     "fr-FR": "NAME_FR",
     "de-DE": "NAME_DE",
     "pl-PL": "NAME_PL",
+    "it-IT": "NAME_IT",
   };
   const langName = langNameMap[locale];
 
@@ -42,9 +45,18 @@ export default function List({ guesses, win, globeRef }: Props) {
     setOrderedGuesses(reorderGuesses(guesses));
   }, [guesses]);
 
-  function formatKm(m: number) {
-    const km = m / 1000;
-    return km.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  function formatKm(m: number, miles: boolean) {
+    const METERS_PER_MILE = 1609.34;
+    const BIN = 50;
+    const value = miles ? m / METERS_PER_MILE : m / 1000;
+    if (value < 5) return "< 5";
+
+    const min = Math.floor(value / BIN) * BIN;
+    const max = min + BIN;
+    const format = (num: number) =>
+      num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return `${format(min)} - ${format(max)}`;
   }
 
   const qualifier = win ? "Answer" : "Closest";
@@ -65,9 +77,13 @@ export default function List({ guesses, win, globeRef }: Props) {
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
-        {isSortedByDistance ? 
-          <b><FormattedMessage id={qualifier} /></b>
-              : <b>Guessed</b>
+          {isSortedByDistance ? (
+            <b>
+              <FormattedMessage id={qualifier} />
+            </b>
+          ) : (
+            <b>Guessed</b>
+          )}
         </p>
       )}
       <ul className="grid grid-cols-3 md:grid-cols-4 gap-3">
@@ -90,7 +106,7 @@ export default function List({ guesses, win, globeRef }: Props) {
                   alt={name}
                   className=""
                 />
-                <span className="ml-2 text-md">{name}</span>
+                <span className="ml-2 text-md text-left">{name}</span>
               </button>
             </li>
           );
@@ -98,16 +114,30 @@ export default function List({ guesses, win, globeRef }: Props) {
       </ul>
       {closest && farthest && (
         <div className="mt-8">
-          <p>
-            <FormattedMessage id="Game8" />: {formatKm(closest?.proximity)} km
-            {isSortedByDistance ? null : (` (${closest.properties.NAME})`)}
-          </p>
+          <div className="flex items-center space-x-1">
+            <p>
+              <FormattedMessage id="Game8" />
+              {isSortedByDistance ? ": " : ` (${closest.properties.NAME}): `}
+              {formatKm(closest?.proximity, miles)}
+            </p>
+            <Toggle
+              name="miles"
+              setToggle={setMiles}
+              toggle={miles}
+              on="km"
+              off="miles"
+            />
+          </div>
           <p>
             <button
-                onClick={() => setIsSortedByDistance(!isSortedByDistance)}
-                className="mt-2"
+              onClick={() => setIsSortedByDistance(!isSortedByDistance)}
+              className="mt-2"
             >
-              <span className="text-md underline">{isSortedByDistance ? "Sort by order of guesses" : "Sort by distance"}</span>
+              <span className="text-md underline">
+                {isSortedByDistance
+                  ? "Sort by order of guesses"
+                  : "Sort by distance"}
+              </span>
             </button>
           </p>
         </div>

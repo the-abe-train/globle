@@ -9,12 +9,12 @@ import { Polish } from "./pl-PL";
 
 const localeList: LocaleMessages = {
   "en-CA": English,
+  "de-DE": German,
   "es-MX": Spanish,
   "fr-FR": French,
-  "de-DE": German,
-  "pt-BR": Portuguese,
   "it-IT": Italian,
   "pl-PL": Polish,
+  "pt-BR": Portuguese,
 };
 
 export default localeList;

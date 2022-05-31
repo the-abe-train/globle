@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
@@ -55,26 +55,29 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
     setWin(false);
   }
 
-  // Stored guesses to state, as countries
-  // If it's a new day though, start with a blank slate
-  // TODO I don't like that this runs with every guess. Should fix. Update: useMemo!
-  let storedCountryNames: string[] = [];
-  let storedCountries: Country[] = [];
-  if (today <= storedGuesses.day && !practiceMode) {
-    storedCountryNames = storedGuesses.countries;
-    storedCountries = storedCountryNames.map((guess) => {
-      const foundCountry = countryData.find((country) => {
-        return country.properties.NAME === guess;
+  const storedCountries = useMemo(() => {
+    if (today <= storedGuesses.day && !practiceMode) {
+      const names = storedGuesses.countries;
+      return names.map((guess) => {
+        const foundCountry = countryData.find((country) => {
+          return country.properties.NAME === guess;
+        });
+        if (!foundCountry) throw new Error("Country mapping broken");
+        foundCountry["proximity"] = polygonDistance(
+          foundCountry,
+          answerCountry
+        );
+        return foundCountry;
       });
-      if (!foundCountry) throw new Error("Country mapping broken");
-      foundCountry["proximity"] = polygonDistance(foundCountry, answerCountry);
-      return foundCountry;
-    });
-  }
+    }
+    return [];
+    // eslint-disable-next-line
+  }, [practiceMode]);
+
   // Check if win condition already met
   const alreadyWon = practiceMode
     ? false
-    : storedCountryNames.includes(answerName);
+    : storedCountries?.map((c) => c.properties.NAME).includes(answerName);
 
   // Now we're ready to start the game! Set up the game states with the data we
   // already know from the stored info.
@@ -93,7 +96,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
         countries: guessNames,
       });
     }
-  }, [guesses, storeGuesses]);
+  }, [guesses, storeGuesses, practiceMode]);
 
   // When the player wins!
   useEffect(() => {
@@ -132,12 +135,16 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
       // Show stats
       setTimeout(() => setShowStats(true), 3000);
     }
-  }, [win, guesses, setShowStats, storeStats, storedStats]);
+  }, [win, guesses, setShowStats, storeStats, storedStats, practiceMode]);
 
   // Practice mode
 
   // Fallback while loading
-  const renderLoader = () => <p className="dark:text-gray-300"><FormattedMessage id="Loading" /></p>;
+  const renderLoader = () => (
+    <p className="dark:text-gray-300">
+      <FormattedMessage id="Loading" />
+    </p>
+  );
 
   return (
     <Suspense fallback={renderLoader()}>
@@ -158,7 +165,9 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
           <List guesses={guesses} win={win} globeRef={globeRef} />
           {practiceMode && (
             <div className="my-4 flex space-x-4 items-center just">
-              <span><FormattedMessage id="PracticeMode" /></span>
+              <span>
+                <FormattedMessage id="PracticeMode" />
+              </span>
               <button
                 className="text-white bg-blue-700 hover:bg-blue-800
         focus:ring-4 focus:ring-blue-300 rounded-lg text-sm

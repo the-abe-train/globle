@@ -1,16 +1,11 @@
 import { LanguageName } from "../lib/country";
-import { Locale, LocaleMessages } from "../lib/locale";
+import { Locale } from "../lib/locale";
 import { English } from "./messages/en-CA";
 import { Spanish } from "./messages/es-MX";
 import { French } from "./messages/fr-FR";
 import { German } from "./messages/de-DE";
 import { Portuguese } from "./messages/pt-BR";
-import { Polish } from './messages/pl-PL';
-
-// export const LOCALES: LocaleList = {
-//   English: "English",
-//   Spanish: "Spanish",
-// };
+import { Polish } from "./messages/pl-PL";
 
 export const LOCALES = {
   English: English,
@@ -28,4 +23,5 @@ export const langNameMap: Record<Locale, LanguageName> = {
   "de-DE": "NAME_DE",
   "pt-BR": "NAME_PT",
   "pl-PL": "NAME_PL",
+  "it-IT": "NAME_IT",
 };

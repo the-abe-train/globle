@@ -71,6 +71,8 @@ export type Messages = {
   Settings7: string;
   Settings8: string;
   Settings9: string;
+  Settings10: string;
+  Settings11: string;
   Answer: string;
   Closest: string;
   PracticeMode: string;

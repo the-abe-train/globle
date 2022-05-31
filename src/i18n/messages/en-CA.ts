@@ -68,9 +68,11 @@ export const English: Messages = {
   Settings7: "Language",
   Settings8: "Globle: Cities Edition coming soon!",
   Settings9: "Practice",
+  Settings10: "Rainbow On",
+  Settings11: "Rainbow Off",
   Answer: "Answer",
   Closest: "Closest",
   PracticeMode: "You are in practice mode.",
   PracticeExit: "Exit practice mode",
-  PracticeNew: "New practice game"
+  PracticeNew: "New practice game",
 };

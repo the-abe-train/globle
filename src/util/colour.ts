@@ -3,6 +3,7 @@ import {
   interpolateBuPu,
   interpolateOrRd,
   interpolateGreys,
+  interpolateTurbo,
 } from "d3-scale-chromatic";
 import { Country } from "../lib/country";
 import { polygonDistance } from "./distance";
@@ -19,7 +20,8 @@ export const getColour = (
   guess: Country,
   answer: Country,
   nightMode: boolean,
-  highContrast: boolean
+  highContrast: boolean,
+  prideMode: boolean
 ) => {
   if (guess.properties?.TYPE === "Territory") {
     if (highContrast) return "white";
@@ -31,6 +33,8 @@ export const getColour = (
   }
   const gradient = highContrast
     ? interpolateGreys
+    : prideMode
+    ? interpolateTurbo
     : nightMode
     ? interpolateBuPu
     : interpolateOrRd;

@@ -69,9 +69,11 @@ export const French: Messages = {
   Settings7: "Langue",
   Settings8: "Globle: Édition Ville arrive bientôt!",
   Settings9: "S'entraîner",
+  Settings10: "Arc-en-ciel activé",
+  Settings11: "Arc-en-ciel désactivé",
   Answer: "Réponse",
   Closest: "Pays les plus proches",
-  PracticeMode: "Vous être dans le mode entraînement.",
+  PracticeMode: "Vous êtes dans le mode entraînement.",
   PracticeExit: "Quitter le mode entraînement",
-  PracticeNew: "Nouvelle partie d'entraînement"
+  PracticeNew: "Nouvelle partie d'entraînement",
 };

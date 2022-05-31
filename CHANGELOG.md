@@ -1,5 +1,17 @@
 # Change log
 
+## v1.6.0 - May 31, 2022
+- Added translations for Italian and Polish (thank you international translators!)
+- Increased zoom-in speed
+- Added rainbow theme for pride 🏳️‍🌈
+- You can now toggle the list of guessed countries between "sort by order of guesses" and "sort by distance"
+- Added switch for miles to km in closest border preview
+- Rounded closest border preview to nearest 50km/miles due to imprecise lines in the game's borders
+- Added (shameful self-promotion) link to new game in the stats menu
+- Added error message for share message fallback
+- Added alternate names for some French, Spanish, and Portuguese countries
+- Added tags for Twitter and open graph previews
+
 ## v1.5.0 - Apr 25, 2022
 - Added Practice mode so players can play unlimited times per day to hone their geography skills without affecting their score
 - Added translations for French, German, and Portuguese (thank you international translators!)

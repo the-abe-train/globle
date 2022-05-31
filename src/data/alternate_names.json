@@ -1,66 +1,46 @@
 {
   "en-CA": [
-    {
-      "real": "eswatini",
-      "alternative": "swaziland"
-    },
-    {
-      "real": "myanmar",
-      "alternative": "burma"
-    },
-    {
-      "real": "north macedonia",
-      "alternative": "macedonia"
-    },
-    {
-      "real": "congo",
-      "alternative": "congo-brazzaville"
-    },
-    {
-      "real": "vatican",
-      "alternative": "holy see"
-    },
-    {
-      "real": "vatican",
-      "alternative": "vatican city"
-    },
-    {
-      "real": "cabo verde",
-      "alternative": "cape verde"
-    },
+    { "real": "eswatini", "alternative": "swaziland" },
+    { "real": "myanmar", "alternative": "burma" },
+    { "real": "north macedonia", "alternative": "macedonia" },
+    { "real": "congo", "alternative": "congo-brazzaville" },
+    { "real": "vatican", "alternative": "holy see" },
+    { "real": "vatican", "alternative": "vatican city" },
+    { "real": "cabo verde", "alternative": "cape verde" },
     {
       "real": "democratic republic of the congo",
       "alternative": "democratic republic of congo"
     },
-    {
-      "real": "democratic republic of the congo",
-      "alternative": "dr congo"
-    }
+    { "real": "democratic republic of the congo", "alternative": "dr congo" }
   ],
   "fr-FR": [
-    {
-      "real": "eswatini",
-      "alternative": "swaziland"
-    },
-    {
-      "real": "myanmar",
-      "alternative": "byrmanie"
-    },
-    {
-      "real": "united arab emirates",
-      "alternative": "eau"
-    },
-    {
-      "real": "united arab emirates",
-      "alternative": "émirats"
-    },
-    {
-      "real": "czechia",
-      "alternative": "république tchèque"
-    }
+    { "real": "eswatini", "alternative": "swaziland" },
+    { "real": "myanmar", "alternative": "byrmanie" },
+    { "real": "united arab emirates", "alternative": "eau" },
+    { "real": "united arab emirates", "alternative": "émirats" },
+    { "real": "czechia", "alternative": "république tchèque" }
   ],
-  "es-MX": [],
+  "es-MX": [{ "real": "netherlands", "alternative": "holanda" }],
   "de-DE": [],
-  "pt-BR": []
+  "pt-BR": [
+    { "real": "czechia", "alternative": "república tcheca" },
+    { "real": "czechia", "alternative": "tchéquia" },
+    { "real": "democratic republic of the congo", "alternative": "rd congo" },
+    { "real": "democratic republic of the congo", "alternative": "rdc" },
+    { "real": "eswatini", "alternative": "suazilândia" },
+    { "real": "djibouti", "alternative": "djibuti" },
+    { "real": "malawi", "alternative": "malaui" },
+    { "real": "mauritius", "alternative": "maurício" },
+    { "real": "papua new guinea", "alternative": "papua nova guiné" },
+    { "real": "turkmenistan", "alternative": "turcomenistão" },
+    { "real": "vietnam", "alternative": "vietnã" },
+    { "real": "bahrain", "alternative": "barein" },
+    { "real": "bahrain", "alternative": "bareine" },
+    { "real": "bahrain", "alternative": "barém" },
+    { "real": "united arab emirates", "alternative": "emirados árabes" },
+    { "real": "ireland", "alternative": "irlanda" },
+    { "real": "seychelles", "alternative": "seicheles" }
+  ],
+  "it-IT": [],
+  "pl-PL": []
 }
-

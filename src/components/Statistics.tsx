@@ -113,26 +113,32 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
 
 #globle`;
 
-    if ("canShare" in navigator && isMobile && !isFirefox) {
-      return await navigator.share({
-        title: "Globle Stats",
-        text: shareString,
-      });
-    } else {
-      // setQuestion(false);
-      setMsg(localeList[locale]["Stats12"]);
-      setShowCopyMsg(true);
-      setTimeout(() => setShowCopyMsg(false), 2000);
-      if ("clipboard" in navigator) {
-        return await navigator.clipboard.writeText(shareString);
+    try {
+      if ("canShare" in navigator && isMobile && !isFirefox) {
+        await navigator.share({ title: "Plurality Stats", text: shareString });
+        setMsg("Shared!");
+        setShowCopyMsg(true);
+        return setTimeout(() => setShowCopyMsg(false), 2000);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareString);
+        setMsg("Copied!");
+        setShowCopyMsg(true);
+        return setTimeout(() => setShowCopyMsg(false), 2000);
       } else {
-        return document.execCommand("copy", true, shareString);
+        document.execCommand("copy", true, shareString);
+        setMsg("Copied!");
+        setShowCopyMsg(true);
+        return setTimeout(() => setShowCopyMsg(false), 2000);
       }
+    } catch (e) {
+      setMsg("This browser cannot share");
+      setShowCopyMsg(true);
+      return setTimeout(() => setShowCopyMsg(false), 2000);
     }
   }
 
   return (
-    <div ref={modalRef}>
+    <div ref={modalRef} className="max-w-sm">
       <button
         className="absolute top-3 right-4"
         onClick={() => setShowStats(false)}
@@ -198,11 +204,41 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
           <FormattedMessage id="Stats9" />
         </button>
       </div>
+      <div className="space-y-2 flex flex-col items-center">
+        <h3
+          className="text-xl text-center font-extrabold dark:text-gray-300 mb-2"
+          style={{ fontFamily: "'Montserrat'" }}
+        >
+          New game from creator of Globle!
+        </h3>
+        <button
+          className="rounded-md px-4 py-2 text-xl font-bold mx-auto my-2
+          border text-[#2b1628] border-[#2b1628] bg-[#FFEAE0] "
+          style={{ fontFamily: "Amaranth" }}
+          onClick={copyToClipboard}
+        >
+          {/* eslint-disable-next-line */}
+          <a
+            href="https://plurality.fun"
+            className="flex items-center space-x-1 mx-auto"
+            rel="strict-origin noopener"
+            target="_blank"
+          >
+            <img
+              src="images/plurality.png"
+              alt="Plurality logo"
+              width={25}
+              height={25}
+            />
+            <span>Plurality</span>
+          </a>
+        </button>
+      </div>
       <Fade
         show={showResetMsg}
         background="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
         dark:bg-slate-900 drop-shadow-xl 
-        absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+        absolute z-10 top-24 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
         <p className="text-gray-900 dark:text-gray-300">{msg}</p>
         <div className="py-4 flex justify-center sm:space-x-8">
@@ -228,7 +264,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         show={showCopyMsg}
         background="border-4 border-sky-300 dark:border-slate-700 
         bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
-      absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+      absolute z-10 top-24 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
         <p className="text-gray-900 dark:text-gray-300">{msg}</p>
       </Fade>

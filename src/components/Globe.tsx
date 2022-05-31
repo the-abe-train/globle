@@ -21,7 +21,7 @@ export default function Globe({ guesses, globeRef, practiceMode }: Props) {
   const [places, setPlaces] = useState(guesses);
 
   // Theme
-  const { nightMode, highContrast } = useContext(ThemeContext).theme;
+  const { nightMode, prideMode, highContrast } = useContext(ThemeContext).theme;
 
   // Globe size settings
   const size = isMobile ? 320 : 600; // px on one side
@@ -80,9 +80,21 @@ export default function Globe({ guesses, globeRef, practiceMode }: Props) {
       const answerCountry = JSON.parse(
         localStorage.getItem("practice") as string
       );
-      return getColour(country, answerCountry, nightMode, highContrast);
+      return getColour(
+        country,
+        answerCountry,
+        nightMode,
+        highContrast,
+        prideMode
+      );
     }
-    return getColour(country, answerCountry, nightMode, highContrast);
+    return getColour(
+      country,
+      answerCountry,
+      nightMode,
+      highContrast,
+      prideMode
+    );
   }
 
   // Label colour

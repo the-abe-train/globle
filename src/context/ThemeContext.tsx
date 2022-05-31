@@ -11,6 +11,7 @@ type ProviderProps = {
 type Theme = {
   nightMode: boolean;
   highContrast: boolean;
+  prideMode: boolean;
 };
 
 type ThemeContextType = {
@@ -18,7 +19,11 @@ type ThemeContextType = {
   setTheme: React.Dispatch<React.SetStateAction<Theme>> | null;
 };
 
-const initialTheme: Theme = { nightMode: false, highContrast: false };
+const initialTheme: Theme = {
+  nightMode: false,
+  highContrast: false,
+  prideMode: false,
+};
 
 const initialThemeContext: ThemeContextType = {
   theme: initialTheme,
