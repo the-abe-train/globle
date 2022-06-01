@@ -209,13 +209,12 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
           className="text-xl text-center font-extrabold dark:text-gray-300 mb-2"
           style={{ fontFamily: "'Montserrat'" }}
         >
-          New game from creator of Globle!
+          New game from the creator of Globle!
         </h3>
         <button
           className="rounded-md px-4 py-2 text-xl font-bold mx-auto my-2
           border text-[#2b1628] border-[#2b1628] bg-[#FFEAE0] "
           style={{ fontFamily: "Amaranth" }}
-          onClick={copyToClipboard}
         >
           {/* eslint-disable-next-line */}
           <a
