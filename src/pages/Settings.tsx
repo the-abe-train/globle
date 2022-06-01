@@ -76,7 +76,7 @@ export default function Settings() {
   return (
     <div
       className="flex-col items-center align-middle space-y-8 mx-auto my-10 
-    min-w-[300px] sm:min-w-[400px] w-fit"
+    min-w-[300px] sm:min-w-[400px] w-fit text-lg"
     >
       <LanguagePicker />
       {options.map((option) => {

@@ -116,8 +116,7 @@ export default function List({ guesses, win, globeRef }: Props) {
         <div className="mt-8">
           <div className="flex items-center space-x-1">
             <p>
-              <FormattedMessage id="Game8" />
-              {isSortedByDistance ? ": " : ` (${closest.properties.NAME}): `}
+              <FormattedMessage id="Game8" />:
               {formatKm(closest?.proximity, miles)}
             </p>
             <Toggle

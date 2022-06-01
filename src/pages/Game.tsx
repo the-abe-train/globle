@@ -164,8 +164,8 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
           />
           <List guesses={guesses} win={win} globeRef={globeRef} />
           {practiceMode && (
-            <div className="my-4 flex space-x-4 items-center just">
-              <span>
+            <div className="my-4 flex flex-wrap gap-3 items-center">
+              <span className="dark:text-gray-300">
                 <FormattedMessage id="PracticeMode" />
               </span>
               <button

@@ -51,7 +51,7 @@ export default function Switch({ name, toggle, setToggle, on, off }: Props) {
       onKeyPress={(e) => keyPressToggle(e, toggle, setToggle)}
       tabIndex={0}
     >
-      <span className="text-lg dark:text-gray-300">{toggle ? off : on}</span>
+      <span className="dark:text-gray-300">{toggle ? off : on}</span>
       <input
         id={name}
         type="checkbox"
