@@ -196,7 +196,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         </button>
         <button
           className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-gray-300 rounded-md px-8 py-2 block text-base font-medium 
+          text-white dark:text-gray-300 rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           justify-around sm:flex-grow sm:mx-10"
           onClick={copyToClipboard}
