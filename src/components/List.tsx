@@ -47,16 +47,16 @@ export default function List({ guesses, win, globeRef }: Props) {
 
   function formatKm(m: number, miles: boolean) {
     const METERS_PER_MILE = 1609.34;
-    const BIN = 50;
+    const BIN = 10;
     const value = miles ? m / METERS_PER_MILE : m / 1000;
-    if (value < 5) return "< 5";
+    if (value < BIN) return "< " + BIN;
 
-    const min = Math.floor(value / BIN) * BIN;
-    const max = min + BIN;
+    const rounded = Math.round(value / BIN) * BIN;
+    // const max = min + BIN;
     const format = (num: number) =>
       num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-    return `${format(min)} - ${format(max)}`;
+    return `~ ${format(rounded)}`;
   }
 
   const qualifier = win ? "Answer" : "Closest";
