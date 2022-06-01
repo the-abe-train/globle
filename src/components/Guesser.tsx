@@ -57,7 +57,8 @@ export default function Guesser({
       .toLowerCase()
       .replace(/&/g, "and")
       .replace(/^st\s/g, "st. ");
-    const oldNamePair = alternateNames.find((pair) => {
+
+    const oldNamePair = alternateNames[locale].find((pair) => {
       return pair.alternative === trimmedName;
     });
     const userGuess = oldNamePair ? oldNamePair.real : trimmedName;

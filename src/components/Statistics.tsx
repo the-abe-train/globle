@@ -104,7 +104,7 @@ export default function Statistics({ setShowStats }: Props) {
   const options = { year: "numeric", month: "short", day: "numeric" };
   const event = new Date();
   // @ts-ignore
-  const unambiguousDate = event.toLocaleDateString("en-CA", options);
+  const unambiguousDate = event.toLocaleDateString(locale, options);
   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
   async function copyToClipboard() {
     const shareString = `🌎 ${date} 🌍
@@ -113,26 +113,32 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
 
 #globle`;
 
-    if ("canShare" in navigator && isMobile && !isFirefox) {
-      return await navigator.share({
-        title: "Globle Stats",
-        text: shareString,
-      });
-    } else {
-      // setQuestion(false);
-      setMsg(localeList[locale]["Stats12"]);
-      setShowCopyMsg(true);
-      setTimeout(() => setShowCopyMsg(false), 2000);
-      if ("clipboard" in navigator) {
-        return await navigator.clipboard.writeText(shareString);
+    try {
+      if ("canShare" in navigator && isMobile && !isFirefox) {
+        await navigator.share({ title: "Plurality Stats", text: shareString });
+        setMsg("Shared!");
+        setShowCopyMsg(true);
+        return setTimeout(() => setShowCopyMsg(false), 2000);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareString);
+        setMsg("Copied!");
+        setShowCopyMsg(true);
+        return setTimeout(() => setShowCopyMsg(false), 2000);
       } else {
-        return document.execCommand("copy", true, shareString);
+        document.execCommand("copy", true, shareString);
+        setMsg("Copied!");
+        setShowCopyMsg(true);
+        return setTimeout(() => setShowCopyMsg(false), 2000);
       }
+    } catch (e) {
+      setMsg("This browser cannot share");
+      setShowCopyMsg(true);
+      return setTimeout(() => setShowCopyMsg(false), 2000);
     }
   }
 
   return (
-    <div ref={modalRef}>
+    <div ref={modalRef} className="max-w-sm">
       <button
         className="absolute top-3 right-4"
         onClick={() => setShowStats(false)}
@@ -181,8 +187,8 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
       </table>
       <div className="py-6 flex w-full justify-around">
         <button
-          className="bg-red-700 text-white rounded-md px-6 py-2 block
-          text-base font-medium hover:bg-red-900
+          className=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
+          text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4"
           onClick={promptReset}
         >
@@ -190,7 +196,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         </button>
         <button
           className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-white rounded-md px-8 py-2 block text-base font-medium 
+          text-white dark:text-gray-300 rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           justify-around sm:flex-grow sm:mx-10"
           onClick={copyToClipboard}
@@ -198,11 +204,55 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
           <FormattedMessage id="Stats9" />
         </button>
       </div>
+      <div className="space-y-2 flex flex-col items-center">
+        <h3
+          className="text-md text-center font-extrabold dark:text-gray-300 mb-2"
+          style={{ fontFamily: "'Montserrat'" }}
+        >
+          New game from the creator of Globle!
+        </h3>
+        <button
+          className="rounded-md px-4 py-2 text-xl font-bold mx-auto my-2
+          border text-[#2b1628] border-[#2b1628] bg-[#FFEAE0] "
+          style={{ fontFamily: "Amaranth" }}
+        >
+          {/* eslint-disable-next-line */}
+          <a
+            href="https://plurality.fun"
+            className="flex items-center mx-auto"
+            rel="strict-origin noopener"
+            target="_blank"
+          >
+            <img
+              src="images/plurality.png"
+              alt="Plurality logo"
+              width={25}
+              height={25}
+            />
+            <span className="ml-1 mr-3">Plurality</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13 8.33333V11.6667C13 12.0203 12.8595 12.3594 12.6095 12.6095C12.3594 12.8595 12.0203 13 11.6667 13H2.33333C1.97971 13 1.64057 12.8595 1.39052 12.6095C1.14048 12.3594 1 12.0203 1 11.6667V2.33333C1 1.97971 1.14048 1.64057 1.39052 1.39052C1.64057 1.14048 1.97971 1 2.33333 1H5.66667M8 6L13 1L8 6ZM9.66667 1H13V4.33333L9.66667 1Z"
+                stroke="#2b1628"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </button>
+      </div>
       <Fade
         show={showResetMsg}
         background="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
         dark:bg-slate-900 drop-shadow-xl 
-        absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+        absolute z-10 top-24 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
         <p className="text-gray-900 dark:text-gray-300">{msg}</p>
         <div className="py-4 flex justify-center sm:space-x-8">
@@ -228,7 +278,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         show={showCopyMsg}
         background="border-4 border-sky-300 dark:border-slate-700 
         bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
-      absolute z-10 top-32 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
+      absolute z-10 top-24 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
         <p className="text-gray-900 dark:text-gray-300">{msg}</p>
       </Fade>
