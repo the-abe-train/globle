@@ -36,6 +36,7 @@ export default function List({ guesses, win, globeRef }: Props) {
     "en-CA": "NAME_EN",
     "fr-FR": "NAME_FR",
     "de-DE": "NAME_DE",
+    "hu-HU": "NAME_HU",
     "pl-PL": "NAME_PL",
     "it-IT": "NAME_IT",
   };

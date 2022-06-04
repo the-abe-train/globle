@@ -4,6 +4,7 @@ export type Locale =
   | "pt-BR"
   | "de-DE"
   | "fr-FR"
+  | "hu-HU"
   | "it-IT"
   | "pl-PL";
 
