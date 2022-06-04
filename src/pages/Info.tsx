@@ -140,8 +140,8 @@ export default function Info() {
     },
   ];
 
-  // Need to skip question 6 if not English because it doesn't apply.
-  if (localeContext.locale !== "en-CA") {
+  // Need to skip question 6 if not English or French because it doesn't apply.
+  if (localeContext.locale !== "en-CA" && localeContext.locale !== "fr-FR") {
     faqs.splice(5, 1);
   }
 

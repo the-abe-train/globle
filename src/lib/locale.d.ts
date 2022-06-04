@@ -1,4 +1,12 @@
-export type Locale = "en-CA" | "es-MX" | "pt-BR" | "de-DE" | "fr-FR" | "sv-SE";
+export type Locale =
+  | "en-CA"
+  | "es-MX"
+  | "pt-BR"
+  | "de-DE"
+  | "fr-FR"
+  | "it-IT"
+  | "pl-PL"
+  | "sv-SE";
 
 export type Messages = {
   name: sting;
@@ -64,6 +72,13 @@ export type Messages = {
   Settings7: string;
   Settings8: string;
   Settings9: string;
+  Settings10: string;
+  Settings11: string;
+  Answer: string;
+  Closest: string;
+  PracticeMode: string;
+  PracticeExit: string;
+  PracticeNew: string;
 };
 
 export type LocaleMessages = Record<Locale, Messages>;
