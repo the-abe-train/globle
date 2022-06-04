@@ -15,7 +15,7 @@ export const LOCALES = {
   German: German,
   Portuguese: Portuguese,
   Polish: Polish,
-  Swedish: Swedish
+  Swedish: Swedish,
 };
 
 export const langNameMap: Record<Locale, LanguageName> = {
@@ -26,5 +26,5 @@ export const langNameMap: Record<Locale, LanguageName> = {
   "pt-BR": "NAME_PT",
   "pl-PL": "NAME_PL",
   "it-IT": "NAME_IT",
-  "sv-SE": "NAME_SV"
+  "sv-SE": "NAME_SV",
 };
