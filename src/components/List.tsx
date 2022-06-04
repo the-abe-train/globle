@@ -34,6 +34,7 @@ export default function List({ guesses, win, globeRef }: Props) {
     "en-CA": "NAME_EN",
     "fr-FR": "NAME_FR",
     "de-DE": "NAME_DE",
+    "sv-SE": "NAME_SV"
   };
   const langName = langNameMap[locale];
 
