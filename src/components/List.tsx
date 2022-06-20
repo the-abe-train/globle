@@ -12,10 +12,28 @@ type Props = {
   guesses: Country[];
   win: boolean;
   globeRef: React.MutableRefObject<GlobeMethods>;
+  practiceMode: boolean;
 };
 
-function reorderGuesses(guessList: Country[]) {
+function reorderGuesses(guessList: Country[], practiceMode: boolean) {
   return [...guessList].sort((a, b) => {
+
+    // practice
+    if (practiceMode) {
+      const answerCountry = JSON.parse(
+        localStorage.getItem("practice") as string
+      ) as Country;
+      const answerName = answerCountry.properties.NAME;
+      if (a.properties.NAME === answerName) {
+        return -1;
+      } else if (b.properties.NAME === answerName) {
+        return 1;
+      } else {
+        return a.proximity - b.proximity;
+      }
+    }  
+
+    // daily
     if (a.properties.NAME === answerName) {
       return -1;
     } else if (b.properties.NAME === answerName) {
@@ -26,8 +44,8 @@ function reorderGuesses(guessList: Country[]) {
   });
 }
 
-export default function List({ guesses, win, globeRef }: Props) {
-  const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
+export default function List({ guesses, win, globeRef, practiceMode }: Props) {
+  const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses, practiceMode));
   const [miles, setMiles] = useState(false);
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
@@ -42,7 +60,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   const langName = langNameMap[locale];
 
   useEffect(() => {
-    setOrderedGuesses(reorderGuesses(guesses));
+    setOrderedGuesses(reorderGuesses(guesses, practiceMode));
   }, [guesses]);
 
   function formatKm(m: number, miles: boolean) {
