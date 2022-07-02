@@ -54,8 +54,8 @@ export default function Settings() {
       name: "pride",
       setToggle: setTogglePride,
       toggle: togglePride,
-      on: "Rainbow On",
-      off: "Rainbow Off",
+      on: localeList[locale]["Settings10"],
+      off: localeList[locale]["Settings11"],
     },
     {
       name: "accessibility",
