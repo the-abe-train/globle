@@ -68,7 +68,10 @@ export const Polish: Messages = {
   Settings11: "Tęcza dezaktywowana",
   Answer: "Odpowiadać",
   Closest: "Najbliższy",
+  Guessed: "Guessed", //TODO: Translate
   PracticeMode: "Jesteś w trybie ćwiczeń.",
   PracticeExit: "Wyjdź z trybu ćwiczeń",
   PracticeNew: "Nowa gra treningowa",
+  SortByGuesses: "Sort by order of guesses", //TODO: Translate
+  SortByDistance: "Sort by distance", //TODO: Translate
 };

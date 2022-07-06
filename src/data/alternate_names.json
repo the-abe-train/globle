@@ -12,7 +12,9 @@
       "alternative": "democratic republic of congo"
     },
     { "real": "democratic republic of the congo", "alternative": "dr congo" },
-    { "real": "bosnia and herzegovina", "alternative": "bosnia" }
+    { "real": "bosnia and herzegovina", "alternative": "bosnia" },
+    { "real": "ivory coast", "alternative": "cote d'ivoire" },
+    { "real": "turkey", "alternative": "turkiye" }
   ],
   "fr-FR": [
     { "real": "eswatini", "alternative": "swaziland" },
@@ -23,6 +25,7 @@
   ],
   "es-MX": [{ "real": "netherlands", "alternative": "holanda" }],
   "de-DE": [],
+  "hu-HU": [],
   "pt-BR": [
     { "real": "czechia", "alternative": "república tcheca" },
     { "real": "czechia", "alternative": "tchéquia" },

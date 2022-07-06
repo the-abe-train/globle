@@ -72,7 +72,10 @@ export const English: Messages = {
   Settings11: "Rainbow Off",
   Answer: "Answer",
   Closest: "Closest",
+  Guessed: "Guessed",
   PracticeMode: "You are in practice mode.",
   PracticeExit: "Exit practice mode",
   PracticeNew: "New practice game",
+  SortByGuesses: "Sort by order of guesses",
+  SortByDistance: "Sort by distance",
 };

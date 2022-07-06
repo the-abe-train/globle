@@ -72,7 +72,10 @@ export const Portuguese: Messages = {
   Settings11: "Arco-íris desativado",
   Answer: "Answer", //TODO: Translate
   Closest: "Closest", //TODO: Translate
+  Guessed: "Guessed", //TODO: Translate
   PracticeMode: "You are in practice mode.", //TODO: Translate
   PracticeExit: "Exit practice mode", //TODO: Translate
   PracticeNew: "New practice game", //TODO: Translate
+  SortByGuesses: "Sort by order of guesses", //TODO: Translate
+  SortByDistance: "Sort by distance", //TODO: Translate
 };
