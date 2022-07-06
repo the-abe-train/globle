@@ -64,7 +64,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   const qualifier = win ? "Answer" : "Closest";
 
   function turnToCountry(e: SyntheticEvent, idx: number) {
-    const clickedCountry = orderedGuesses[idx];
+    const clickedCountry = isSortedByDistance ? orderedGuesses[idx] : guesses[idx];
     const { lat, lng, altitude } = findCentre(clickedCountry);
     turnGlobe({ lat, lng, altitude }, globeRef, "zoom");
   }
