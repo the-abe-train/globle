@@ -96,7 +96,6 @@ export default function Auxilliary({ screen }: Props) {
           </b>
         </Link>
       </div>
-      <div id="snack_dex1"></div>
       {(screen === "Help" || screen === "Settings") && (
         <span className="mt-10 mb-4">
           <FormattedMessage id="Aux2" />{" "}
