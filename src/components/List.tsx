@@ -1,11 +1,11 @@
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
+import { FormattedMessage } from "react-intl";
+import { LocaleContext } from "../i18n/LocaleContext";
 import { Country, LanguageName } from "../lib/country";
+import { Locale } from "../lib/locale";
 import { answerName } from "../util/answer";
 import { findCentre, turnGlobe } from "../util/globe";
-import { LocaleContext } from "../i18n/LocaleContext";
-import { Locale } from "../lib/locale";
-import { FormattedMessage } from "react-intl";
 import Toggle from "./Toggle";
 
 type Props = {
@@ -39,6 +39,7 @@ export default function List({ guesses, win, globeRef }: Props) {
     "hu-HU": "NAME_HU",
     "pl-PL": "NAME_PL",
     "it-IT": "NAME_IT",
+    "sv-SE": "NAME_SV"
   };
   const langName = langNameMap[locale];
 

@@ -13,6 +13,7 @@ const langMap = {
   "hu-HU": "Magyar",
   "pl-PL": "Polski",
   "pt-BR": "Português",
+  "sv-SE": "Swedish",
 };
 
 const languages = Object.keys(messages) as Locale[];

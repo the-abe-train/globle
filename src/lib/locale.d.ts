@@ -6,7 +6,8 @@ export type Locale =
   | "fr-FR"
   | "hu-HU"
   | "it-IT"
-  | "pl-PL";
+  | "pl-PL"
+  | "sv-SE";
 
 export type Messages = {
   name: sting;
