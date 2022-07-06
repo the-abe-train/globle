@@ -82,7 +82,9 @@ export default function List({ guesses, win, globeRef }: Props) {
               <FormattedMessage id={qualifier} />
             </b>
           ) : (
-            <b>Guessed</b>
+            <b>
+              <FormattedMessage id="Guessed" />
+            </b>
           )}
         </p>
       )}
@@ -133,10 +135,10 @@ export default function List({ guesses, win, globeRef }: Props) {
               className="mt-2"
             >
               <span className="text-md underline">
-                {isSortedByDistance
-                  ? "Sort by order of guesses"
-                  : "Sort by distance"}
+                <FormattedMessage id={isSortedByDistance ? "SortByGuesses" : "SortByDistance"} />
               </span>
+
+
             </button>
           </p>
         </div>

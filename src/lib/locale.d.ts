@@ -75,9 +75,12 @@ export type Messages = {
   Settings11: string;
   Answer: string;
   Closest: string;
+  Guessed: string;
   PracticeMode: string;
   PracticeExit: string;
   PracticeNew: string;
+  SortByGuesses: string;
+  SortByDistance: string;
 };
 
 export type LocaleMessages = Record<Locale, Messages>;

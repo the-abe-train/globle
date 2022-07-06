@@ -69,9 +69,12 @@ export const Spanish: Messages = {
   Settings11: "Arco iris desactivado",
   Answer: "Respuesta",
   Closest: "Los países más cercanos",
+  Guessed: "Guessed", //TODO: Translate
   PracticeMode: "You are in practice mode.", //TODO: Translate
   PracticeExit: "Exit practice mode", //TODO: Translate
   PracticeNew: "New practice game", //TODO: Translate
+  SortByGuesses: "Sort by order of guesses", //TODO: Translate
+  SortByDistance: "Sort by distance", //TODO: Translate
 };
 
 // export default {
