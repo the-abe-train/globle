@@ -162,7 +162,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
             globeRef={globeRef}
             practiceMode={practiceMode}
           />
-          <List guesses={guesses} win={win} globeRef={globeRef} />
+          <List guesses={guesses} win={win} globeRef={globeRef} practiceMode={practiceMode}/>
           {practiceMode && (
             <div className="my-4 flex flex-wrap gap-3 items-center">
               <span className="dark:text-gray-300">
