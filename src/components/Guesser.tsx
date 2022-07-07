@@ -10,8 +10,7 @@ import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
 import { AltNames } from "../lib/alternateNames";
 const countryData: Country[] = require("../data/country_data.json").features;
-const alternateNames: AltNames =
-  require("../data/alternate_names.json").features;
+const alternateNames: AltNames = require("../data/alternate_names.json");
 
 type Props = {
   guesses: Country[];
@@ -66,10 +65,12 @@ export default function Guesser({
       .replace(/&/g, "and")
       .replace(/^st\s/g, "st. ");
 
+    console.log(alternateNames);
     const oldNamePair = alternateNames[locale].find((pair) => {
       return pair.alternative === trimmedName;
     });
     const userGuess = oldNamePair ? oldNamePair.real : trimmedName;
+    console.log(userGuess);
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
