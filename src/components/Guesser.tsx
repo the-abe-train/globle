@@ -10,8 +10,7 @@ import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
 import { AltNames } from "../lib/alternateNames";
 const countryData: Country[] = require("../data/country_data.json").features;
-const alternateNames: AltNames =
-  require("../data/alternate_names.json").features;
+const alternateNames: AltNames = require("../data/alternate_names.json");
 
 type Props = {
   guesses: Country[];
