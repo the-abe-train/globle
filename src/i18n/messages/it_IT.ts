@@ -73,7 +73,10 @@ export const Italian: Messages = {
   Settings11: "Arcobaleno disattivato",
   Answer: "Risposta",
   Closest: "Paesi più vicini",
+  Guessed: "Guessed", //TODO: Translate
   PracticeMode: "Sei in modalità allenamento.",
   PracticeExit: "Esci dalla modalità allenamento",
   PracticeNew: "Nuovo gioco di pratica",
+  SortByGuesses: "Sort by order of guesses", //TODO: Translate
+  SortByDistance: "Sort by distance", //TODO: Translate
 };

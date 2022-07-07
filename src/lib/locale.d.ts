@@ -4,8 +4,10 @@ export type Locale =
   | "pt-BR"
   | "de-DE"
   | "fr-FR"
+  | "hu-HU"
   | "it-IT"
-  | "pl-PL";
+  | "pl-PL"
+  | "sv-SE";
 
 export type Messages = {
   name: sting;
@@ -75,9 +77,12 @@ export type Messages = {
   Settings11: string;
   Answer: string;
   Closest: string;
+  Guessed: string;
   PracticeMode: string;
   PracticeExit: string;
   PracticeNew: string;
+  SortByGuesses: string;
+  SortByDistance: string;
 };
 
 export type LocaleMessages = Record<Locale, Messages>;

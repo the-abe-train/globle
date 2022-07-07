@@ -1,14 +1,17 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useState, useRef, useEffect } from "react";
 import { Country } from "../lib/country";
 import { answerCountry, answerName } from "../util/answer";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
-import alternateNames from "../data/alternate_names.json";
+// import alternateNames from "../data/alternate_names.json";
 import { LocaleContext } from "../i18n/LocaleContext";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+import { AltNames } from "../lib/alternateNames";
 const countryData: Country[] = require("../data/country_data.json").features;
+const alternateNames: AltNames =
+  require("../data/alternate_names.json").features;
 
 type Props = {
   guesses: Country[];
@@ -30,6 +33,11 @@ export default function Guesser({
   const { locale } = useContext(LocaleContext);
 
   const langName = langNameMap[locale];
+
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    ref.current?.focus();
+  }, [ref]);
 
   function findCountry(countryName: string, list: Country[]) {
     return list.find((country) => {
@@ -65,11 +73,13 @@ export default function Guesser({
     const alreadyGuessed = findCountry(userGuess, guesses);
     if (alreadyGuessed) {
       setError(localeList[locale]["Game6"]);
+      ref.current?.select();
       return;
     }
     const guessCountry = findCountry(userGuess, countryData);
     if (!guessCountry) {
       setError(localeList[locale]["Game5"]);
+      ref.current?.select();
       return;
     }
     if (practiceMode) {
@@ -128,6 +138,7 @@ export default function Guesser({
           id="guesser"
           value={guessName}
           onChange={(e) => setGuessName(e.currentTarget.value)}
+          ref={ref}
           disabled={win}
           placeholder={guesses.length === 0 ? localeList[locale]["Game1"] : ""}
           autoComplete="new-password"
