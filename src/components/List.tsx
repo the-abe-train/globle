@@ -17,7 +17,6 @@ type Props = {
 
 function reorderGuesses(guessList: Country[], practiceMode: boolean) {
   return [...guessList].sort((a, b) => {
-
     // practice
     if (practiceMode) {
       const answerCountry = JSON.parse(
@@ -31,7 +30,7 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
       } else {
         return a.proximity - b.proximity;
       }
-    }  
+    }
 
     // daily
     if (a.properties.NAME === answerName) {
@@ -45,7 +44,9 @@ function reorderGuesses(guessList: Country[], practiceMode: boolean) {
 }
 
 export default function List({ guesses, win, globeRef, practiceMode }: Props) {
-  const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses, practiceMode));
+  const [orderedGuesses, setOrderedGuesses] = useState(
+    reorderGuesses(guesses, practiceMode)
+  );
   const [miles, setMiles] = useState(false);
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
@@ -57,13 +58,13 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
     "hu-HU": "NAME_HU",
     "pl-PL": "NAME_PL",
     "it-IT": "NAME_IT",
-    "sv-SE": "NAME_SV"
+    "sv-SE": "NAME_SV",
   };
   const langName = langNameMap[locale];
 
   useEffect(() => {
     setOrderedGuesses(reorderGuesses(guesses, practiceMode));
-  }, [guesses]);
+  }, [guesses, practiceMode]);
 
   function formatKm(m: number, miles: boolean) {
     const METERS_PER_MILE = 1609.34;
@@ -82,7 +83,9 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
   const qualifier = win ? "Answer" : "Closest";
 
   function turnToCountry(e: SyntheticEvent, idx: number) {
-    const clickedCountry = isSortedByDistance ? orderedGuesses[idx] : guesses[idx];
+    const clickedCountry = isSortedByDistance
+      ? orderedGuesses[idx]
+      : guesses[idx];
     const { lat, lng, altitude } = findCentre(clickedCountry);
     turnGlobe({ lat, lng, altitude }, globeRef, "zoom");
   }
@@ -155,10 +158,10 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
               className="mt-2"
             >
               <span className="text-md underline">
-                <FormattedMessage id={isSortedByDistance ? "SortByGuesses" : "SortByDistance"} />
+                <FormattedMessage
+                  id={isSortedByDistance ? "SortByGuesses" : "SortByDistance"}
+                />
               </span>
-
-
             </button>
           </p>
         </div>

@@ -46,6 +46,9 @@
     { "real": "seychelles", "alternative": "seicheles" }
   ],
   "it-IT": [],
-  "pl-PL": [],
+  "pl-PL": [
+    { "real": "georgia", "alterantive": "gruzja" },
+    { "real": "china", "alterantive": "chiny" }
+  ],
   "sv-SE": []
 }

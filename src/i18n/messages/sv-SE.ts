@@ -71,4 +71,7 @@ export const Swedish: Messages = {
   PracticeMode: "Du är nu i övningsläge",
   PracticeExit: "Stäng av övningsläge",
   PracticeNew: "Nytt övningsspel",
+  Guessed: "gissade",
+  SortByGuesses: "Sortera efter gissningsordning",
+  SortByDistance: "Sortera efter avstånd",
 };

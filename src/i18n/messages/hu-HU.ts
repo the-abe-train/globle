@@ -75,4 +75,7 @@ export const Hungarian: Messages = {
   PracticeMode: "Gyakorló üzemmódban vagy.",
   PracticeExit: "Lépj ki a gyakorló üzemmódból",
   PracticeNew: "Új gyakorló játék",
+  Guessed: "sejtette",
+  SortByGuesses: "Rendezés a találgatások sorrendje szerint",
+  SortByDistance: "Rendezés távolság szerint",
 };

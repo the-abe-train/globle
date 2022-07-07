@@ -1,5 +1,4 @@
 import { LocaleMessages } from "../../lib/locale";
-import { German } from "./de-DE";
 import { English } from "./en-CA";
 import { Spanish } from "./es-MX";
 import { French } from "./fr-FR";
