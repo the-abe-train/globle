@@ -154,14 +154,14 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         </svg>
       </button>
       <h2
-        className="text-3xl text-center font-extrabold dark:text-gray-300"
+        className="text-3xl text-center font-extrabold dark:text-gray-200"
         style={{ fontFamily: "'Montserrat'" }}
       >
         <FormattedMessage id="StatsTitle" />
       </h2>
       <table
         cellPadding="4rem"
-        className="mx-auto dark:text-gray-300"
+        className="mx-auto dark:text-gray-200"
         width="100%"
       >
         <tbody>
@@ -196,7 +196,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         </button>
         <button
           className="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-white dark:text-gray-300 rounded-md px-8 py-2 block text-base font-medium 
+          text-white dark:text-gray-200 rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           justify-around sm:flex-grow sm:mx-10"
           onClick={copyToClipboard}
@@ -206,7 +206,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
       </div>
       <div className="space-y-2 flex flex-col items-center">
         <h3
-          className="text-md text-center font-extrabold dark:text-gray-300 mb-2"
+          className="text-md text-center font-extrabold dark:text-gray-200 mb-2"
           style={{ fontFamily: "'Montserrat'" }}
         >
           New game from the creator of Globle!
@@ -254,7 +254,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         dark:bg-slate-900 drop-shadow-xl 
         absolute z-10 top-24 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
-        <p className="text-gray-900 dark:text-gray-300">{msg}</p>
+        <p className="text-gray-900 dark:text-gray-200">{msg}</p>
         <div className="py-4 flex justify-center sm:space-x-8">
           <button
             className="bg-red-700 text-white rounded-md px-6 py-2 block 
@@ -280,7 +280,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
         bg-sky-100 dark:bg-slate-900 drop-shadow-xl 
       absolute z-10 top-24 w-fit inset-x-0 mx-auto py-4 px-4 rounded-md space-y-2"
       >
-        <p className="text-gray-900 dark:text-gray-300">{msg}</p>
+        <p className="text-gray-900 dark:text-gray-200">{msg}</p>
       </Fade>
     </div>
   );

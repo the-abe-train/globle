@@ -30,17 +30,16 @@ export default function LanguagePicker() {
 
   return (
     <label className="flex justify-between items-center" htmlFor="language">
-      <span className="text-lg dark:text-gray-300">
+      <span className="text-lg dark:text-gray-200">
         <FormattedMessage id="Settings7" />
       </span>
       <select
         name="language"
         id="language"
-        className="text-white bg-blue-700 hover:bg-blue-800
-        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm
+        className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
+         dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
         px-4 py-2.5 text-center inline-flex items-center
-        dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
-        justify-between
+        justify-between rounded-lg text-sm font-medium
         "
         value={selected}
         onChange={(e) => setSelected(e.target.value as Locale)}
@@ -49,7 +48,7 @@ export default function LanguagePicker() {
           return (
             <option
               className="py-2 px-4 text-sm text-gray-700 text-left
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  hover:bg-gray-100 dark:hover:bg-gray-600 
                   dark:hover:text-white bg-white"
               key={idx}
               value={lang}

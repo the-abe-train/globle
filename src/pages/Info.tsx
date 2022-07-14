@@ -146,7 +146,7 @@ export default function Info() {
   }
 
   return (
-    <div className="my-2 space-y-7 dark:text-gray-300">
+    <div className="my-2 space-y-7 dark:text-gray-200">
       <h2
         className="text-center text-2xl my-5 font-extrabold"
         style={{ fontFamily: "'Montserrat'" }}

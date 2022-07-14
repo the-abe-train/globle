@@ -141,7 +141,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
 
   // Fallback while loading
   const renderLoader = () => (
-    <p className="dark:text-gray-300">
+    <p className="dark:text-gray-200">
       <FormattedMessage id="Loading" />
     </p>
   );
@@ -162,10 +162,15 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
             globeRef={globeRef}
             practiceMode={practiceMode}
           />
-          <List guesses={guesses} win={win} globeRef={globeRef} practiceMode={practiceMode}/>
+          <List
+            guesses={guesses}
+            win={win}
+            globeRef={globeRef}
+            practiceMode={practiceMode}
+          />
           {practiceMode && (
             <div className="my-4 flex flex-wrap gap-3 items-center">
-              <span className="dark:text-gray-300">
+              <span className="dark:text-gray-200">
                 <FormattedMessage id="PracticeMode" />
               </span>
               <button

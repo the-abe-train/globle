@@ -56,7 +56,7 @@ export default function Auxilliary({ screen }: Props) {
   }
 
   return (
-    <div className="dark:text-gray-300 flex flex-col">
+    <div className="dark:text-gray-200 flex flex-col">
       <div
         className="w-fit flex flex-col justify-center align-middle mx-auto"
         tabIndex={0}

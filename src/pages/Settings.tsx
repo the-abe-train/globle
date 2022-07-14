@@ -84,10 +84,10 @@ export default function Settings() {
       })}
       <button
         onClick={enterPracticeMode}
-        className="text-white bg-blue-700 hover:bg-blue-800
+        className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
+         dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
         focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
         px-4 py-2.5 text-center items-center
-        dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
         w-32 justify-center self-center mx-auto block"
       >
         <span className="font-medium">

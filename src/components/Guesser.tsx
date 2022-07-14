@@ -128,7 +128,8 @@ export default function Guesser({
       >
         <input
           className="shadow px-2 py-1 md:py-0
-          text-gray-700 dark:bg-slate-300 focus:outline-none 
+          text-gray-700 dark:bg-slate-200 dark:text-gray-900
+          focus:outline-none 
           focus:shadow-outline disabled:bg-slate-400
           border rounded disabled:border-slate-400
           w-full"
@@ -143,7 +144,8 @@ export default function Guesser({
           autoComplete="new-password"
         />
         <button
-          className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
+          className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 
+          dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
           font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline "
           type="submit"
           disabled={win}
