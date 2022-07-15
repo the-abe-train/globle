@@ -48,6 +48,7 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
     reorderGuesses(guesses, practiceMode)
   );
   const [miles, setMiles] = useState(false);
+  const distanceUnits = miles ? "miles" : "km";  // TODO: localize
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
     "pt-BR": "NAME_PT",
@@ -115,6 +116,7 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
         {guessesToDisplay.map((guess, idx) => {
           const { NAME_LEN, ABBREV, NAME, FLAG } = guess.properties;
           const flag = (FLAG || "").toLocaleLowerCase();
+          const proximity = guess.proximity;
           let name = NAME_LEN >= 10 ? ABBREV : NAME;
           if (locale !== "en-CA") {
             name = guess.properties[langName];
@@ -131,7 +133,7 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
                   alt={name}
                   className=""
                 />
-                <span className="ml-2 text-md text-left">{name}</span>
+                <span className="ml-2 text-md text-left">{name} {formatKm(proximity, miles)} {distanceUnits}</span>
               </button>
             </li>
           );
@@ -148,8 +150,8 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
               name="miles"
               setToggle={setMiles}
               toggle={miles}
-              on="km"
-              off="miles"
+              on={distanceUnits}
+              off={distanceUnits}
             />
           </div>
           <p>
