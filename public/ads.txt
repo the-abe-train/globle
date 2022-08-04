@@ -269,3 +269,5 @@ improvedigital.com, 1680, DIRECT
 adyoulike.com, 83d15ef72d387a1e60e5a1399a2b0c03, DIRECT, 4ad745ead2958bf7
 rubiconproject.com, 20736, RESELLER, 0bfd66d529a55807
 pubmatic.com, 160925, RESELLER, 5d62403b186f2ace
+ogury.com, e23b74b2-0627-45c2-9eba-f8cede07f4cc, DIRECT
+appnexus.com, 11470, RESELLER
