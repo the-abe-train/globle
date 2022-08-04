@@ -97,7 +97,7 @@ export default function Auxilliary({ screen }: Props) {
           </b>
         </Link>
       </div>
-      <div className="py-4">
+      <div className="sm:py-4">
         <SnackAdUnit unitName="snack_dex1" siteId="2902" />
       </div>
       {(screen === "Help" || screen === "Settings") && (
@@ -112,7 +112,7 @@ export default function Auxilliary({ screen }: Props) {
         </span>
       )}
       {(screen === "Help" || screen === "Info") && (
-        <div className="flex-grow flex items-end">
+        <div className="flex-grow flex items-end sm:mb-[100px]">
           <Footer />
         </div>
       )}
