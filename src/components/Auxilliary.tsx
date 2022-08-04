@@ -97,7 +97,9 @@ export default function Auxilliary({ screen }: Props) {
           </b>
         </Link>
       </div>
-      <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+      <div className="py-4">
+        <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+      </div>
       {(screen === "Help" || screen === "Settings") && (
         <span className="mt-10 mb-4">
           <FormattedMessage id="Aux2" />{" "}
