@@ -9,6 +9,7 @@ import { polygonDistance } from "../util/distance";
 import { getColourEmoji } from "../util/colour";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import SnackAdUnit from "../components/SnackAdUnit";
 
 const Globe = lazy(() => import("../components/Globe"));
 const Guesser = lazy(() => import("../components/Guesser"));
@@ -194,6 +195,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
               </button>
             </div>
           )}
+          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
         </div>
       )}
     </Suspense>
