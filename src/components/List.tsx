@@ -97,7 +97,7 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
   const guessesToDisplay = isSortedByDistance ? orderedGuesses : guesses;
 
   return (
-    <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30">
+    <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30 mb-5">
       {orderedGuesses.length > 0 && (
         <p className="my-1">
           {isSortedByDistance ? (

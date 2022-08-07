@@ -18,11 +18,10 @@ const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   reSpin: boolean;
-  setReSpin: React.Dispatch<React.SetStateAction<boolean>>;
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
+export default function Game({ reSpin, setShowStats }: Props) {
   // Get data from local storage
   const [storedGuesses, storeGuesses] = useLocalStorage<Guesses>("guesses", {
     day: today,
@@ -157,7 +156,7 @@ export default function Game({ reSpin, setReSpin, setShowStats }: Props) {
         practiceMode={practiceMode}
       />
       {!reSpin && (
-        <div className="pb-4">
+        <div className="pb-4 mb-5">
           <Globe
             guesses={guesses}
             globeRef={globeRef}

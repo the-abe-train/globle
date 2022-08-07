@@ -44,13 +44,7 @@ function App() {
         <Route path="/" element={<Help />} />
         <Route
           path="/game"
-          element={
-            <Game
-              reSpin={reSpin}
-              setReSpin={setReSpin}
-              setShowStats={setShowStats}
-            />
-          }
+          element={<Game reSpin={reSpin} setShowStats={setShowStats} />}
         />
         <Route path="/settings" element={<Settings />} />
         <Route path="/info" element={<Info />} />
