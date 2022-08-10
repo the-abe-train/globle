@@ -194,7 +194,6 @@ export default function Game({ reSpin, setShowStats }: Props) {
               </button>
             </div>
           )}
-          {/* <SnackAdUnit unitName="snack_dex1" siteId="2902" /> */}
         </div>
       )}
     </Suspense>

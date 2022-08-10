@@ -8,6 +8,7 @@ import Settings from "./pages/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 import Fade from "./transitions/Fade";
+import SnackAdUnit from "./components/SnackAdUnit";
 
 function App() {
   // State
@@ -49,6 +50,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/info" element={<Info />} />
       </Routes>
+      <SnackAdUnit unitName="snack_dex1" siteId="2902" />
     </div>
   );
 }
