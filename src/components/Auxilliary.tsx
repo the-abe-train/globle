@@ -20,7 +20,8 @@ export default function Auxilliary({ screen }: Props) {
   const globeSize = 150;
   const extraStyle = {
     width: `${globeSize}px`,
-    clipPath: `circle(${globeSize / 2}px at ${globeSize / 2}px ${globeSize / 2
+    clipPath: `circle(${globeSize / 2}px at ${globeSize / 2}px ${
+        globeSize / 2
       }px)`,
   };
   const globeRef = useRef<GlobeMethods>(null!);
