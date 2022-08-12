@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 import { globeImg } from "../util/globe";
 import { FormattedMessage } from "react-intl";
 import { Link, useNavigate } from "react-router-dom";
+import SnackAdUnit from "./SnackAdUnit";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
 
 type Props = {
@@ -21,8 +22,8 @@ export default function Auxilliary({ screen }: Props) {
   const extraStyle = {
     width: `${globeSize}px`,
     clipPath: `circle(${globeSize / 2}px at ${globeSize / 2}px ${
-        globeSize / 2
-      }px)`,
+      globeSize / 2
+    }px)`,
   };
   const globeRef = useRef<GlobeMethods>(null!);
 
@@ -97,7 +98,11 @@ export default function Auxilliary({ screen }: Props) {
         </Link>
       </div>
       <div className="sm:py-4">
-
+        {isMobile ? (
+          <SnackAdUnit unitName="snack_mex1" siteId="2902" />
+        ) : (
+          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+        )}
       </div>
       {(screen === "Help" || screen === "Settings") && (
         <span className="mt-10 mb-4">
