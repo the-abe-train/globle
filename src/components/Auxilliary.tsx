@@ -116,7 +116,7 @@ export default function Auxilliary({ screen }: Props) {
         </span>
       )}
       {(screen === "Help" || screen === "Info") && (
-        <div className="flex-grow flex items-end sm:mb-[100px]">
+        <div className="flex-grow flex items-end mb-[100px]">
           <Footer />
         </div>
       )}
