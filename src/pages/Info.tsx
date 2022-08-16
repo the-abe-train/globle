@@ -138,6 +138,14 @@ export default function Info() {
         </dd>
       ),
     },
+    {
+      q: <FormattedMessage id="q8" />,
+      a: (
+        <dd key={2}>
+          <FormattedMessage id="a8" />
+        </dd>
+      ),
+    },
   ];
 
   // Need to skip question 6 if not English or French because it doesn't apply.
@@ -153,7 +161,9 @@ export default function Info() {
       >
         <FormattedMessage id="FAQTitle" />
       </h2>
-      <dl className="space-y-8">{faqs.map((faq, idx) => Item(faq, idx))}</dl>
+      <dl className="space-y-8 pb-8">
+        {faqs.map((faq, idx) => Item(faq, idx))}
+      </dl>
     </div>
   );
 }

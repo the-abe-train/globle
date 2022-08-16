@@ -36,6 +36,8 @@ export const English: Messages = {
   a6: "There are many countries with multiple acceptable names. Some alternate spellings and previous names are accepted, e.g. Burma for Myanmar. As well, acronyms are acceptable for some multi-word countries, e.g. UAE for United Arab Emirates.",
   q7: "7. A country is missing or a border is incorrect. What can I do about it?",
   a7: "Geography can be a sensitive topic, and some countries' borders are disputed. If you believe a correction should be made, please politely raise an issue on {GitHub} or DM me on {Twitter}.",
+  q8: "8. Why are my friend and I getting different mystery countries?",
+  a8: "Sometimes updates to the game don't reach everyone's browsers/devices at the same time. To fix this issue, you can get the latest code by doing a hard refresh (Ctrl + Shift + R on desktop, instructions vary for mobile devices).",
   GameTitle: "Game",
   Game1: "Enter country name here",
   Game2: "Enter",
