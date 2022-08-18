@@ -6,7 +6,7 @@ import { isMobile } from "react-device-detect";
 import { globeImg } from "../util/globe";
 import { FormattedMessage } from "react-intl";
 import { Link, useNavigate } from "react-router-dom";
-import SnackAdUnit from "./SnackAdUnit";
+// import SnackAdUnit from "./SnackAdUnit";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
 
 type Props = {
@@ -97,13 +97,13 @@ export default function Auxilliary({ screen }: Props) {
           </b>
         </Link>
       </div>
-      <div className="sm:py-4">
+      {/* <div className="sm:py-4">
         {isMobile ? (
           <SnackAdUnit unitName="snack_mex1" siteId="2902" />
         ) : (
           <SnackAdUnit unitName="snack_dex1" siteId="2902" />
         )}
-      </div>
+      </div> */}
       {(screen === "Help" || screen === "Settings") && (
         <span className="mt-10 mb-4">
           <FormattedMessage id="Aux2" />{" "}
