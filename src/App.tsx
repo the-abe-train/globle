@@ -8,7 +8,7 @@ import Settings from "./pages/Settings";
 import Statistics from "./components/Statistics";
 import { ThemeContext } from "./context/ThemeContext";
 import Fade from "./transitions/Fade";
-import { isMobile } from "react-device-detect";
+import { MobileOnlyView, TabletView, BrowserView } from "react-device-detect";
 import SnackAdUnit from "./components/SnackAdUnit";
 
 function App() {
@@ -52,11 +52,20 @@ function App() {
         <Route path="/info" element={<Info />} />
       </Routes>
       <div className="sm:py-4">
-        {isMobile ? (
+        <MobileOnlyView>
+          <SnackAdUnit unitName="snack_mex1" siteId="2902" />
+        </MobileOnlyView>
+        <BrowserView>
+          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+        </BrowserView>
+        <TabletView>
+          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+        </TabletView>
+        {/* {isMobile ? (
           <SnackAdUnit unitName="snack_mex1" siteId="2902" />
         ) : (
           <SnackAdUnit unitName="snack_dex1" siteId="2902" />
-        )}
+        )} */}
       </div>
     </div>
   );
