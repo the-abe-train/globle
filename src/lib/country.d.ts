@@ -1,6 +1,9 @@
+export type Direction = 'N' | 'NE'| 'E'| 'SE'| 'S'| 'SW'| 'W'| 'NW';
+
 export type Country = {
   type: string;
   proximity: number;
+  direction ?: Direction;
   properties: {
     scalerank: number;
     featurecla: string;

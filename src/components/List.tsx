@@ -1,8 +1,8 @@
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "../i18n/LocaleContext";
-import { Country, LanguageName } from "../lib/country";
+import {Country, LanguageName} from "../lib/country";
 import { Locale } from "../lib/locale";
 import { answerName } from "../util/answer";
 import { findCentre, turnGlobe } from "../util/globe";
@@ -95,6 +95,7 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
 
   const [isSortedByDistance, setIsSortedByDistance] = useState(true);
   const guessesToDisplay = isSortedByDistance ? orderedGuesses : guesses;
+  const intl = useIntl();
 
   return (
     <div className="md:ml-10 md:mr-0 py-8 dark:text-white z-30 mb-20">
@@ -151,6 +152,12 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
               on="km"
               off="miles"
             />
+          </div>
+          <div className="flex items-center space-x-1">
+            <p>
+              <FormattedMessage id="Game9" />:{" "}
+              {intl.formatMessage({id:closest?.direction})}
+            </p>
           </div>
           <p>
             <button

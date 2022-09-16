@@ -52,6 +52,15 @@ export type Messages = {
   Game6: string;
   Game7: string;
   Game8: string;
+  Game9: string;
+  N: string;
+  NE: string;
+  E: string;
+  SE: string;
+  S: string;
+  SW: string;
+  W: string;
+  NW: string;
   StatsTitle: string;
   Stats1: string;
   Stats2: string;

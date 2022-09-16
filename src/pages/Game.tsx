@@ -9,6 +9,7 @@ import { polygonDistance } from "../util/distance";
 import { getColourEmoji } from "../util/colour";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import {polygonDirection} from "../util/direction";
 
 const Globe = lazy(() => import("../components/Globe"));
 const Guesser = lazy(() => import("../components/Guesser"));
@@ -62,9 +63,13 @@ export default function Game({ reSpin, setShowStats }: Props) {
           return country.properties.NAME === guess;
         });
         if (!foundCountry) throw new Error("Country mapping broken");
-        foundCountry["proximity"] = polygonDistance(
+        foundCountry.proximity = polygonDistance(
           foundCountry,
           answerCountry
+        );
+        foundCountry.direction = polygonDirection(
+            foundCountry,
+            answerCountry
         );
         return foundCountry;
       });
