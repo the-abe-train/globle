@@ -312,3 +312,8 @@ e-planning.net, 901a809a65f984a4, RESELLER, c1ba615865ed87b2
 improvedigital.com, 2016, RESELLER
 inmobi.com, b4821b1325c44dc581b04d743ca46575, RESELLER, 83e75a7ae333ca9d
 rubiconproject.com, 11726, RESELLER, 0bfd66d529a55807
+33across.com,0010b00002CpYhEAAV,reseller,bbea06d9c4d2853c
+themediagrid.com,V19ZSB,reseller,35d5010d7789b49d
+yahoo.com,59875,reseller
+triplelift.com,11582,reseller,6c33edb13117fd86
+media.net,8CUY6IX4H,RESELLER
