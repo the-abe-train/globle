@@ -67,10 +67,12 @@ export default function Game({ reSpin, setShowStats }: Props) {
           foundCountry,
           answerCountry
         );
-        foundCountry.direction = polygonDirection(
-            foundCountry,
-            answerCountry
-        );
+        if (practiceMode) {
+          foundCountry.direction = polygonDirection(
+              foundCountry,
+              answerCountry
+          );
+        }
         return foundCountry;
       });
     }

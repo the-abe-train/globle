@@ -153,12 +153,14 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
               off="miles"
             />
           </div>
-          <div className="flex items-center space-x-1">
-            <p>
-              <FormattedMessage id="Game9" />:{" "}
-              {intl.formatMessage({id:closest?.direction})}
-            </p>
-          </div>
+          {closest?.direction && (
+            <div className="flex items-center space-x-1">
+              <p>
+                <FormattedMessage id="Game9" />:{" "}
+                {intl.formatMessage({id:closest?.direction})}
+              </p>
+            </div>
+          )}
           <p>
             <button
               onClick={() => setIsSortedByDistance(!isSortedByDistance)}

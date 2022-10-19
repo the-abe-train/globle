@@ -1,13 +1,12 @@
-import { scaleSequentialSqrt } from "d3-scale";
+import {scaleSequentialSqrt} from "d3-scale";
 import {
   interpolateBuPu,
-  interpolateOrRd,
   interpolateGreys,
+  interpolateOrRd,
   interpolateTurbo,
 } from "d3-scale-chromatic";
-import { Country } from "../lib/country";
-import { polygonDistance } from "./distance";
-import {polygonDirection} from "./direction";
+import {Country} from "../lib/country";
+import {polygonDistance} from "./distance";
 
 const GREEN_SQUARE = "🟩";
 const ORANGE_SQUARE = "🟧";
@@ -32,9 +31,6 @@ export const getColour = (
   if (guess.proximity == null) {
     guess.proximity = polygonDistance(guess, answer);
   }
-  if (guess.direction == null) {
-    guess.direction = polygonDirection(guess, answer);
-  }
   const gradient = highContrast
     ? interpolateGreys
     : prideMode
@@ -51,9 +47,6 @@ export const getColourEmoji = (guess: Country, answer: Country) => {
   if (guess.properties.NAME === answer.properties.NAME) return GREEN_SQUARE;
   if (guess.proximity == null) {
     guess.proximity = polygonDistance(guess, answer);
-  }
-  if (guess.direction == null) {
-    guess.direction = polygonDirection(guess, answer);
   }
   const scale = guess.proximity / MAX_DISTANCE;
   if (scale < 0.1) {

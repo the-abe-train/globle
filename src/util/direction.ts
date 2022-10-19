@@ -15,9 +15,7 @@ function average(values: number[]) {
 }
 
 // very silly implementation of centroid that's good enough for our purposes
-// suggestion: two libraries that do distance, bearing and centroid:
-// https://turfjs.org
-// https://www.npmjs.com/package/geodesy
+// suggestion: use https://www.npmjs.com/package/geolib
 function polygonNaiveCentroid(points: number[][]) {
     const lat = average(points.map(point => point[0]));
     const lng = average(points.map(point => point[1]));

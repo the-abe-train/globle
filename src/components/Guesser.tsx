@@ -111,10 +111,12 @@ export default function Guesser({
           guessCountry,
           guessAnswerCountry
       );
-      guessCountry.direction = polygonDirection(
-          guessCountry,
-          guessAnswerCountry
-      );
+      if (practiceMode) {
+        guessCountry.direction = polygonDirection(
+            guessCountry,
+            guessAnswerCountry
+        );
+      }
       setGuesses([...guesses, guessCountry]);
       setGuessName("");
     }
