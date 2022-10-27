@@ -47,8 +47,8 @@
   ],
   "it-IT": [],
   "pl-PL": [
-    { "real": "georgia", "alterantive": "abchazja" },
-    { "real": "china", "alterantive": "chiny" }
+    { "real": "georgia", "alternative": "abchazja" },
+    { "real": "china", "alternative": "chiny" }
   ],
   "sv-SE": []
 }
