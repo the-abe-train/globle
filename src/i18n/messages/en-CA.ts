@@ -3,8 +3,7 @@ import { Messages } from "../../lib/locale";
 export const English: Messages = {
   name: "English",
   helpTitle: "How to play",
-  help1: `Every day, there is a new Mystery Country. Your goal is to guess the
-  mystery country using the fewest number of guesses. Each incorrect guess
+  help1: `Every day, there is a new Mystery Country. Your goal is to guess which country it is using the fewest number of guesses. Each incorrect guess
   will appear on the globe with a colour indicating how close it is to the
   Mystery Country. The <b>hotter</b> the colour, the closer you are to the answer.`,
   help2: `For example, if the Mystery Country is <b>Japan</b>, then the following
