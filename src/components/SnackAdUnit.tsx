@@ -81,7 +81,7 @@ function SnackAdUnit({ unitName, siteId }: Props) {
     };
   }, [siteId, unitName]);
 
-  return <div id={unitName}></div>;
+  return <div id={unitName} className="min-5-[50px]"></div>;
 }
 
 export default SnackAdUnit;
