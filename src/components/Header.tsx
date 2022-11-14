@@ -76,7 +76,7 @@ export default function Header({ setReSpin, setShowStats }: Props) {
         </div>
       </div>
       <hr className="bottom-0" style={{ borderColor: svgColour }} />
-      <SnackAdUnit unitName="snack_mob_top" siteId="2902"></SnackAdUnit>
+      {/* <SnackAdUnit unitName="snack_mob_top" siteId="2902"></SnackAdUnit> */}
     </header>
   );
 }
