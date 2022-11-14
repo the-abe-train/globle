@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
+import SnackAdUnit from "./SnackAdUnit";
 
 type Props = {
   setReSpin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -75,6 +76,7 @@ export default function Header({ setReSpin, setShowStats }: Props) {
         </div>
       </div>
       <hr className="bottom-0" style={{ borderColor: svgColour }} />
+      <SnackAdUnit unitName="snack_mob_top" siteId="2902"></SnackAdUnit>
     </header>
   );
 }
