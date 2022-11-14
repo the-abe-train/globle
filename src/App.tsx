@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import Game from "./pages/Game";
 import Header from "./components/Header";
 import Help from "./pages/Help";
@@ -15,6 +15,8 @@ function App() {
   // State
   const [reSpin, setReSpin] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [params] = useSearchParams();
+  const practiceMode = Boolean(params.get("practice_mode"));
 
   // Context
   const themeContext = useContext(ThemeContext);
@@ -51,22 +53,19 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/info" element={<Info />} />
       </Routes>
-      <div className="sm:py-4">
-        <MobileOnlyView>
-          <SnackAdUnit unitName="snack_mex1" siteId="2902" />
-        </MobileOnlyView>
-        <BrowserView>
-          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
-        </BrowserView>
-        <TabletView>
-          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
-        </TabletView>
-        {/* {isMobile ? (
-          <SnackAdUnit unitName="snack_mex1" siteId="2902" />
-        ) : (
-          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
-        )} */}
-      </div>
+      {!practiceMode && (
+        <div className="sm:py-4">
+          <MobileOnlyView>
+            <SnackAdUnit unitName="snack_mex1" siteId="2902" />
+          </MobileOnlyView>
+          <BrowserView>
+            <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+          </BrowserView>
+          <TabletView>
+            <SnackAdUnit unitName="snack_dex1" siteId="2902" />
+          </TabletView>
+        </div>
+      )}
     </div>
   );
 }
