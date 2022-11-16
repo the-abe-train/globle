@@ -93,11 +93,8 @@ export default function Settings() {
         </p>
       )}
       <p>
-        <i>Globle: Capitals</i> is now in beta! Send me an email at{" "}
-        <a href="mailto:abe@trainwrecklabs.com" className="underline">
-          abe@trainwrecklabs.com
-        </a>{" "}
-        if you'd like to try it out and help me work out the bugs.
+        Thank you to all those who volunteered to beta test{" "}
+        <i>Globle: Capitals</i>. The game will be released November 30!
       </p>
       <Auxilliary screen="Settings" />
     </div>
