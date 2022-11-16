@@ -64,19 +64,12 @@ export default function Settings() {
       on: localeList[locale]["Settings3"],
       off: localeList[locale]["Settings4"],
     },
-    {
-      name: "scope",
-      setToggle: setToggleScope,
-      toggle: toggleScope,
-      on: localeList[locale]["Settings5"],
-      off: localeList[locale]["Settings6"],
-    },
   ];
 
   return (
     <div
       className="flex-col items-center align-middle space-y-8 mx-auto my-10 
-    min-w-[300px] sm:min-w-[400px] w-fit text-lg"
+    min-w-[300px] sm:min-w-[400px] w-fit text-lg max-w-sm"
     >
       <LanguagePicker />
       {options.map((option) => {
@@ -99,6 +92,13 @@ export default function Settings() {
           <FormattedMessage id="Settings8" />
         </p>
       )}
+      <p>
+        <i>Globle: Capitals</i> is now in beta! Send me an email at{" "}
+        <a href="mailto:abe@trainwrecklabs.com" className="underline">
+          abe@trainwrecklabs.com
+        </a>{" "}
+        if you'd like to try it out and help me work out the bugs.
+      </p>
       <Auxilliary screen="Settings" />
     </div>
   );
