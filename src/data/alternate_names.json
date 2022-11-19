@@ -14,6 +14,8 @@
     { "real": "democratic republic of the congo", "alternative": "dr congo" },
     { "real": "bosnia and herzegovina", "alternative": "bosnia" },
     { "real": "ivory coast", "alternative": "cote d'ivoire" },
+    { "real": "ivory coast", "alternative": "côte d'ivoire" },
+    { "real": "ivory coast", "alternative": "cote divoire" },
     { "real": "turkey", "alternative": "turkiye" }
   ],
   "fr-FR": [
