@@ -92,7 +92,7 @@ export default function Settings() {
           <FormattedMessage id="Settings8" />
         </p>
       )}
-      <p>
+      <p className="dark:text-gray-200">
         Thank you to all those who volunteered to beta test{" "}
         <i>Globle: Capitals</i>. The game will be released November 30!
       </p>
