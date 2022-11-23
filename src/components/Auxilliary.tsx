@@ -97,23 +97,13 @@ export default function Auxilliary({ screen }: Props) {
           </b>
         </Link>
       </div>
-      {/* <div className="sm:py-4">
-        {isMobile ? (
-          <SnackAdUnit unitName="snack_mex1" siteId="2902" />
-        ) : (
-          <SnackAdUnit unitName="snack_dex1" siteId="2902" />
-        )}
-      </div> */}
       {(screen === "Help" || screen === "Settings") && (
-        <span className="mt-10 mb-4">
-          <FormattedMessage id="Aux2" />{" "}
-          <button
-            className="underline cursor-pointer inline"
-            onClick={() => navigate("/info")}
-          >
-            <FormattedMessage id="Aux3" />
-          </button>
-        </span>
+        <p className="dark:text-gray-200 my-6">
+          <i>Globle: Capitals</i> is now available.{" "}
+          <a href="https://globle-capitals.com" className="underline">
+            Click here to play!
+          </a>{" "}
+        </p>
       )}
       {(screen === "Help" || screen === "Info") && (
         <div className="flex-grow flex items-end mb-[100px]">

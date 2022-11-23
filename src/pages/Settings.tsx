@@ -69,7 +69,7 @@ export default function Settings() {
   return (
     <div
       className="flex-col items-center align-middle space-y-8 mx-auto my-10 
-    min-w-[300px] sm:min-w-[400px] w-fit text-lg max-w-sm"
+    min-w-[300px] sm:min-w-[400px] w-fit text-lg max-w-md"
     >
       <LanguagePicker />
       {options.map((option) => {
@@ -92,10 +92,6 @@ export default function Settings() {
           <FormattedMessage id="Settings8" />
         </p>
       )}
-      <p className="dark:text-gray-200">
-        Thank you to all those who volunteered to beta test{" "}
-        <i>Globle: Capitals</i>. The game will be released November 30!
-      </p>
       <Auxilliary screen="Settings" />
     </div>
   );

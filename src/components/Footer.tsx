@@ -3,8 +3,10 @@ import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
 
 import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
   const iconWidth = 14;
   const { nightMode } = useContext(ThemeContext).theme;
 
@@ -46,26 +48,16 @@ export default function Footer() {
         </a>
       </span>
       <div className="flex flex-col sm:flex-row justify-start">
-        <span>
-          <FormattedMessage id="Footer2" />
-        </span>
         <span className="flex justify-end">
-          <a
-            className="underline mx-1"
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.buymeacoffee.com/theabetrain"
-          >
-            <FormattedMessage id="Footer3" />
-          </a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={iconWidth}
-            viewBox="0 0 24 24"
-            fill={nightMode ? "rgb(209 213 219)" : "rgb(17 24 39)"}
-          >
-            <path d={getPath("coffee")} />
-          </svg>
+          <span className="mt-10 mb-4">
+            <FormattedMessage id="Aux2" />{" "}
+            <button
+              className="underline cursor-pointer inline"
+              onClick={() => navigate("/info")}
+            >
+              <FormattedMessage id="Aux3" />
+            </button>
+          </span>
         </span>
       </div>
     </footer>
