@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import { getPath } from "../util/svg";
-import SnackAdUnit from "./SnackAdUnit";
 
 type Props = {
   setReSpin: React.Dispatch<React.SetStateAction<boolean>>;

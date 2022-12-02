@@ -19,6 +19,7 @@ export default function Settings() {
   );
   const { locale } = useContext(LocaleContext);
 
+  // eslint-disable-next-line
   const [toggleScope, setToggleScope] = useState(true);
 
   const { setTheme } = themeContext;
