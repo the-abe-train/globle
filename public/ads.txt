@@ -317,3 +317,6 @@ themediagrid.com,V19ZSB,reseller,35d5010d7789b49d
 yahoo.com,59875,reseller
 triplelift.com,11582,reseller,6c33edb13117fd86
 media.net,8CUY6IX4H,RESELLER
+triplelift.com, 11582, reseller, 6c33edb13117fd86
+conversantmedia.com, 100232, reseller, 03113cd04947736d
+media.net, 8CUY6IX4H, RESELLER
