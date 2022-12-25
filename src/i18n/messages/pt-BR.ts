@@ -70,12 +70,12 @@ export const Portuguese: Messages = {
   Settings9: "Praticar",
   Settings10: "Arco-íris ativado",
   Settings11: "Arco-íris desativado",
-  Answer: "Answer", //TODO: Translate
-  Closest: "Closest", //TODO: Translate
-  Guessed: "Guessed", //TODO: Translate
-  PracticeMode: "You are in practice mode.", //TODO: Translate
-  PracticeExit: "Exit practice mode", //TODO: Translate
-  PracticeNew: "New practice game", //TODO: Translate
-  SortByGuesses: "Sort by order of guesses", //TODO: Translate
-  SortByDistance: "Sort by distance", //TODO: Translate
+  Answer: "Resposta",
+  Closest: "Mais próximo",
+  Guessed: "Chutados",
+  PracticeMode: "Você está no modo de treino.",
+  PracticeExit: "Sair do modo de treino",
+  PracticeNew: "Novo jogo de trino",
+  SortByGuesses: "Listar pela ordem dos chutes",
+  SortByDistance: "Ordenar pela distância",
 };
