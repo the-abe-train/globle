@@ -9,6 +9,7 @@ import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
 import { AltNames } from "../lib/alternateNames";
+import {polygonDirection} from "../util/direction";
 const countryData: Country[] = require("../data/country_data.json").features;
 const alternateNames: AltNames = require("../data/alternate_names.json");
 
@@ -99,22 +100,23 @@ export default function Guesser({
     e.preventDefault();
     setError("");
     let guessCountry = runChecks();
+    let guessAnswerCountry = answerCountry;
     if (practiceMode) {
-      const answerCountry = JSON.parse(
+      guessAnswerCountry = JSON.parse(
         localStorage.getItem("practice") as string
       );
-      if (guessCountry && answerCountry) {
-        guessCountry["proximity"] = polygonDistance(
-          guessCountry,
-          answerCountry
-        );
-        setGuesses([...guesses, guessCountry]);
-        setGuessName("");
-        return;
-      }
     }
-    if (guessCountry && answerCountry) {
-      guessCountry["proximity"] = polygonDistance(guessCountry, answerCountry);
+    if (guessCountry && guessAnswerCountry) {
+      guessCountry.proximity = polygonDistance(
+          guessCountry,
+          guessAnswerCountry
+      );
+      if (practiceMode) {
+        guessCountry.direction = polygonDirection(
+            guessCountry,
+            guessAnswerCountry
+        );
+      }
       setGuesses([...guesses, guessCountry]);
       setGuessName("");
     }

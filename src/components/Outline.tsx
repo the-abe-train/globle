@@ -1,10 +1,11 @@
-import { Country } from "../lib/country";
-import { polygonDistance } from "../util/distance";
-import { getColour } from "../util/colour";
-import { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
-import { getPath } from "../util/svg";
-import { FormattedMessage } from "react-intl";
+import {Country} from "../lib/country";
+import {polygonDistance} from "../util/distance";
+import {getColour} from "../util/colour";
+import {useContext} from "react";
+import {ThemeContext} from "../context/ThemeContext";
+import {getPath} from "../util/svg";
+import {FormattedMessage} from "react-intl";
+
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -27,7 +28,10 @@ export default function Outline({ countryName, width }: Props) {
   if (!sampleAnswer)
     throw new Error("Country in Help screen not found in Country Data");
 
-  countryCopy["proximity"] = polygonDistance(countryCopy, sampleAnswer);
+  countryCopy.proximity = polygonDistance(
+      countryCopy,
+      sampleAnswer
+  );
 
   const outline = getPath(countryName);
 
