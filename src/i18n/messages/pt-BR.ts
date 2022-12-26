@@ -17,6 +17,9 @@ export const Portuguese: Messages = {
   Aux1: `<b>["Clique", "Toque"]</b> no globo para jogar`,
   Aux2: "Alguma dúvida?",
   Aux3: "Cheque a área Perguntas Frequentes",
+  Aux4: "Globle: Capitals", // TODO: Translate this
+  Aux5: " is now Available.", // TODO: Translate this
+  Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "por The Abe Train",
   Footer2: "Curtindo o jogo?",
   Footer3: "Pague meu cafezinho",
@@ -75,7 +78,13 @@ export const Portuguese: Messages = {
   Guessed: "Chutados",
   PracticeMode: "Você está no modo de treino.",
   PracticeExit: "Sair do modo de treino",
-  PracticeNew: "Novo jogo de trino",
+  PracticeNew: "Novo jogo de treino",
   SortByGuesses: "Listar pela ordem dos chutes",
   SortByDistance: "Ordenar pela distância",
+  Copied: "Copied!", // TODO: Translate this
+  Shared: "Shared!", // TODO: Translate this
+  ShareErr: "This browser cannot share", // TODO: Translate this
+  ShamelessPlug: "New game from the creator of Globle!", // TODO: Translate this
+  Yes: "Yes", // TODO: Translate this
+  No: "No", // TODO: Translate this
 };

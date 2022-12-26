@@ -17,6 +17,9 @@ export const French: Messages = {
   Aux1: `<b>["Cliquez sur", "Touchez"]</b> le globe pour jouer!`,
   Aux2: "Vous avez une question?",
   Aux3: "Consultez la FAQ",
+  Aux4: "Globle: Capitals", // TODO: Translate this
+  Aux5: " is now Available.", // TODO: Translate this
+  Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "Auteur: The Abe Train",
   Footer2: "Le jeu vous plaît?",
   Footer3: "Payez-moi un café.",
@@ -79,4 +82,10 @@ export const French: Messages = {
   PracticeNew: "Nouvelle partie d'entraînement",
   SortByGuesses: "Trier par ordre des tentatives",
   SortByDistance: "Trier par distance",
+  Copied: "Copied!", // TODO: Translate this
+  Shared: "Shared!", // TODO: Translate this
+  ShareErr: "This browser cannot share", // TODO: Translate this
+  ShamelessPlug: "New game from the creator of Globle!", // TODO: Translate this
+  Yes: "Yes", // TODO: Translate this
+  No: "No", // TODO: Translate this
 };

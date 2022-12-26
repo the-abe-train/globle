@@ -22,6 +22,9 @@ export type Messages = {
   Aux1: string;
   Aux2: string;
   Aux3: string;
+  Aux4: string;
+  Aux5: string;
+  Aux6: string;
   Footer1: string;
   Footer2: string;
   Footer3: string;
@@ -85,6 +88,12 @@ export type Messages = {
   PracticeNew: string;
   SortByGuesses: string;
   SortByDistance: string;
+  Copied: string;
+  Shared: string;
+  ShareErr: string;
+  ShamelessPlug: string;
+  Yes: string;
+  No: string;
 };
 
 export type LocaleMessages = Record<Locale, Messages>;

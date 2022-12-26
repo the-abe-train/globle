@@ -17,6 +17,9 @@ export const Hungarian: Messages = {
   Aux1: `<b>["Kattincs", "Tap"]</b> a földgömbre!`,
   Aux2: "Van kérdésed?",
   Aux3: "Nézd meg a gyakori kérdéseket",
+  Aux4: "Globle: Capitals", // TODO: Translate this
+  Aux5: " is now Available.", // TODO: Translate this
+  Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "The Abe Train által",
   Footer2: "Élvezed a játékot?",
   Footer3: "Hívj meg egy kávera",
@@ -78,4 +81,10 @@ export const Hungarian: Messages = {
   Guessed: "sejtette",
   SortByGuesses: "Rendezés a találgatások sorrendje szerint",
   SortByDistance: "Rendezés távolság szerint",
+  Copied: "Copied!", // TODO: Translate this
+  Shared: "Shared!", // TODO: Translate this
+  ShareErr: "This browser cannot share", // TODO: Translate this
+  ShamelessPlug: "New game from the creator of Globle!", // TODO: Translate this
+  Yes: "Yes", // TODO: Translate this
+  No: "No", // TODO: Translate this
 };

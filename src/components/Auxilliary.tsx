@@ -6,6 +6,8 @@ import { isMobile } from "react-device-detect";
 import { globeImg } from "../util/globe";
 import { FormattedMessage } from "react-intl";
 import { Link, useNavigate } from "react-router-dom";
+import localeList from "../i18n/messages";
+import { LocaleContext } from "../i18n/LocaleContext";
 // import SnackAdUnit from "./SnackAdUnit";
 const ReactGlobe = lazy(() => import("react-globe.gl"));
 
@@ -14,6 +16,10 @@ type Props = {
 };
 
 export default function Auxilliary({ screen }: Props) {
+  // Locales
+  const localeContext = useContext(LocaleContext);
+  const { locale } = localeContext;
+
   // Navigation
   const navigate = useNavigate();
 
@@ -99,9 +105,9 @@ export default function Auxilliary({ screen }: Props) {
       </div>
       {(screen === "Help" || screen === "Settings") && (
         <p className="dark:text-gray-200 my-6">
-          <i>Globle: Capitals</i> is now available.{" "}
+          <i>{localeList[locale]["Aux4"]}</i> {localeList[locale]["Aux5"]}{" "}
           <a href="https://globle-capitals.com" className="underline">
-            Click here to play!
+            {localeList[locale]["Aux6"]}
           </a>{" "}
         </p>
       )}

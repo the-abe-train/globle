@@ -13,6 +13,9 @@ export const Polish: Messages = {
   Aux1: `<b>["Kliknij", "Dotknij"]</b> kulę ziemską, żeby zagrać!`,
   Aux2: "Masz pytania?",
   Aux3: "Zobacz FAQ",
+  Aux4: "Globle: Capitals", // TODO: Translate this
+  Aux5: " is now Available.", // TODO: Translate this
+  Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "stworzone przez The Abe Train",
   Footer2: "Podoba Ci się gra?",
   Footer3: "Kup mi kawę",
@@ -74,4 +77,10 @@ export const Polish: Messages = {
   PracticeNew: "Nowa gra treningowa",
   SortByGuesses: "Sort by order of guesses", //TODO: Translate
   SortByDistance: "Sort by distance", //TODO: Translate
+  Copied: "Copied!", // TODO: Translate this
+  Shared: "Shared!", // TODO: Translate this
+  ShareErr: "This browser cannot share", // TODO: Translate this
+  ShamelessPlug: "New game from the creator of Globle!", // TODO: Translate this
+  Yes: "Yes", // TODO: Translate this
+  No: "No", // TODO: Translate this
 };

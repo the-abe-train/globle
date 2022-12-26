@@ -13,6 +13,9 @@ export const Swedish: Messages = {
   Aux1: `<b>["Klicka", "Tryck"]</b> på globen för att spela!`,
   Aux2: "Har du en fråga?",
   Aux3: "Läs vår FAQ",
+  Aux4: "Globle: Capitals", // TODO: Translate this
+  Aux5: " is now Available.", // TODO: Translate this
+  Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "av The Abe Train",
   Footer2: "Gillar du spelet?",
   Footer3: "Bjud mig på en kaffe",
@@ -74,4 +77,10 @@ export const Swedish: Messages = {
   Guessed: "gissade",
   SortByGuesses: "Sortera efter gissningsordning",
   SortByDistance: "Sortera efter avstånd",
+  Copied: "Copied!", // TODO: Translate this
+  Shared: "Shared!", // TODO: Translate this
+  ShareErr: "This browser cannot share", // TODO: Translate this
+  ShamelessPlug: "New game from the creator of Globle!", // TODO: Translate this
+  Yes: "Yes", // TODO: Translate this
+  No: "No", // TODO: Translate this
 };

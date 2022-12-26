@@ -116,22 +116,22 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
     try {
       if ("canShare" in navigator && isMobile && !isFirefox) {
         await navigator.share({ title: "Plurality Stats", text: shareString });
-        setMsg("Shared!");
+        setMsg(localeList[locale]["Shared"]);
         setShowCopyMsg(true);
         return setTimeout(() => setShowCopyMsg(false), 2000);
       } else if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareString);
-        setMsg("Copied!");
+        setMsg(localeList[locale]["Shared"]);
         setShowCopyMsg(true);
         return setTimeout(() => setShowCopyMsg(false), 2000);
       } else {
         document.execCommand("copy", true, shareString);
-        setMsg("Copied!");
+        setMsg(localeList[locale]["Shared"]);
         setShowCopyMsg(true);
         return setTimeout(() => setShowCopyMsg(false), 2000);
       }
     } catch (e) {
-      setMsg("This browser cannot share");
+      setMsg(localeList[locale]["ShareErr"]);
       setShowCopyMsg(true);
       return setTimeout(() => setShowCopyMsg(false), 2000);
     }
@@ -209,7 +209,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
           className="text-md text-center font-extrabold dark:text-gray-200 mb-2"
           style={{ fontFamily: "'Montserrat'" }}
         >
-          New game from the creator of Globle!
+          <FormattedMessage id="ShamelessPlug" />
         </h3>
         <button
           className="rounded-md px-4 py-2 text-xl font-bold mx-auto my-2
@@ -262,7 +262,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
             onClick={resetStats}
             disabled={resetComplete}
           >
-            Yes
+            <FormattedMessage id="Yes" />
           </button>
           <button
             className="bg-blue-700 text-white rounded-md px-6 py-2 block 
@@ -270,7 +270,7 @@ ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
             onClick={() => setShowResetMsg(false)}
             disabled={resetComplete}
           >
-            No
+            <FormattedMessage id="No" />
           </button>
         </div>
       </Fade>
