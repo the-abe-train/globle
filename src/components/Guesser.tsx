@@ -60,7 +60,7 @@ export default function Guesser({
   // Check territories function
   function runChecks() {
     const trimmedName = guessName
-      .trim()
+      .replace(/\s+/g,' ').trim()
       .toLowerCase()
       .replace(/&/g, "and")
       .replace(/^st\s/g, "st. ");
