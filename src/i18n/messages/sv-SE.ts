@@ -14,7 +14,7 @@ export const Swedish: Messages = {
   Aux2: "Har du en fråga?",
   Aux3: "Läs vår FAQ",
   Aux4: "Globle: Capitals", // TODO: Translate this
-  Aux5: " is now Available.", // TODO: Translate this
+  Aux5: "is now Available.", // TODO: Translate this
   Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "av The Abe Train",
   Footer2: "Gillar du spelet?",

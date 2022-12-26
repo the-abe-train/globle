@@ -14,7 +14,7 @@ export const Spanish: Messages = {
   Aux2: "¿Tienes alguna duda?",
   Aux3: "Visita Preguntas Frecuentes.",
   Aux4: "Globle: Capitals", // TODO: Translate this
-  Aux5: " is now Available.", // TODO: Translate this
+  Aux5: "is now Available.", // TODO: Translate this
   Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "Creado por The Abe Train",
   Footer2: "¿Estas disfrutando el juego?",

@@ -18,7 +18,7 @@ export const Portuguese: Messages = {
   Aux2: "Alguma dúvida?",
   Aux3: "Cheque a área Perguntas Frequentes",
   Aux4: "Globle: Capitals", // TODO: Translate this
-  Aux5: " is now Available.", // TODO: Translate this
+  Aux5: "is now Available.", // TODO: Translate this
   Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "por The Abe Train",
   Footer2: "Curtindo o jogo?",

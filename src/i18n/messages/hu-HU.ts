@@ -18,7 +18,7 @@ export const Hungarian: Messages = {
   Aux2: "Van kérdésed?",
   Aux3: "Nézd meg a gyakori kérdéseket",
   Aux4: "Globle: Capitals", // TODO: Translate this
-  Aux5: " is now Available.", // TODO: Translate this
+  Aux5: "is now Available.", // TODO: Translate this
   Aux6: "Click here to play!", // TODO: Translate this
   Footer1: "The Abe Train által",
   Footer2: "Élvezed a játékot?",

@@ -17,7 +17,7 @@ export const English: Messages = {
   Aux2: "Have a question?",
   Aux3: "Check out the FAQ",
   Aux4: "Globle: Capitals",
-  Aux5: " is now Available.",
+  Aux5: "is now Available.",
   Aux6: "Click here to play!",
   Footer1: "by The Abe Train",
   Footer2: "Enjoying the game?",
