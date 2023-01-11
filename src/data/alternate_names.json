@@ -7,7 +7,7 @@
     { "real": "vatican", "alternative": "holy see" },
     { "real": "vatican", "alternative": "vatican city" },
     { "real": "cabo verde", "alternative": "cape verde" },
-    {
+    { "real": "united arab emirates", "alternative": "UAE" },
       "real": "democratic republic of the congo",
       "alternative": "democratic republic of congo"
     },
