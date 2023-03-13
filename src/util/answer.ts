@@ -24,7 +24,7 @@ function generateKeyNew(list: any[], day: string) {
  * @link https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
  * @license Public Domain 
  */
-function mulberry32(a) {
+function mulberry32(a: number) {
   a |= 0; a = a + 0x6D2B79F5 | 0;
   var t = Math.imul(a ^ a >>> 15, 1 | a);
   t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
