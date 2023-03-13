@@ -7,8 +7,6 @@ countryData.sort((a, b) => {
   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
 });
 
-const shuffleAdjust = today < "2022-08-01" ? "5" : "6";
-
 function generateKeyNew(list: any[], day: string) {
   const [year, month, date] = day.split("-");
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
