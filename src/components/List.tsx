@@ -47,7 +47,10 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
   const [orderedGuesses, setOrderedGuesses] = useState(
     reorderGuesses(guesses, practiceMode)
   );
-  const [miles, setMiles] = useState(false);
+  const [miles, setMiles] = useState(() => {
+    const storedMiles = localStorage.getItem("toggleMiles");
+    return storedMiles ? JSON.parse(storedMiles) : false;
+  });
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
     "pt-BR": "NAME_PT",
@@ -65,6 +68,10 @@ export default function List({ guesses, win, globeRef, practiceMode }: Props) {
   useEffect(() => {
     setOrderedGuesses(reorderGuesses(guesses, practiceMode));
   }, [guesses, practiceMode]);
+
+  useEffect(() => {
+    localStorage.setItem("toggleMiles", JSON.stringify(miles));
+  }, [miles]);
 
   function formatKm(m: number, miles: boolean) {
     const METERS_PER_MILE = 1609.34;
